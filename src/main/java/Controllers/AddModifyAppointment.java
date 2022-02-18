@@ -3,6 +3,7 @@ package Controllers;
 import Database.AppointmentDAO;
 import Database.ContactDAO;
 import Database.CustomerDAO;
+import Models.Customer;
 import Utilities.StageChangeUtils;
 import Utilities.TimeUtils;
 import javafx.application.Platform;
@@ -240,5 +241,13 @@ public class AddModifyAppointment implements Initializable {
         else {
             return "FAIL";
         }
+    }
+
+    public void selectLocation(){
+        String customerName = customerNameComboBox.getValue();
+        int customerId = CustomerDAO.getCustomerId(customerName);
+        Customer customer = CustomerDAO.getCustomerById(customerId);
+        String address = customer.getFullAddress();
+        locationField.setText(address);
     }
 }

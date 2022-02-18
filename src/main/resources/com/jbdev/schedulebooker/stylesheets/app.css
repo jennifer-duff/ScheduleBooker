@@ -78,7 +78,7 @@
     -fx-border-width: 1px;
 }
 
-#appIdField{
+#appIdField, #locationField{
     -fx-text-fill: #787878;
 }
 

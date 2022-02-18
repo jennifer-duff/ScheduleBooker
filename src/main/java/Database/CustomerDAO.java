@@ -68,4 +68,67 @@ public class CustomerDAO {
         return customerId;
     }
 
+    public static Customer getCustomerById(int custId){
+        Customer customer = null;
+        try {
+            String query = "SELECT * FROM customers WHERE Customer_ID = \"" + custId + "\"";
+            PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                String name = resultSet.getString("Customer_Name");
+                String streetAddress = resultSet.getString("Address");
+                String zip = resultSet.getString("Postal_Code");
+                String phone = resultSet.getString("Phone");
+                int divisionId = resultSet.getInt("Division_ID");
+                customer = new Customer(custId, name, streetAddress, divisionId, zip, phone);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+//        System.out.println(customerId);
+        return customer;
+    }
+
+//    public static String getCustomerDivision(int divisionId){
+//        String custDivision = "";
+//            try {
+//            String query = "SELECT Division FROM first_level_divisions WHERE Division_ID = " + divisionId;
+//            PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
+//            ResultSet resultSet = statement.executeQuery();
+//            while (resultSet.next()) {
+//                custDivision = resultSet.getString("Division");
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//    //        System.out.println(customerId);
+//        return custDivision;
+//        }
+//
+//    public static String getCustomerCountry(int divisionId){
+//        String custCountry = "";
+//        int countryId = 0;
+//        try {
+//            String query = "SELECT Country_ID FROM first_level_divisions WHERE Division_ID = " + divisionId;
+//            PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
+//            ResultSet resultSet = statement.executeQuery();
+//            while (resultSet.next()) {
+//                countryId = resultSet.getInt("Country_ID");
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        try {
+//            String query = "SELECT Country FROM countries WHERE Country_ID = " + countryId;
+//            PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
+//            ResultSet resultSet = statement.executeQuery();
+//            while (resultSet.next()) {
+//                custCountry = resultSet.getString("Country");
+//            }
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return custCountry;
+//    }
+
 }

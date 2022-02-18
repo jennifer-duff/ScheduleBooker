@@ -6,6 +6,17 @@ import java.sql.SQLException;
 
 public class LocationDAO {
 
+    public static void changeLocationCol(){
+        try {
+            String query = "ALTER TABLE appointments CHANGE COLUMN `Location` `Location` LONGTEXT";
+            PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
+            statement.execute();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static String getDivisionName(int divisionId) {
         String divisionName = null;
         try {

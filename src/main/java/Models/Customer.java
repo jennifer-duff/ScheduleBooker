@@ -1,15 +1,19 @@
 package Models;
 
+import Database.CustomerDAO;
 import Database.LocationDAO;
+
+import java.time.LocalDateTime;
 
 public class Customer {
     private int custId;
     private String name;
     private String streetAddress;
     private int divisionId;
-    private String divisionName;
+//    private String divisionName;
     private String zip;
     private String country;
+    private String fullAddress;
     private String phone;
 
     public Customer(int custId, String name, String streetAddress, int divisionId, String zip, String phone) {
@@ -18,7 +22,6 @@ public class Customer {
         this.streetAddress = streetAddress;
         this.divisionId = divisionId;
         this.zip = zip;
-//        this.country = country;
         this.phone = phone;
     }
 
@@ -76,6 +79,11 @@ public class Customer {
 //    public void setCountry(String country) {
 //        this.country = country;
 //    }
+
+    public String getFullAddress(){
+        String divisionName = LocationDAO.getDivisionName(this.divisionId);
+        return this.streetAddress + ", " + divisionName + ", " + this.zip +  ", " + this.getCountry();
+    }
 
     public String getPhone() {
         return phone;

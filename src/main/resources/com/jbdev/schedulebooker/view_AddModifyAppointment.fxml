@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="659.0" prefWidth="660.0" styleClass="background" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddModifyAppointment">
+<AnchorPane prefHeight="659.0" prefWidth="669.0" styleClass="background" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddModifyAppointment">
     <children>
         <Label fx:id="titleLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="53.0" layoutY="45.0" prefHeight="45.0" prefWidth="489.0" styleClass="heading" text="Add Appointment" textAlignment="CENTER" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="30.0">
             <font>
@@ -47,7 +47,7 @@
                   <Insets left="120.0" />
                </GridPane.margin></Label>
                 <Label alignment="BOTTOM_LEFT" styleClass="textFieldLabel" text="App. ID:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TextField fx:id="appIdField" editable="false" prefHeight="25.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <TextField fx:id="appIdField" styleClass="customDisabledText" editable="false" prefHeight="25.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <GridPane.margin>
                         <Insets left="48.0" right="150.0" />
                     </GridPane.margin></TextField>
@@ -87,7 +87,7 @@
                         <Insets left="75.0" />
                     </GridPane.margin>
                 </ComboBox>
-                <ComboBox fx:id="startAmPmPicker" maxWidth="81.0" minWidth="65.0" prefHeight="25.0" prefWidth="81.0" promptText="am/pm" GridPane.columnIndex="1" GridPane.rowIndex="12">
+                <ComboBox fx:id="startAmPmPicker" maxWidth="87.0" minWidth="65.0" prefHeight="25.0" prefWidth="87.0" promptText="am/pm" GridPane.columnIndex="1" GridPane.rowIndex="12">
                     <GridPane.margin>
                         <Insets left="149.0" />
                     </GridPane.margin>
@@ -110,7 +110,7 @@
                         <Insets left="73.5" />
                     </GridPane.margin>
                 </ComboBox>
-                <ComboBox fx:id="endAmPmPicker" layoutX="197.0" layoutY="247.0" maxWidth="83.0" minWidth="65.0" prefHeight="25.0" prefWidth="83.0" promptText="am/pm" GridPane.columnIndex="3" GridPane.rowIndex="12">
+                <ComboBox fx:id="endAmPmPicker" layoutX="197.0" layoutY="247.0" maxWidth="91.0" minWidth="65.0" prefHeight="25.0" prefWidth="91.0" promptText="am/pm" GridPane.columnIndex="3" GridPane.rowIndex="12">
                     <GridPane.margin>
                         <Insets left="149.0" />
                     </GridPane.margin>
@@ -121,28 +121,34 @@
                </padding>
             </Label>
                 <Label styleClass="textFieldLabel" text="Customer Name" GridPane.columnIndex="1" GridPane.rowIndex="14" />
-                <ComboBox fx:id="customerNameComboBox" prefHeight="25.0" prefWidth="276.0" promptText="Select one" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+                <ComboBox fx:id="customerNameComboBox" onAction="#selectLocation" prefHeight="25.0" prefWidth="276.0" promptText="Select one" GridPane.columnIndex="1" GridPane.rowIndex="15" />
             <Label fx:id="customerErrorMsg" alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="50.0" layoutY="224.0" styleClass="subErrorMsg" GridPane.columnIndex="1" GridPane.rowIndex="16">
                <GridPane.margin>
                   <Insets bottom="10.0" />
                </GridPane.margin>
             </Label>
-                <Label styleClass="textFieldLabel" text="Location" GridPane.columnIndex="3" GridPane.rowIndex="14" />
-                <TextField fx:id="locationField" prefHeight="25.0" prefWidth="218.0" GridPane.columnIndex="3" GridPane.rowIndex="15" />
+                <Label styleClass="textFieldLabel" text="Location" GridPane.columnIndex="1" GridPane.rowIndex="17" />
+                <TextField fx:id="locationField" styleClass="customDisabledText" editable="false" maxWidth="420.0" minWidth="420.0" prefHeight="25.0" prefWidth="420.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="18" />
             <Label fx:id="locationErrorMsg" alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="50.0" layoutY="396.0" styleClass="subErrorMsg" GridPane.columnIndex="3" GridPane.rowIndex="16">
                <GridPane.margin>
                   <Insets bottom="10.0" />
                </GridPane.margin>
             </Label>
-                <Label styleClass="textFieldLabel" text="User ID" GridPane.columnIndex="1" GridPane.rowIndex="17" />
-                <TextField fx:id="userIdField" prefHeight="25.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="18" />
+                <Label styleClass="textFieldLabel" text="User ID" GridPane.columnIndex="3" GridPane.rowIndex="17">
+               <GridPane.margin>
+                  <Insets left="190.0" />
+               </GridPane.margin></Label>
+                <TextField fx:id="userIdField" maxWidth="43.0" minWidth="25.0" prefWidth="43.0" GridPane.columnIndex="3" GridPane.rowIndex="18">
+               <GridPane.margin>
+                  <Insets left="190.0" />
+               </GridPane.margin></TextField>
             <Label fx:id="userErrorMsg" alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="320.0" layoutY="396.0" styleClass="subErrorMsg" GridPane.columnIndex="1" GridPane.rowIndex="19">
                <GridPane.margin>
                   <Insets bottom="10.0" />
                </GridPane.margin>
             </Label>
-                <Label styleClass="textFieldLabel" text="Contact Name" GridPane.columnIndex="3" GridPane.rowIndex="17" />
-                <ComboBox fx:id="contactNameComboBox" prefHeight="25.0" prefWidth="267.0" promptText="Select one" GridPane.columnIndex="3" GridPane.rowIndex="18" />
+                <Label styleClass="textFieldLabel" text="Contact Name" GridPane.columnIndex="3" GridPane.rowIndex="14" />
+                <ComboBox fx:id="contactNameComboBox" prefHeight="25.0" prefWidth="267.0" promptText="Select one" GridPane.columnIndex="3" GridPane.rowIndex="15" />
             <Label fx:id="contactErrorMsg" alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="50.0" layoutY="466.0" styleClass="subErrorMsg" GridPane.columnIndex="3" GridPane.rowIndex="19">
                <GridPane.margin>
                   <Insets bottom="10.0" />
