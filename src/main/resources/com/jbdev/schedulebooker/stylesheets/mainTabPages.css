@@ -59,9 +59,19 @@
     -fx-font-size: 10pt;
 }
 
-.table-view .column-header .label {
-    -fx-background-color: -fx-black;
+/*#startDateCol .label{
+    -fx-border-radius: 5px 0 0 0;
+    -fx-background-radius: 5px 0 0 0;
+    -fx-border-width: 4px 2px 0 0;
+    -fx-border-color: -fx-eggshell -fx-black -fx-eggshell -fx-eggshell;
 }
+
+#startTimeCol .label{
+    -fx-border-radius: 0 5px 0 0;
+    -fx-background-radius: 0 5px 0 0;
+    -fx-border-width: 4px 0px 0 2px;
+    -fx-border-color: -fx-eggshell -fx-eggshell -fx-eggshell -fx-black;
+} */
 
 .column{
    -fx-background-color: -fx-eggshell;
@@ -89,7 +99,6 @@
 .table-row-cell:selected .table-cell{
     -fx-background-color: -fx-dustyRose;
 }
-
 
 
 

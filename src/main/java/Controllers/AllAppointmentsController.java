@@ -10,6 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.skin.TableHeaderRow;
+import javafx.scene.control.skin.TableViewSkinBase;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import Models.Appointment;
 
@@ -28,8 +31,12 @@ public class AllAppointmentsController implements Initializable {
     @FXML private TableColumn <Appointment, Integer> custIdCol;
     @FXML private TableColumn <Appointment, String> custNameCol;
     @FXML private TableColumn <Appointment, String> locationCol;
-    @FXML private TableColumn <Appointment, LocalDateTime> startCol;
-    @FXML private TableColumn <Appointment, LocalDateTime> endCol;
+//    @FXML private TableColumn <Appointment, LocalDateTime> startCol;
+    @FXML private TableColumn <Appointment, String> startDateCol;
+    @FXML private TableColumn <Appointment, String> startTimeCol;
+//    @FXML private TableColumn <Appointment, LocalDateTime> endCol;
+    @FXML private TableColumn <Appointment, String> endDateCol;
+    @FXML private TableColumn <Appointment, String> endTimeCol;
     @FXML private TableColumn <Appointment, Integer> contactCol;
     @FXML private TableColumn <Appointment, String> contactNameCol;
     @FXML private TableColumn <Appointment, Integer> userIdCol;
@@ -46,12 +53,28 @@ public class AllAppointmentsController implements Initializable {
         custIdCol.setCellValueFactory(new PropertyValueFactory<>("custId"));
         custNameCol.setCellValueFactory(new PropertyValueFactory<>("custName"));
         locationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
-        startCol.setCellValueFactory(new PropertyValueFactory<>("startDateTime"));
-        endCol.setCellValueFactory(new PropertyValueFactory<>("endDateTime"));
+//        startCol.setCellValueFactory(new PropertyValueFactory<>("readOnlyStart"));
+        startDateCol.setCellValueFactory(new PropertyValueFactory<>("readOnlyStartDate"));
+        startTimeCol.setCellValueFactory(new PropertyValueFactory<>("readOnlyStartTime"));
+//        endCol.setCellValueFactory(new PropertyValueFactory<>("readOnlyEnd"));
+        endDateCol.setCellValueFactory(new PropertyValueFactory<>("readOnlyEndDate"));
+        endTimeCol.setCellValueFactory(new PropertyValueFactory<>("readOnlyEndTime"));
         contactCol.setCellValueFactory(new PropertyValueFactory<>("contactId"));
         contactNameCol.setCellValueFactory(new PropertyValueFactory<>("contactName"));
         userIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
     }
+
+//    private void hideHeaders() {
+//        appTable.skinProperty().addListener((a, b, newSkin) ->
+//        {
+//            Pane header = (Pane) appTable.lookup("subColumn > column-header");
+//            header.setMinHeight(0);
+//            header.setPrefHeight(0);
+//            header.setMaxHeight(0);
+//            header.setVisible(false);
+//        });
+//
+//    }
 
     public void initialize(URL location, ResourceBundle resources) {
         updateTable();
