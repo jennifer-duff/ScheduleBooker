@@ -141,7 +141,7 @@ public class AddModifyAppointment implements Initializable {
             AppointmentDAO.addAppointment(app);
         }
         else if(titleLabel.getText().equals("Modify Appointment")) {
-            //AppointmentDAO.modifyAppointment(app);
+            AppointmentDAO.modifyAppointment(app);
         }
         returnToApps(actionEvent);
     }

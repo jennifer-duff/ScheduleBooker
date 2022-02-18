@@ -41,10 +41,13 @@ public class TimeUtils {
         comboBox.setItems(amPmArray);
     }
     public static String convertTo24Hr(String hour, String amPm){
-        if(amPm.equalsIgnoreCase("PM")){
+        if(amPm.equalsIgnoreCase("PM") && !hour.equals("12")){
             int hourInt = Integer.parseInt(hour);
             hourInt = hourInt + 12;
             hour = String.valueOf(hourInt);
+        }
+        if(amPm.equalsIgnoreCase("AM") && hour.equals("12")){
+            hour = "00";
         }
         return hour;
     }
@@ -70,7 +73,7 @@ public class TimeUtils {
         System.out.println(intHour);
         //00:00 -> 12:00am
         if(intHour == 0){
-            System.out.println(intHour + " is in the MORNING");
+//            System.out.println(intHour + " is in the MORNING");
             hour = "12";
             amPmPicker.setValue("am");
         }
@@ -83,14 +86,14 @@ public class TimeUtils {
 
         //12:00pm -> stays the same
         else if(intHour == 12){
-            System.out.println(intHour + " is in the EVENING");
+//            System.out.println(intHour + " is in the EVENING");
             amPmPicker.setValue("pm");
         }
 
         // 13:00,    14:00,    15:00,    16:00,    17:00,    18:00,    19:00,    20:00,    21:00 ->
         // 01:00 pm, 02:00 pm, 03:00 pm, 04:00 pm, 05:00 pm, 06:00 pm, 07:00 pm, 08:00 pm, 09:00pm
         else if (intHour > 12 && intHour <= 21) {
-            System.out.println(intHour + " is in the EVENING");
+//            System.out.println(intHour + " is in the EVENING");
             intHour = intHour - 12;
             hour = "0" + String.valueOf(intHour);
             amPmPicker.setValue("pm");
@@ -98,7 +101,7 @@ public class TimeUtils {
         // 22:00,    23:00 ->
         // 10:00 pm, 11:00 pm
         else if (intHour > 21) {
-            System.out.println(intHour + " is in the EVENING");
+//            System.out.println(intHour + " is in the EVENING");
             intHour = intHour - 12;
             hour = String.valueOf(intHour);
             amPmPicker.setValue("pm");

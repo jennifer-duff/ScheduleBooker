@@ -58,7 +58,7 @@ public class AppointmentDAO {
 
         try {
             String values = "NULL, \"" + title + "\" , \"" + description + "\" , \"" + location + "\", \"" + type + "\", \"" + localStart + "\", \""  + localEnd + "\" , \"" + LocalDateTime.now() + "\" , \"User_" + userId + "\" , \"" + LocalDateTime.now()  + "\" , \"User_" + userId + "\" , \"" +  custId + "\" , \""  + userId + "\" , \""  + contactID + "\"";
-            System.out.println(values);
+//            System.out.println(values);
             String query = "INSERT INTO appointments VALUES (" + values + ")";
             PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
             statement.execute();
@@ -68,18 +68,18 @@ public class AppointmentDAO {
     }
 
     public static void modifyAppointment (Appointment app){
-        String creationUser = "";
-        Timestamp creationDate = null;
-        try{
-            ResultSet resultSet = getLastResultSet();
-            while (resultSet.next()) {
-                creationDate = resultSet.getTimestamp("Create_Date");
-                creationUser = resultSet.getString("Created_By");
-            }
-        }
-        catch (SQLException e) {
-            e.printStackTrace();
-        }
+//        String creationUser = "";
+//        Timestamp creationDate = null;
+//        try{
+//            ResultSet resultSet = getLastResultSet();
+//            while (resultSet.next()) {
+//                creationDate = resultSet.getTimestamp("Create_Date");
+//                creationUser = resultSet.getString("Created_By");
+//            }
+//        }
+//        catch (SQLException e) {
+//            e.printStackTrace();
+//        }
         int appId = app.getAppId();
         String title = app.getTitle();
         String description = app.getDescription();
@@ -96,18 +96,19 @@ public class AppointmentDAO {
                             "Title = \"" + title + "\", " +
                             "Description = \"" + description + "\", " +
                             "Location = \"" + location + "\", " +
-                            "Type = \"" + type + "\", \"" +
-                            "Start = \"" + localStart + "\", \"" +
-                            "End = \"" + localEnd + "\" , \"" +
-                            "Create_Date = \"" + creationDate + "\" , \"" +
-                            "Created_By = \"User_" + creationUser + "\" , \"" +
-                            "Last_Update = \"" + LocalDateTime.now()  + "\" , \"" +
-                            "Last_Updated_By = \"" + userId + "\" , \"" +
-                            "Customer_ID = \"" + custId + "\" , \""  +
-                            "User_ID = \"" + userId + "\" , \""  +
+                            "Type = \"" + type + "\", " +
+                            "Start = \"" + localStart + "\", " +
+                            "End = \"" + localEnd + "\", " +
+//                            "Create_Date = \"" + creationDate + "\", " +
+//                            "Created_By = \"User_" + creationUser + "\", " +
+                            "Last_Update = \"" + LocalDateTime.now()  + "\", " +
+                            "Last_Updated_By = \"User_" + userId + "\", " +
+                            "Customer_ID = \"" + custId + "\", " +
+                            "User_ID = \"" + userId + "\", " +
                             "Contact_ID = \"" + contactID + "\"";
-            System.out.println(values);
-            String query = "UPDATE appointments SET (" + values + ") WHERE APPOINTMENT_ID = " + appId;
+//            System.out.println(values);
+            String query = "UPDATE appointments SET " + values + " WHERE APPOINTMENT_ID = " + appId;
+            System.out.println(query);
             PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
             statement.execute();
         } catch (SQLException e) {

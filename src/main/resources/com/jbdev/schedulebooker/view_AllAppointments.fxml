@@ -12,9 +12,9 @@
         <TableView fx:id="appTable" layoutX="40.0" layoutY="40.0" prefHeight="359.0" prefWidth="1495.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
             <columns>
                 <TableColumn fx:id="appIdCol" prefWidth="64.0" resizable="false" styleClass="column, centeredCol" text="App. ID" />
-                <TableColumn fx:id="titleCol" prefWidth="97.0" resizable="false" styleClass="column" text="Title" />
-                <TableColumn fx:id="typeCol" prefWidth="122.0" resizable="false" styleClass="column" text="Type" />
-                <TableColumn fx:id="descriptionCol" prefWidth="210.0" resizable="false" styleClass="column" text="Description" />
+                <TableColumn fx:id="titleCol" prefWidth="148.0" resizable="false" styleClass="column" text="Title" />
+                <TableColumn fx:id="typeCol" prefWidth="88.0" resizable="false" styleClass="column" text="Type" />
+                <TableColumn fx:id="descriptionCol" prefWidth="193.0" resizable="false" styleClass="column" text="Description" />
                 <TableColumn fx:id="custIdCol" prefWidth="76.0" resizable="false" styleClass="column, centeredCol" text="Cust. ID" />
                 <TableColumn fx:id="custNameCol" prefWidth="120.0" resizable="false" styleClass="column" text="Cust. Name" />
                 <TableColumn fx:id="locationCol" minWidth="0.0" prefWidth="268.0" resizable="false" styleClass="column" text="Location" />
