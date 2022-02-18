@@ -1,0 +1,118 @@
+#tabBackground{
+    -fx-background-color: -fx-pink;
+}
+
+#bodyBackground{
+    -fx-background-color: -fx-eggshell;
+}
+
+.tabs{
+    -fx-font-family: "Manrope ExtraBold";
+    -fx-background-color: -fx-red;
+    -fx-text-fill: -fx-eggshell;
+    -fx-font-size: 11pt;
+    -fx-border-radius: 10px 10px 0 0;
+    -fx-background-radius: 10px 10px 0 0;
+    /*-fx-padding: 0 7px 0 0;
+    -fx-border-insets: 0 7px 0 0;
+    -fx-background-insets: 0 7px 0 0;*/
+    -fx-cursor: hand;
+}
+
+#activeTab{
+   -fx-background-color: -fx-eggshell;
+   -fx-text-fill: -fx-red;
+   -fx-z-index:1;
+}
+
+.subHeading{
+    -fx-font-family: "Manrope SemiBold";
+    -fx-font-size: 12pt;
+}
+
+#msgLabel{
+    -fx-text-fill: -fx-red;
+    -fx-font-family: "Manrope SemiBold";
+}
+
+.table-view{
+    -fx-background-color: -fx-eggshell;
+    -fx-effect: dropshadow(three-pass-box, -fx-gray, 1, 1.0, 10, 10);
+    -fx-border-style: solid;
+    -fx-border-color: -fx-gray;
+    -fx-border-width: 0.25px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.table-view .column-header .label {
+    -fx-text-fill: -fx-eggshell;
+    -fx-background-color: -fx-black;
+    -fx-border-radius: 5px 5px 0 0;
+    -fx-background-radius: 5px 5px 0 0;
+    -fx-border-style: solid;
+    -fx-border-color: -fx-eggshell;
+    -fx-border-width: 4px 2px 0 0;
+    -fx-border-insets: -2px;
+    -fx-padding: 3px 0 3px 0;
+    -fx-font-family: "Manrope ExtraBold";
+    -fx-font-size: 10pt;
+}
+
+.table-view .column-header .label {
+    -fx-background-color: -fx-black;
+}
+
+.column{
+   -fx-background-color: -fx-eggshell;
+   -fx-border-radius: 5px 5px 0 0;
+}
+
+.centeredCol{
+    -fx-alignment: center;
+}
+
+.column .filler{
+   -fx-background-color: -fx-eggshell;
+}
+
+.table-row-cell:selected{
+    -fx-background-color: -fx-dustyRose !important;
+    -fx-table-cell-border-color: transparent;
+    -fx-text-background-color: -fx-black;
+}
+
+.table-row-cell:focused .table-cell{
+    -fx-font-family: "Manrope SemiBold";
+}
+
+.table-row-cell:selected .table-cell{
+    -fx-background-color: -fx-dustyRose;
+}
+
+
+
+
+.table-row-cell:focused{
+}
+
+
+/*.table-view:focused:row-selection > .virtual-flow > .clipped-container > .sheet > .table-cell:selected{
+    -fx-background: transparent;
+    -fx-background-color: -fx-dustyRose;
+    -fx-text-fill: -fx-black;
+    -fx-table-cell-border-color: none;
+}
+
+.table-row-cell:filled > .table-cell: selected{
+    -fx-background: transparent;
+    -fx-background-color: -fx-dustyRose;
+}*/
+
+.combo-box{
+    -fx-border-style: solid;
+    -fx-border-color: -fx-dustyRose;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}

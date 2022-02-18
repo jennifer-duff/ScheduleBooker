@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="659.0" prefWidth="660.0" styleClass="background" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddModifyAppointment">
+    <children>
+        <Label fx:id="titleLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="53.0" layoutY="45.0" prefHeight="45.0" prefWidth="489.0" styleClass="heading" text="Add Appointment" textAlignment="CENTER" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="30.0">
+            <font>
+                <Font size="30.0" />
+            </font></Label>
+        <GridPane prefHeight="487.0" prefWidth="580.0" styleClass="formBox" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="90.0">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="7.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="7.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="40.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="7.0" prefWidth="100.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="25.0" minHeight="20.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="50.0" minHeight="50.0" prefHeight="50.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="7.0" minHeight="7.0" prefHeight="7.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="25.0" minHeight="25.0" prefHeight="25.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="20.0" minHeight="20.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Label alignment="BOTTOM_LEFT" styleClass="textFieldLabel" text="App. ID:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="appIdField" editable="false" prefHeight="25.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                    <GridPane.margin>
+                        <Insets left="48.0" right="150.0" />
+                    </GridPane.margin></TextField>
+                <Label styleClass="textFieldLabel" text="Title" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField fx:id="titleField" prefHeight="25.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                <Label styleClass="textFieldLabel" text="Type" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                <TextField fx:id="typeField" layoutX="50.0" layoutY="60.0" prefHeight="25.0" prefWidth="218.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                <Label styleClass="textFieldLabel" text="Description" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                <TextArea fx:id="descriptionField" prefHeight="51.0" prefWidth="470.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="7" />
+                <Label styleClass="textFieldLabel" text="Start Date" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+                <DatePicker fx:id="startDatePicker" prefHeight="25.0" prefWidth="237.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                <ComboBox fx:id="startHourPicker" maxWidth="65.0" minWidth="65.0" prefHeight="25.0" prefWidth="65.0" promptText="hh" GridPane.columnIndex="1" GridPane.rowIndex="12">
+                    <GridPane.margin>
+                        <Insets />
+                    </GridPane.margin></ComboBox>
+                <Label text=":" GridPane.columnIndex="1" GridPane.rowIndex="12">
+                    <GridPane.margin>
+                        <Insets left="68.0" />
+                    </GridPane.margin>
+                </Label>
+                <ComboBox fx:id="startMinutePicker" maxWidth="65.0" minWidth="65.0" prefHeight="25.0" prefWidth="65.0" promptText="mm" GridPane.columnIndex="1" GridPane.rowIndex="12">
+                    <GridPane.margin>
+                        <Insets left="75.0" />
+                    </GridPane.margin>
+                </ComboBox>
+                <ComboBox fx:id="startAmPmPicker" maxWidth="81.0" minWidth="65.0" prefHeight="25.0" prefWidth="81.0" promptText="am/pm" GridPane.columnIndex="1" GridPane.rowIndex="12">
+                    <GridPane.margin>
+                        <Insets left="149.0" />
+                    </GridPane.margin>
+                </ComboBox>
+                <Label styleClass="textFieldLabel" text="End Date" GridPane.columnIndex="3" GridPane.rowIndex="9" />
+                <DatePicker fx:id="endDatePicker" layoutX="50.0" layoutY="215.0" prefHeight="25.0" prefWidth="237.0" GridPane.columnIndex="3" GridPane.rowIndex="10" />
+                <ComboBox fx:id="endHourPicker" layoutX="50.0" layoutY="247.0" maxWidth="65.0" minWidth="65.0" prefHeight="25.0" prefWidth="65.0" promptText="hh" GridPane.columnIndex="3" GridPane.rowIndex="12" />
+                <Label layoutX="50.0" layoutY="251.0" text=":" GridPane.columnIndex="3" GridPane.rowIndex="12">
+                    <GridPane.margin>
+                        <Insets left="68.0" />
+                    </GridPane.margin>
+                </Label>
+                <ComboBox fx:id="endMinutePicker" layoutX="124.0" layoutY="247.0" maxWidth="65.0" minWidth="65.0" prefHeight="25.0" prefWidth="65.0" promptText="mm" GridPane.columnIndex="3" GridPane.rowIndex="12">
+                    <GridPane.margin>
+                        <Insets left="73.5" />
+                    </GridPane.margin>
+                </ComboBox>
+                <ComboBox fx:id="endAmPmPicker" layoutX="197.0" layoutY="247.0" maxWidth="83.0" minWidth="65.0" prefHeight="25.0" prefWidth="83.0" promptText="am/pm" GridPane.columnIndex="3" GridPane.rowIndex="12">
+                    <GridPane.margin>
+                        <Insets left="149.0" />
+                    </GridPane.margin>
+                </ComboBox>
+                <Label styleClass="textFieldLabel" text="Customer Name" GridPane.columnIndex="1" GridPane.rowIndex="14" />
+                <ComboBox fx:id="customerNameComboBox" prefHeight="25.0" prefWidth="276.0" promptText="Select one" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+                <Label styleClass="textFieldLabel" text="Location" GridPane.columnIndex="3" GridPane.rowIndex="14" />
+                <TextField fx:id="locationField" prefHeight="25.0" prefWidth="218.0" GridPane.columnIndex="3" GridPane.rowIndex="15" />
+                <Label styleClass="textFieldLabel" text="User ID" GridPane.columnIndex="1" GridPane.rowIndex="17" />
+                <TextField fx:id="userIdField" prefHeight="25.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="18" />
+                <Label styleClass="textFieldLabel" text="Contact Name" GridPane.columnIndex="3" GridPane.rowIndex="17" />
+                <ComboBox fx:id="contactNameComboBox" prefHeight="25.0" prefWidth="267.0" promptText="Select one" GridPane.columnIndex="3" GridPane.rowIndex="18" />
+            </children>
+        </GridPane>
+        <Button layoutX="465.0" layoutY="613.0" mnemonicParsing="false" onAction="#returnToApps" styleClass="appButton" text=" C A N C E L " AnchorPane.bottomAnchor="21.0" AnchorPane.rightAnchor="112.0" />
+        <Button layoutX="568.0" layoutY="566.0" mnemonicParsing="false" onAction="#saveApp" styleClass="appButton, confirmActionBtn" text=" S A V E " AnchorPane.bottomAnchor="21.0" AnchorPane.rightAnchor="31.0" />
+    </children>
+</AnchorPane>

@@ -1,0 +1,11 @@
+.heading{
+    -fx-text-fill: -fx-dustyRose;
+}
+
+#subTitle{
+    -fx-font-size: 12.25pt;
+    -fx-font-family: "Manrope SemiBold";
+}
+#subText{
+    -fx-font-size: 10pt;
+}

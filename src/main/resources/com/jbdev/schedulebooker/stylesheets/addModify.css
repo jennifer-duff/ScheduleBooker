@@ -1,0 +1,9 @@
+.formBox{
+    -fx-background-color: -fx-eggshell;
+    -fx-effect: dropshadow(three-pass-box, -fx-gray, 1, 1.0, 10, 10);
+    -fx-border-style: solid;
+    -fx-border-color: -fx-gray;
+    -fx-border-width: 0.25px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}

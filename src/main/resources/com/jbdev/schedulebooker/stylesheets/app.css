@@ -1,0 +1,269 @@
+/* --- GENERAL ------------------------------ */
+*{
+    -fx-eggshell: #FFFCFA;
+    -fx-black: #323940;
+    -fx-gray: #5E6163;
+    -fx-red: #d17356;
+    -fx-dustyRose: #e6ad9c;
+    -fx-pink: #FAE7E1;
+}
+
+.text{
+    -fx-font-smoothing-type: gray;
+}
+
+.root{
+    -fx-background-color: -fx-eggshell;
+    -fx-font-family: "Manrope Regular";
+    -fx-text-fill: -fx-black;
+    -fx-font-smoothing-type: gray;
+}
+
+.background{
+    -fx-background-color: -fx-eggshell;
+}
+
+.appButton{
+    -fx-font-family: "Manrope ExtraBold";
+    -fx-font-size: 9pt;
+    -fx-cursor: hand;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-background-color: -fx-red;
+    -fx-text-fill: -fx-eggshell;
+}
+
+.confirmActionBtn{
+    -fx-background-color: -fx-gray;
+}
+
+.button:hover{
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
+
+.heading{
+    -fx-font-family: "Manrope ExtraBold";
+    -fx-font-size: 25pt;
+}
+
+
+.text-area {
+    -fx-background-insets: 0;
+    -fx-background-color: transparent;
+}
+
+.text-area .content {
+    -fx-background-color: -fx-pink;
+}
+
+.text-area:focused .content {
+    -fx-background-color: -fx-pink;
+}
+
+.text-field, .text-area, .text-area. content{
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-background-color: -fx-pink;
+    -fx-highlight-fill: -fx-pink;
+}
+
+.text-field:focused, .text-area:focused{
+    -fx-border-style: solid;
+    -fx-border-color: -fx-dustyRose;
+    -fx-border-radius: 5px;
+    -fx-border-width: 1px;
+}
+
+#appIdField{
+    -fx-text-fill: #787878;
+}
+
+.textFieldLabel{
+    -fx-font-family: "Manrope SemiBold";
+}
+
+.text-input {
+    -fx-text-fill: -fx-black;
+    -fx-highlight-fill: -fx-dustyRose;
+    -fx-highlight-text-fill: -fx-black;
+    -fx-prompt-text-fill: gray;
+    -fx-placeholder-text-fill: gray;
+}
+
+
+/* ---- Combo Box -------------------------------------------------------------------*/
+.combo-box{
+    -fx-border-style: none;
+    -fx-background-color: -fx-pink;
+}
+
+.combo-box-base > .arrow-button:hover{
+    -fx-cursor: hand;
+}
+
+.combo-box:focused{
+    -fx-border-style: solid;
+    -fx-border-color: -fx-dustyRose;
+    -fx-border-width: 1px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.combo-box-popup{
+    -fx-background: -fx-pink;
+    -fx-background-color: -fx-pink;
+    -fx-background-radius: 0 0 5px 5px;
+    -fx-border-radius: 0 0 5px 5px;
+}
+
+.combo-box-popup .list-view{
+    -fx-border-style: solid;
+    -fx-border-color: -fx-dustyRose;
+    -fx-border-width: 1px;
+    -fx-border-radius: 0 0 5px 5px;
+    -fx-background-radius: 0 0 5px 5px;
+    -fx-background: -fx-pink;
+    -fx-background-color: -fx-pink;
+    -fx-padding: -4px 0px 0 0;
+    -fx-border-insets: -4px 0px 0 0;
+    -fx-background-insets: -4px 0px 0 0;
+}
+
+.list-cell{
+    -fx-background-color: -fx-pink;
+    -fx-insets: 0;
+    -fx-background-insets: 0;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.combo-box-popup .list-view .list-cell:filled:hover {
+    -fx-background-color: -fx-dustyRose;
+    -fx-text-fill: -fx-black;
+    -fx-cursor: hand;
+}
+
+.combo-box-popup .list-view .list-cell:filled:selected {
+    -fx-background-color: -fx-dustyRose;
+    -fx-text-fill: -fx-black;
+}
+
+
+/* ------- DATE PICKER --------------------------------*/
+.date-picker{
+    -fx-background-color: -fx-pink;
+    -fx-border-style: none;
+    -fx-background-insets: 0;
+    -fx-background-radius: 5px;
+}
+
+/* CALENDAR ICON (in textfield)*/
+.date-picker > .arrow-button {
+    -fx-background-color: -fx-pink;
+    -fx-background-insets: 0;
+}
+
+.date-picker > .arrow-button:hover{
+    -fx-cursor: hand;
+}
+
+.date-picker:focused {
+    -fx-background-color: -fx-pink;;
+    -fx-background-insets: 0;
+    -fx-background-radius: 5px;
+}
+
+date-picker:focused > .text-field,
+.date-picker > .text-field:focused {
+    -fx-background-color: -fx-pink;
+    -fx-background-insets: 0;
+    -fx-background-radius: 5px;
+}
+
+.date-picker-popup {
+    -fx-background-color:-fx-gray;
+    -fx-background: -fx-eggshell;
+    /*-fx-border-style: solid;
+    -fx-border-color: -fx-gray;
+    -fx-border-width: 0.5px;*/
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-padding: -1px 0px 0 0;
+    -fx-border-insets: -1px 0px 0 0;
+    -fx-background-insets: -1px 0 0 0;
+}
+
+.date-picker-popup > .calendar-grid {
+    -fx-background-color: -fx-eggshell;
+    -fx-background-insets: 0;
+}
+
+.date-picker-popup > .month-year-pane {
+    -fx-background-color: -fx-dustyRose;
+    -fx-background-radius: 5px 5px 0 0;
+    -fx-font-family: "Manrope ExtraBold";
+}
+
+.date-picker-popup > * > .spinner > .button {
+    -fx-background-insets: 0;
+    -fx-background-color: transparent;
+}
+
+.date-picker-popup > * > .spinner > .button:hover {
+    -fx-cursor: hand;
+}
+
+.date-picker-popup > * > .spinner > .button > .left-arrow,
+.date-picker-popup > * > .spinner > .button > .right-arrow {
+    -fx-background-color: -fx-black;
+    -fx-background-insets: 0;
+    -fx-effect: none;
+}
+
+.date-picker-popup > * > .spinner > .button:hover > .left-arrow,
+.date-picker-popup > * > .spinner > .button:hover > .right-arrow {
+    -fx-scale-x: 1.2;
+    -fx-scale-y: 1.2;
+}
+
+.date-picker-popup > * > .date-cell {
+    -fx-background-color: -fx-eggshell;
+}
+
+.date-picker-popup > * > .day-cell{
+    -fx-cursor: hand;
+}
+
+.date-picker-popup > * > .previous-month,
+.date-picker-popup > * > .next-month {
+    -fx-background-color: #f7f2f2;
+}
+
+.date-picker-popup > * > .today {
+    -fx-background-color: transparent;
+    -fx-text-fill: -fx-red;
+    -fx-font-family: "Manrope ExtraBold";
+}
+
+.date-picker-popup > * > .day-cell:focused,
+.date-picker-popup > * > .today:focused {
+    -fx-background-color: -fx-red;
+    -fx-text-fill: -fx-eggshell;
+}
+
+.date-picker-popup > * > .day-cell:hover,
+.date-picker-popup > * > .selected,
+.date-picker-popup > * > .selected:hover,
+.date-picker-popup > * > .previous-month.selected,
+.date-picker-popup > * > .next-month.selected,
+.date-picker-popup > * > .previous-month:hover,
+.date-picker-popup > * > .next-month:hover{
+    -fx-background-color: -fx-dustyRose;
+    -fx-text-fill: -fx-black;
+}
+
+.date-picker-popup > * > .today:hover {
+    -fx-background-color: -fx-dustyRose
+}
+

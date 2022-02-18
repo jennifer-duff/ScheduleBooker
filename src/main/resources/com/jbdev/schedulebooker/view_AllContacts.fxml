@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="tabBackground" prefHeight="552.0" prefWidth="1155.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AllContactsController">
+    <children>
+        <Button layoutX="37.0" layoutY="33.0" mnemonicParsing="false" onAction="#viewApps" prefHeight="37.0" prefWidth="175.0" styleClass="tabs" text="APPOINTMENTS" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="34.0" />
+        <Button layoutX="225.0" layoutY="34.0" mnemonicParsing="false" onAction="#viewCustomers" prefHeight="37.0" prefWidth="175.0" styleClass="tabs" text="CUSTOMERS" AnchorPane.topAnchor="34.0" />
+        <Button fx:id="activeTab" layoutX="410.0" layoutY="34.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="175.0" styleClass="tabs" text="CONTACTS" AnchorPane.topAnchor="34.0" />
+        <AnchorPane fx:id="bodyBackground" layoutX="38.0" layoutY="70.0" prefHeight="489.0" prefWidth="893.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+            <Label layoutX="41.0" layoutY="32.0" styleClass="subHeading" text="Schedule for:" AnchorPane.topAnchor="32.0" />
+            <ComboBox fx:id="comboBox" layoutX="149.0" layoutY="28.0" onAction="#populateTable" prefWidth="150.0" promptText="Select One:" />
+            <Label fx:id="msgLabel" layoutX="327.0" layoutY="34.0" AnchorPane.topAnchor="34.0" />
+            <TableView fx:id="contactAppsTable" layoutX="40.0" layoutY="64.0" prefHeight="378.0" prefWidth="960.0" AnchorPane.bottomAnchor="40.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="64.0">
+                <columns>
+                    <TableColumn fx:id="appIdCol" prefWidth="69.0" resizable="false" styleClass="column, centeredCol" text="App. ID" />
+                    <TableColumn fx:id="titleCol" prefWidth="99.0" resizable="false" styleClass="column" text="Title" />
+                    <TableColumn fx:id="typeCol" prefWidth="122.0" resizable="false" styleClass="column" text="Type" />
+                    <TableColumn fx:id="descriptionCol" prefWidth="279.0" resizable="false" styleClass="column" text="Description" />
+                    <TableColumn fx:id="startCol" prefWidth="130.0" resizable="false" styleClass="column, centeredCol" text="Start Date" />
+                    <TableColumn fx:id="endCol" prefWidth="130.0" resizable="false" styleClass="column, centeredCol" text="End Date" />
+                    <TableColumn fx:id="custIdCol" prefWidth="70.0" resizable="false" styleClass="column, centeredCol" text="Cust. ID" />
+                    <TableColumn fx:id="custNameCol" prefWidth="172.0" resizable="false" styleClass="column" text="Cust. Name" />
+                </columns>
+            </TableView>
+        </AnchorPane>
+    </children>
+</AnchorPane>

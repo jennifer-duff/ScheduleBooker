@@ -1,0 +1,29 @@
+/*.background{
+    -fx-padding: 20px 40px 20px 40px;
+}*/
+
+#loginLabel{
+    -fx-font-family: "Manrope ExtraBold";
+    -fx-font-size: 30pt;
+}
+
+#countryLabel{
+    -fx-font-size: 8.25pt;
+}
+
+#errorMsg{
+    -fx-text-fill: -fx-red;
+    -fx-font-family: "Manrope SemiBold";
+    -fx-font-size: 9.5pt;
+}
+
+#enterBtn{
+    -fx-text-fill: -fx-eggshell;
+    -fx-background-color: -fx-red;
+    -fx-font-size: 9pt;
+}
+
+#enterBtn:hover{
+    -fx-scale-x: 1.1;
+    -fx-scale-y: 1.1;
+}
