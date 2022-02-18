@@ -27,8 +27,10 @@ public class AllContactsController implements Initializable {
     @FXML private TableColumn <Appointment, String> descriptionCol;
     @FXML private TableColumn <Appointment, String> typeCol;
     //    @FXML private TableColumn <Appointment, String> locationCol;
-    @FXML private TableColumn <Appointment, LocalDateTime> startCol;
-    @FXML private TableColumn <Appointment, LocalDateTime> endCol;
+    @FXML private TableColumn <Appointment, LocalDateTime> startDateCol;
+    @FXML private TableColumn <Appointment, LocalDateTime> startTimeCol;
+    @FXML private TableColumn <Appointment, LocalDateTime> endDateCol;
+    @FXML private TableColumn <Appointment, LocalDateTime> endTimeCol;
     @FXML private TableColumn <Appointment, Integer> custIdCol;
     @FXML private TableColumn <Appointment, String> custNameCol;
 
@@ -74,9 +76,10 @@ public class AllContactsController implements Initializable {
         descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
         custIdCol.setCellValueFactory(new PropertyValueFactory<>("custId"));
         custNameCol.setCellValueFactory(new PropertyValueFactory<>("custName"));
-//        locationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
-        startCol.setCellValueFactory(new PropertyValueFactory<>("startDateTime"));
-        endCol.setCellValueFactory(new PropertyValueFactory<>("endDateTime"));
+        startDateCol.setCellValueFactory(new PropertyValueFactory<>("readOnlyStartDate"));
+        startTimeCol.setCellValueFactory(new PropertyValueFactory<>("readOnlyStartTime"));
+        endDateCol.setCellValueFactory(new PropertyValueFactory<>("readOnlyEndDate"));
+        endTimeCol.setCellValueFactory(new PropertyValueFactory<>("readOnlyEndTime"));
 
         if(contactApps.size() == 0){
             msgLabel.setText("No appointments found for " + contactName);
