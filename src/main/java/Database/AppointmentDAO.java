@@ -108,7 +108,7 @@ public class AppointmentDAO {
                             "Contact_ID = \"" + contactID + "\"";
 //            System.out.println(values);
             String query = "UPDATE appointments SET " + values + " WHERE APPOINTMENT_ID = " + appId;
-            System.out.println(query);
+//            System.out.println(query);
             PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
             statement.execute();
         } catch (SQLException e) {

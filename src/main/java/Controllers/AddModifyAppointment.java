@@ -21,6 +21,16 @@ import java.util.ResourceBundle;
 
 public class AddModifyAppointment implements Initializable {
     @FXML private Label titleLabel;
+    @FXML private Label addModifyErrorMsg;
+    @FXML private Label titleErrorMsg;
+    @FXML private Label typeErrorMsg;
+    @FXML private Label descriptionErrorMsg;
+    @FXML private Label startErrorMsg;
+    @FXML private Label endErrorMsg;
+    @FXML private Label customerErrorMsg;
+//    @FXML private Label locationErrorMsg;
+    @FXML private Label userErrorMsg;
+    @FXML private Label contactErrorMsg;
 
     @FXML private TextField appIdField;
     @FXML private TextField titleField;
@@ -39,6 +49,15 @@ public class AddModifyAppointment implements Initializable {
     @FXML private TextField userIdField;
     @FXML private ComboBox<String> contactNameComboBox;
 
+    String startDate;
+    String startHour;
+    String startMinute;
+    String startAmPm;
+
+    String endDate;
+    String endHour;
+    String endMinute;
+    String endAmPm;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -56,7 +75,6 @@ public class AddModifyAppointment implements Initializable {
             // set appId to next #
             int nextId = AppointmentDAO.getNextId();
             appIdField.setText(String.valueOf(nextId));
-
         }
 
         // shift focus from appId (since it's non-editable) to next field ("Title")
@@ -103,39 +121,70 @@ public class AddModifyAppointment implements Initializable {
     }
 
     public void saveApp(ActionEvent actionEvent) throws IOException {
-        int appId = Integer.parseInt(appIdField.getText());
-        String title = titleField.getText();
-        String type = typeField.getText();
-        String description = descriptionField.getText();
-        String location = locationField.getText();
+        //re-set error msg fields
+        addModifyErrorMsg.setText("");
+        titleErrorMsg.setText("");
+        typeErrorMsg.setText("");
+        descriptionErrorMsg.setText("");
+        startErrorMsg.setText("");
+        endErrorMsg.setText("");
+        customerErrorMsg.setText("");
+        userErrorMsg.setText("");
+        contactErrorMsg.setText("");
 
-        String startDate = startDatePicker.getValue().toString();
-        String startHour = startHourPicker.getValue();
-        String startMinute = startMinutePicker.getValue();
-        String startAmPm = startAmPmPicker.getValue();
-        startHour = TimeUtils.convertTo24Hr(startHour, startAmPm);
+        //Pull input values from fields
+        int appId = 0;
+        String title = "";
+        String type = "";
+        String description = "";
+        String location = "";
+        LocalDateTime startDateTime = null;
+        LocalDateTime endDateTime = null;
+        int customerId = 0;
+        int userId = 0;
+        int contactId = 0;
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        String startDateString = startDate+" "+startHour+":"+startMinute;
-//        System.out.println(startDateString);
-        LocalDateTime startDateTime = LocalDateTime.parse(startDateString, formatter);
+        try {
+            appId = Integer.parseInt(appIdField.getText());
+            title = titleField.getText();
+            type = typeField.getText();
+            description = descriptionField.getText();
+            location = locationField.getText();
 
-        String endDate = endDatePicker.getValue().toString();
-        String endHour = endHourPicker.getValue();
-        String endMinute = endMinutePicker.getValue();
-        String endAmPm = endAmPmPicker.getValue();
-        endHour = TimeUtils.convertTo24Hr(endHour, endAmPm);
-        String endDateString = endDate+" "+endHour+":"+endMinute;
-        LocalDateTime endDateTime = LocalDateTime.parse(endDateString, formatter);
+            startDate = startDatePicker.getValue().toString();
+            startHour = startHourPicker.getValue();
+            startMinute = startMinutePicker.getValue();
+            startAmPm = startAmPmPicker.getValue();
+            startHour = TimeUtils.convertTo24Hr(startHour, startAmPm);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            String startDateString = startDate + " " + startHour + ":" + startMinute;
+            startDateTime = LocalDateTime.parse(startDateString, formatter);
 
-        String customerName = customerNameComboBox.getValue();
-        int customerId = CustomerDAO.getCustomerId(customerName);
+            endDate = endDatePicker.getValue().toString();
+            endHour = endHourPicker.getValue();
+            endMinute = endMinutePicker.getValue();
+            endAmPm = endAmPmPicker.getValue();
+            endHour = TimeUtils.convertTo24Hr(endHour, endAmPm);
+            String endDateString = endDate + " " + endHour + ":" + endMinute;
+            endDateTime = LocalDateTime.parse(endDateString, formatter);
 
-        int userID = Integer.parseInt(userIdField.getText());
-        String contactName = contactNameComboBox.getValue();
-        int contactId = ContactDAO.getContactId(contactName);
+            String customerName = customerNameComboBox.getValue();
+            customerId = CustomerDAO.getCustomerId(customerName);
 
-        Appointment app = new Appointment(appId, title, description, type, customerId, location, startDateTime, endDateTime, contactId, userID);
+            userId = Integer.parseInt(userIdField.getText());
+            String contactName = contactNameComboBox.getValue();
+            contactId = ContactDAO.getContactId(contactName);
+        }
+        catch(Exception error){
+            System.out.println("Something went wrong!");
+        }
+
+        String checkStatus = errorChecking();
+        if(checkStatus.equals("FAIL")){
+            return;
+        }
+
+        Appointment app = new Appointment(appId, title, description, type, customerId, location, startDateTime, endDateTime, contactId, userId);
 
         if(titleLabel.getText().equals("Add Appointment")){
             AppointmentDAO.addAppointment(app);
@@ -146,5 +195,50 @@ public class AddModifyAppointment implements Initializable {
         returnToApps(actionEvent);
     }
 
+    //Error-checking
+    private String errorChecking(){
+        boolean passesCheck = true;
+        String requiredMsg = "* Required";
+        addModifyErrorMsg.setText("Whoops! Don't forget to fill out all fields.");
 
+        if(titleField.getText().equals("")){
+            titleErrorMsg.setText(requiredMsg);
+            passesCheck = false;
+        }
+        if(typeField.getText().equals("")){
+            typeErrorMsg.setText(requiredMsg);
+            passesCheck = false;
+        }
+        if(descriptionField.getText().equals("")){
+            descriptionErrorMsg.setText(requiredMsg);
+            passesCheck = false;
+        }
+        if(startDatePicker.getValue() == null || startHourPicker.getValue() == null || startMinutePicker.getValue() == null || startAmPmPicker.getValue() == null){
+            startErrorMsg.setText("* All fields required");
+            passesCheck = false;
+        }
+        if(endDatePicker.getValue() == null || endHourPicker.getValue() == null || endMinutePicker.getValue() == null || endAmPmPicker.getValue() == null){
+            endErrorMsg.setText("* All fields required");
+            passesCheck = false;
+        }
+        if(customerNameComboBox.getValue()== null){
+            customerErrorMsg.setText(requiredMsg);
+            passesCheck = false;
+        }
+        if(!(userIdField.getText().equals("1"))){
+            userErrorMsg.setText("* User ID must be \"1\"");
+            passesCheck = false;
+        }
+        if(contactNameComboBox.getValue() == null){
+            contactErrorMsg.setText(requiredMsg);
+            passesCheck = false;
+        }
+
+        if(passesCheck){
+            return "PASS";
+        }
+        else {
+            return "FAIL";
+        }
+    }
 }

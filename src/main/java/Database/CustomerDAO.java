@@ -52,7 +52,7 @@ public class CustomerDAO {
     }
 
     public static int getCustomerId(String custName) {
-        System.out.print(custName + "   ID = ");
+//        System.out.print(custName + "   ID = ");
         int customerId = 0;
         try {
             String query = "SELECT Customer_ID FROM customers WHERE Customer_Name = \"" + custName + "\"";
@@ -64,7 +64,8 @@ public class CustomerDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println(customerId);
+//        System.out.println(customerId);
         return customerId;
     }
+
 }

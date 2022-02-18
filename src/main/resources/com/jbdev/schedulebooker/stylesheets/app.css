@@ -23,6 +23,8 @@
     -fx-background-color: -fx-eggshell;
 }
 
+/* --- BUTTONS ----------------------------------------------- */
+
 .appButton{
     -fx-font-family: "Manrope ExtraBold";
     -fx-font-size: 9pt;
@@ -42,11 +44,12 @@
     -fx-scale-y: 1.1;
 }
 
+
+/* --- HEADINGS & TEXT ----------------------------------------- */
 .heading{
     -fx-font-family: "Manrope ExtraBold";
     -fx-font-size: 25pt;
 }
-
 
 .text-area {
     -fx-background-insets: 0;
@@ -91,6 +94,23 @@
     -fx-placeholder-text-fill: gray;
 }
 
+#errorMsg{
+    -fx-text-fill: -fx-red;
+    -fx-font-family: "Manrope SemiBold";
+    -fx-font-size: 9.5pt;
+}
+
+#addModifyErrorMsg{
+-fx-text-fill: -fx-red;
+    -fx-font-family: "Manrope ExtraBold";
+    -fx-font-size: 10pt;
+}
+
+.subErrorMsg{
+    -fx-text-fill: -fx-red;
+    -fx-font-family: "Manrope SemiBold";
+    -fx-font-size: 7.5pt;
+}
 
 /* ---- Combo Box -------------------------------------------------------------------*/
 .combo-box{

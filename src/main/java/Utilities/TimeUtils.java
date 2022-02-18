@@ -70,7 +70,7 @@ public class TimeUtils {
     public static void setModifyTimeValues(String dateTime, Appointment app, ComboBox<String> hourPicker, ComboBox<String> minutePicker, ComboBox<String> amPmPicker){
         String hour = dateTime.substring(0, 2);
         int intHour = Integer.parseInt(hour);
-        System.out.println(intHour);
+//        System.out.println(intHour);
         //00:00 -> 12:00am
         if(intHour == 0){
 //            System.out.println(intHour + " is in the MORNING");
@@ -80,7 +80,7 @@ public class TimeUtils {
 
         // 01:00, 02:00, 03:00, 04:00, 05:00, 06:00, 07:00, 08:00, 09:00 -> stays the same
         if(intHour <= 11) {
-            System.out.println(intHour + " is in the MORNING");
+//            System.out.println(intHour + " is in the MORNING");
             amPmPicker.setValue("am");
         }
 
@@ -108,7 +108,7 @@ public class TimeUtils {
         }
         hourPicker.setValue(hour);
         String minute = dateTime.substring(3);
-        System.out.println(minute);
+//        System.out.println(minute);
         minutePicker.setValue(minute);
     }
 

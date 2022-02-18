@@ -42,6 +42,10 @@
                 <RowConstraints maxHeight="35.0" minHeight="35.0" prefHeight="35.0" vgrow="SOMETIMES" />
             </rowConstraints>
             <children>
+            <Label fx:id="addModifyErrorMsg" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="1">
+               <GridPane.margin>
+                  <Insets left="120.0" />
+               </GridPane.margin></Label>
                 <Label alignment="BOTTOM_LEFT" styleClass="textFieldLabel" text="App. ID:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                 <TextField fx:id="appIdField" editable="false" prefHeight="25.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <GridPane.margin>
@@ -49,12 +53,26 @@
                     </GridPane.margin></TextField>
                 <Label styleClass="textFieldLabel" text="Title" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <TextField fx:id="titleField" prefHeight="25.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Label fx:id="titleErrorMsg" alignment="TOP_CENTER" contentDisplay="RIGHT" styleClass="subErrorMsg" GridPane.columnIndex="1" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets bottom="10.0" />
+               </GridPane.margin>
+            </Label>
                 <Label styleClass="textFieldLabel" text="Type" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+            <Label fx:id="typeErrorMsg" alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="50.0" layoutY="129.0" styleClass="subErrorMsg" GridPane.columnIndex="3" GridPane.rowIndex="5">
+               <GridPane.margin>
+                  <Insets bottom="10.0" />
+               </GridPane.margin></Label>
                 <TextField fx:id="typeField" layoutX="50.0" layoutY="60.0" prefHeight="25.0" prefWidth="218.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
                 <Label styleClass="textFieldLabel" text="Description" GridPane.columnIndex="1" GridPane.rowIndex="6" />
                 <TextArea fx:id="descriptionField" prefHeight="51.0" prefWidth="470.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="7" />
+            <Label fx:id="descriptionErrorMsg" alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="320.0" layoutY="129.0" styleClass="subErrorMsg" GridPane.columnIndex="1" GridPane.rowIndex="8">
+               <GridPane.margin>
+                  <Insets bottom="10.0" />
+               </GridPane.margin>
+            </Label>
                 <Label styleClass="textFieldLabel" text="Start Date" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-                <DatePicker fx:id="startDatePicker" prefHeight="25.0" prefWidth="237.0" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+                <DatePicker fx:id="startDatePicker" prefHeight="25.0" prefWidth="237.0" promptText="mm/dd/yyyy" GridPane.columnIndex="1" GridPane.rowIndex="10" />
                 <ComboBox fx:id="startHourPicker" maxWidth="65.0" minWidth="65.0" prefHeight="25.0" prefWidth="65.0" promptText="hh" GridPane.columnIndex="1" GridPane.rowIndex="12">
                     <GridPane.margin>
                         <Insets />
@@ -74,8 +92,13 @@
                         <Insets left="149.0" />
                     </GridPane.margin>
                 </ComboBox>
+            <Label fx:id="startErrorMsg" alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="50.0" layoutY="224.0" styleClass="subErrorMsg" GridPane.columnIndex="1" GridPane.rowIndex="13">
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding>
+            </Label>
                 <Label styleClass="textFieldLabel" text="End Date" GridPane.columnIndex="3" GridPane.rowIndex="9" />
-                <DatePicker fx:id="endDatePicker" layoutX="50.0" layoutY="215.0" prefHeight="25.0" prefWidth="237.0" GridPane.columnIndex="3" GridPane.rowIndex="10" />
+                <DatePicker fx:id="endDatePicker" layoutX="50.0" layoutY="215.0" prefHeight="25.0" prefWidth="237.0" promptText="mm/dd/yyyy" GridPane.columnIndex="3" GridPane.rowIndex="10" />
                 <ComboBox fx:id="endHourPicker" layoutX="50.0" layoutY="247.0" maxWidth="65.0" minWidth="65.0" prefHeight="25.0" prefWidth="65.0" promptText="hh" GridPane.columnIndex="3" GridPane.rowIndex="12" />
                 <Label layoutX="50.0" layoutY="251.0" text=":" GridPane.columnIndex="3" GridPane.rowIndex="12">
                     <GridPane.margin>
@@ -92,14 +115,39 @@
                         <Insets left="149.0" />
                     </GridPane.margin>
                 </ComboBox>
+            <Label fx:id="endErrorMsg" alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="50.0" layoutY="326.0" styleClass="subErrorMsg" GridPane.columnIndex="3" GridPane.rowIndex="13">
+               <padding>
+                  <Insets bottom="10.0" />
+               </padding>
+            </Label>
                 <Label styleClass="textFieldLabel" text="Customer Name" GridPane.columnIndex="1" GridPane.rowIndex="14" />
                 <ComboBox fx:id="customerNameComboBox" prefHeight="25.0" prefWidth="276.0" promptText="Select one" GridPane.columnIndex="1" GridPane.rowIndex="15" />
+            <Label fx:id="customerErrorMsg" alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="50.0" layoutY="224.0" styleClass="subErrorMsg" GridPane.columnIndex="1" GridPane.rowIndex="16">
+               <GridPane.margin>
+                  <Insets bottom="10.0" />
+               </GridPane.margin>
+            </Label>
                 <Label styleClass="textFieldLabel" text="Location" GridPane.columnIndex="3" GridPane.rowIndex="14" />
                 <TextField fx:id="locationField" prefHeight="25.0" prefWidth="218.0" GridPane.columnIndex="3" GridPane.rowIndex="15" />
+            <Label fx:id="locationErrorMsg" alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="50.0" layoutY="396.0" styleClass="subErrorMsg" GridPane.columnIndex="3" GridPane.rowIndex="16">
+               <GridPane.margin>
+                  <Insets bottom="10.0" />
+               </GridPane.margin>
+            </Label>
                 <Label styleClass="textFieldLabel" text="User ID" GridPane.columnIndex="1" GridPane.rowIndex="17" />
                 <TextField fx:id="userIdField" prefHeight="25.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="18" />
+            <Label fx:id="userErrorMsg" alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="320.0" layoutY="396.0" styleClass="subErrorMsg" GridPane.columnIndex="1" GridPane.rowIndex="19">
+               <GridPane.margin>
+                  <Insets bottom="10.0" />
+               </GridPane.margin>
+            </Label>
                 <Label styleClass="textFieldLabel" text="Contact Name" GridPane.columnIndex="3" GridPane.rowIndex="17" />
                 <ComboBox fx:id="contactNameComboBox" prefHeight="25.0" prefWidth="267.0" promptText="Select one" GridPane.columnIndex="3" GridPane.rowIndex="18" />
+            <Label fx:id="contactErrorMsg" alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="50.0" layoutY="466.0" styleClass="subErrorMsg" GridPane.columnIndex="3" GridPane.rowIndex="19">
+               <GridPane.margin>
+                  <Insets bottom="10.0" />
+               </GridPane.margin>
+            </Label>
             </children>
         </GridPane>
         <Button layoutX="465.0" layoutY="613.0" mnemonicParsing="false" onAction="#returnToApps" styleClass="appButton" text=" C A N C E L " AnchorPane.bottomAnchor="21.0" AnchorPane.rightAnchor="112.0" />
