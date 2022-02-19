@@ -4,9 +4,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane  scaleShape="false" cacheShape="false" snapToPixel="false" prefHeight="497.0" prefWidth="646.0" styleClass="background" xmlns="http://javafx.com/javafx/11.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddModifyCustomerController">
+<AnchorPane cacheShape="false" prefHeight="497.0" prefWidth="646.0" scaleShape="false" snapToPixel="false" styleClass="background" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddModifyCustomerController">
     <children>
-        <Label fx:id="titleLabel" scaleShape="false" cacheShape="false" snapToPixel="false" alignment="CENTER" contentDisplay="CENTER" layoutX="53.0" layoutY="45.0" prefHeight="45.0" prefWidth="489.0" styleClass="heading" text="Add Customer" textAlignment="CENTER" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="20.0">
+        <Label fx:id="titleLabel" alignment="CENTER" cacheShape="false" contentDisplay="CENTER" layoutX="53.0" layoutY="45.0" prefHeight="45.0" prefWidth="489.0" scaleShape="false" snapToPixel="false" styleClass="heading" text="Add Customer" textAlignment="CENTER" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="20.0">
             <font>
                 <Font size="30.0" />
             </font></Label>
@@ -35,22 +35,22 @@
             </rowConstraints>
             <children>
                 <Label styleClass="textFieldLabel" text="Cust. ID" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TextField editable="false" prefHeight="25.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="custIdField" editable="false" prefHeight="25.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                 <Label styleClass="textFieldLabel" text="Name" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                <TextField prefHeight="25.0" prefWidth="278.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                <TextField fx:id="nameField" prefHeight="25.0" prefWidth="278.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
                 <Label styleClass="textFieldLabel" text="Street Address" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <TextField prefHeight="25.0" prefWidth="372.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="5" />
+                <TextField fx:id="addressField" prefHeight="25.0" prefWidth="372.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="5" />
                 <Label styleClass="textFieldLabel" text="Country" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                <ComboBox prefHeight="25.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+                <ComboBox fx:id="countryComboBox" prefHeight="25.0" prefWidth="230.0" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                 <Label styleClass="textFieldLabel" text="Division" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                <ComboBox prefHeight="25.0" prefWidth="226.0" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                <ComboBox fx:id="divisionComboBox" prefHeight="25.0" prefWidth="226.0" GridPane.columnIndex="3" GridPane.rowIndex="8" />
                 <Label styleClass="textFieldLabel" text="Zip Code" GridPane.columnIndex="1" GridPane.rowIndex="10" />
                 <Label layoutX="10.0" layoutY="207.0" styleClass="textFieldLabel" text="Phone" GridPane.columnIndex="3" GridPane.rowIndex="10" />
-                <TextField GridPane.columnIndex="1" GridPane.rowIndex="11" />
-                <TextField layoutX="10.0" layoutY="225.0" GridPane.columnIndex="3" GridPane.rowIndex="11" />
+                <TextField fx:id="zipField" GridPane.columnIndex="1" GridPane.rowIndex="11" />
+                <TextField fx:id="phoneField" layoutX="10.0" layoutY="225.0" GridPane.columnIndex="3" GridPane.rowIndex="11" />
             </children>
         </GridPane>
-        <Button layoutX="465.0" layoutY="447.0" mnemonicParsing="false" onAction="#saveCustomer" styleClass="appButton" text=" C A N C E L " AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="98.0" />
-        <Button layoutX="557.0" layoutY="447.0" mnemonicParsing="false" onAction="#returnToCustomers" styleClass="appButton" text=" S A V E " AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="28.0" />
+        <Button layoutX="465.0" layoutY="447.0" mnemonicParsing="false" onAction="#returnToCustomers" styleClass="appButton" text=" C A N C E L " AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="98.0" />
+        <Button layoutX="557.0" layoutY="447.0" mnemonicParsing="false" onAction="#saveCustomer" styleClass="appButton" text=" S A V E " AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="28.0" />
     </children>
 </AnchorPane>

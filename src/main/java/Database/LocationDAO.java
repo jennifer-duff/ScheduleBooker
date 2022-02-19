@@ -1,5 +1,9 @@
 package Database;
 
+import Models.Appointment;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -33,7 +37,23 @@ public class LocationDAO {
         return divisionName;
     }
 
-    public static String getCountry(int divisionId) {
+    public static int getDivisionId(String divisionName) {
+        int divisionId = 0;
+        try {
+            String query = "SELECT * FROM first_level_divisions WHERE Division = \"" + divisionName + "\"";
+            PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()) {
+                divisionId = resultSet.getInt("Division_ID");
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return divisionId;
+    }
+
+    public static String getCountryName(int divisionId) {
         int countryId = 0;
         String countryName = null;
         try {
@@ -55,5 +75,41 @@ public class LocationDAO {
             e.printStackTrace();
         }
         return countryName;
+    }
+
+    public static ObservableList<String> getAllCountryNames() {
+        ObservableList<String> allCountries = FXCollections.observableArrayList();
+        try {
+            String query = "SELECT Country FROM countries";
+            PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                String countryName = resultSet.getString("Country");
+                allCountries.add(countryName);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return allCountries;
+    }
+
+    public static ObservableList<String> getAllDivisionNames() {
+        ObservableList<String> allDivisions = FXCollections.observableArrayList();
+        try {
+            String query = "SELECT Division FROM first_level_divisions";
+            PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                String divisionName = resultSet.getString("Division");
+                allDivisions.add(divisionName);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return allDivisions;
     }
 }

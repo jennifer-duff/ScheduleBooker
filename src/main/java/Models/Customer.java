@@ -1,9 +1,6 @@
 package Models;
 
-import Database.CustomerDAO;
 import Database.LocationDAO;
-
-import java.time.LocalDateTime;
 
 public class Customer {
     private int custId;
@@ -70,7 +67,7 @@ public class Customer {
     }
 
     public String getCountry(){
-        return LocationDAO.getCountry(this.divisionId);
+        return LocationDAO.getCountryName(this.divisionId);
     }
 //    public String getCountry() {
 //        return country;

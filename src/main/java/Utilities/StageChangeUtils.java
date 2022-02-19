@@ -1,7 +1,7 @@
 package Utilities;
 
 import com.jbdev.schedulebooker.Main;
-import Controllers.AddModifyAppointment;
+import Controllers.AddModifyAppointmentController;
 import Controllers.AddModifyCustomerController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +23,7 @@ public class StageChangeUtils {
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(view));
         Parent scene = fxmlLoader.load();
         if (screenTitle.equals("Add Appointment") || screenTitle.equals("Modify Appointment")){
-            AddModifyAppointment controller = fxmlLoader.getController();
+            AddModifyAppointmentController controller = fxmlLoader.getController();
             controller.setTitle(screenTitle);
             if(screenTitle.equals("Modify Appointment")){
                 controller.setModifyValues(app);
@@ -32,7 +32,9 @@ public class StageChangeUtils {
         else if (screenTitle.equals("Add Customer") || screenTitle.equals("Modify Customer")){
             AddModifyCustomerController controller = fxmlLoader.getController();
             controller.setTitle(screenTitle);
-//            controller.setModifyValues(cust);
+            if(screenTitle.equals("Modify Customer")){
+                controller.setModifyValues(cust);
+            }
         }
         scene.getStylesheets().add(Objects.requireNonNull(Main.class.getResource("/com/jbdev/schedulebooker/stylesheets/app.css")).toExternalForm());
         scene.getStylesheets().add(Objects.requireNonNull(Main.class.getResource(stylesheet)).toExternalForm());

@@ -7,6 +7,7 @@ import Models.Customer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 public class CustomerDAO {
     public static ObservableList<Customer> getAllCustomers() {
@@ -16,9 +17,6 @@ public class CustomerDAO {
             PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
 
-            // 1) Gets the value from each column for one row at a time,
-            // 2) then create a new Customer entity from the info,
-            // 3) and finally add the new cust to the allCustomers list
             while (resultSet.next()) {
                 int custId = resultSet.getInt("Customer_ID");
                 String name = resultSet.getString("Customer_Name");
@@ -89,46 +87,60 @@ public class CustomerDAO {
         return customer;
     }
 
-//    public static String getCustomerDivision(int divisionId){
-//        String custDivision = "";
-//            try {
-//            String query = "SELECT Division FROM first_level_divisions WHERE Division_ID = " + divisionId;
-//            PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
-//            ResultSet resultSet = statement.executeQuery();
-//            while (resultSet.next()) {
-//                custDivision = resultSet.getString("Division");
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    //        System.out.println(customerId);
-//        return custDivision;
-//        }
-//
-//    public static String getCustomerCountry(int divisionId){
-//        String custCountry = "";
-//        int countryId = 0;
-//        try {
-//            String query = "SELECT Country_ID FROM first_level_divisions WHERE Division_ID = " + divisionId;
-//            PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
-//            ResultSet resultSet = statement.executeQuery();
-//            while (resultSet.next()) {
-//                countryId = resultSet.getInt("Country_ID");
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        try {
-//            String query = "SELECT Country FROM countries WHERE Country_ID = " + countryId;
-//            PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
-//            ResultSet resultSet = statement.executeQuery();
-//            while (resultSet.next()) {
-//                custCountry = resultSet.getString("Country");
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return custCountry;
-//    }
+    public static int getNextId(){
+        int currId = 0;
+        try{
+            ResultSet resultSet = getLastResultSet();
+            while (resultSet.next()) {
+                currId = resultSet.getInt("Customer_ID");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return (currId + 1);
+    }
+
+    public static ResultSet getLastResultSet(){
+        ResultSet resultSet = null;
+        try{
+            String query = "SELECT Customer_ID FROM customers ORDER BY Customer_ID DESC LIMIT 1";
+            PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
+            resultSet = statement.executeQuery();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return resultSet;
+    }
+
+    public static void addCustomer(Customer cust){
+        String name = cust.getName();
+        String address = cust.getStreetAddress();
+        int divisionId = cust.getDivisionId();
+        String zip = cust.getZip();
+        String phone = cust.getPhone();
+
+        try {
+            String values =
+                    "NULL, \"" +
+                    name + "\", \"" +
+                    address + "\", \"" +
+                    zip + "\", \"" +
+                    phone + "\", \"" +
+                    LocalDateTime.now() + "\", \"" +
+                    "User_1\", \"" +
+                    LocalDateTime.now() + "\", \"" +
+                    "User_1\", " +
+                    divisionId;
+
+//            System.out.println(values);
+            String query = "INSERT INTO customers VALUES (" + values + ")";
+//            System.out.println(query);
+            PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 }

@@ -144,9 +144,6 @@ public class AppointmentDAO {
     public static int getNextId(){
         int currId = 0;
         try{
-            //String query = "SELECT Appointment_ID FROM appointments ORDER BY Appointment_ID DESC LIMIT 1";
-            //PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
-//            ResultSet resultSet = statement.executeQuery();
             ResultSet resultSet = getLastResultSet();
             while (resultSet.next()) {
                 currId = resultSet.getInt("Appointment_ID");

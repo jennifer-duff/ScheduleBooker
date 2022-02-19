@@ -1,6 +1,7 @@
 package Controllers;
 
 import Database.CustomerDAO;
+import Models.Appointment;
 import Utilities.StageChangeUtils;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -79,6 +80,8 @@ public class AllCustomersController implements Initializable {
     }
 
     public void modifyCustomer(ActionEvent actionEvent) throws IOException {
+        ObservableList<Customer> selectedItems = customerTable.getSelectionModel().getSelectedItems();
+        Customer customer = selectedItems.get(0);
         StageChangeUtils.changeStage(
             actionEvent,
             "/com/jbdev/schedulebooker/view_AddModifyCustomer.fxml",
@@ -86,7 +89,7 @@ public class AllCustomersController implements Initializable {
             "Modify Customer",
             "Modify Customer",
             null,
-            null
+                customer
         );
     }
 

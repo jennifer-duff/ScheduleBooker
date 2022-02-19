@@ -20,7 +20,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ResourceBundle;
 
 
-public class AddModifyAppointment implements Initializable {
+public class AddModifyAppointmentController implements Initializable {
     @FXML private Label titleLabel;
     @FXML private Label addModifyErrorMsg;
     @FXML private Label titleErrorMsg;

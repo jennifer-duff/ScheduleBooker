@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="659.0" prefWidth="669.0" styleClass="background" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddModifyAppointment">
+<AnchorPane prefHeight="659.0" prefWidth="669.0" styleClass="background" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AddModifyAppointmentController">
     <children>
         <Label fx:id="titleLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="53.0" layoutY="45.0" prefHeight="45.0" prefWidth="489.0" styleClass="heading" text="Add Appointment" textAlignment="CENTER" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="30.0">
             <font>

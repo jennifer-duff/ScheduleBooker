@@ -64,18 +64,6 @@ public class AllAppointmentsController implements Initializable {
         userIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
     }
 
-//    private void hideHeaders() {
-//        appTable.skinProperty().addListener((a, b, newSkin) ->
-//        {
-//            Pane header = (Pane) appTable.lookup("subColumn > column-header");
-//            header.setMinHeight(0);
-//            header.setPrefHeight(0);
-//            header.setMaxHeight(0);
-//            header.setVisible(false);
-//        });
-//
-//    }
-
     public void initialize(URL location, ResourceBundle resources) {
         updateTable();
     }
@@ -134,12 +122,14 @@ public class AllAppointmentsController implements Initializable {
         ObservableList<Appointment> selectedItems = appTable.getSelectionModel().getSelectedItems();
         Appointment appointment = selectedItems.get(0);
         String appTitle = appointment.getTitle();
+        int appId = appointment.getAppId();
+        String appType = appointment.getType();
 
         StageChangeUtils.showDeleteDialog(stage);
         if (DialogController.wasDeleted){
             AppointmentDAO.deleteAppointment(appointment);
             updateTable();
-            msgLabel.setText("Appointment \"" + appTitle + "\" was deleted");
+            msgLabel.setText(appType + " appointment \"" + appTitle + "\" (#" +  appId + ") was deleted.");
         }
         else{
             msgLabel.setText("");
