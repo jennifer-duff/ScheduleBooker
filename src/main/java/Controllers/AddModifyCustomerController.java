@@ -40,9 +40,6 @@ public class AddModifyCustomerController implements Initializable {
         ObservableList<String> allCountries = LocationDAO.getAllCountryNames();
         countryComboBox.setItems(allCountries);
 
-//        ObservableList<String> allDivisions = LocationDAO.getAllDivisionNames();
-//        divisionComboBox.setItems(allDivisions);
-
         // shift focus from custId (since it's non-editable) to next field ("Name")
         Platform.runLater(new Runnable() {
             @Override

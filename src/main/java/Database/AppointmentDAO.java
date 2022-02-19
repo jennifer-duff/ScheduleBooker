@@ -1,5 +1,6 @@
 package Database;
 
+import Controllers.LoginController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import Models.Appointment;
@@ -11,6 +12,17 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class AppointmentDAO {
+    public static void changeDescriptionCol(){
+        try {
+            String query = "ALTER TABLE appointments CHANGE COLUMN `Description` `Description` LONGTEXT";
+            PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
+            statement.execute();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static ObservableList<Appointment> getAllAppointments(){
         ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
         try{
@@ -57,9 +69,23 @@ public class AppointmentDAO {
         int contactID = app.getContactId();
 
         try {
-            String values = "NULL, \"" + title + "\" , \"" + description + "\" , \"" + location + "\", \"" + type + "\", \"" + localStart + "\", \""  + localEnd + "\" , \"" + LocalDateTime.now() + "\" , \"User_" + userId + "\" , \"" + LocalDateTime.now()  + "\" , \"User_" + userId + "\" , \"" +  custId + "\" , \""  + userId + "\" , \""  + contactID + "\"";
-//            System.out.println(values);
+            String values =
+                    "NULL, \"" +                            //Appointment_ID
+                    title + "\", \"" +                     //Title
+                    description + "\", \"" +               //Description
+                    location + "\", \"" +                   //Location
+                    type + "\", \"" +                       //Type
+                    localStart + "\", \""  +                //Start
+                    localEnd + "\", \"" +                  //End
+                    LocalDateTime.now() + "\", \"" +       //Create_Date
+                    LoginController.USERNAME + "\", \"" +  //Created_By
+                    LocalDateTime.now()  + "\", \"" +      //Last_Update
+                    LoginController.USERNAME + "\", \"" +  //Last_Updated_By
+                    custId + "\", \"" +                    //Customer_ID
+                    userId + "\", \"" +                    //User_ID
+                    contactID + "\"";                       //Contact_ID
             String query = "INSERT INTO appointments VALUES (" + values + ")";
+            System.out.println(query);
             PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
             statement.execute();
         } catch (SQLException e) {

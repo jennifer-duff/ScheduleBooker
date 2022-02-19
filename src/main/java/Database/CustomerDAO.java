@@ -1,5 +1,6 @@
 package Database;
 
+import Controllers.LoginController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import Models.Customer;
@@ -158,7 +159,7 @@ public class CustomerDAO {
                     "Postal_Code = \"" + zip + "\", " +
                     "Phone = \"" + phone + "\", " +
                     "Last_Update = \"" + LocalDateTime.now() + "\", " +
-                    "Last_Updated_By = \"User_1\", "  +
+                    "Last_Updated_By = \""  + LoginController.USERNAME + "\", " +
                     "Division_ID = " + divisionId;
             String query = "UPDATE customers SET " + values + " WHERE Customer_ID = " + custId;
 //            System.out.println(query);
@@ -167,5 +168,9 @@ public class CustomerDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void deleteCustomer(Customer customer) {
+        System.out.println("DELETING A THING!");
     }
 }

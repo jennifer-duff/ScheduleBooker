@@ -1,6 +1,5 @@
 package Database;
 
-import Models.Appointment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -92,7 +91,6 @@ public class LocationDAO {
         }
         return countryId;
     }
-
 
     public static ObservableList<String> getAllCountryNames() {
         ObservableList<String> allCountries = FXCollections.observableArrayList();

@@ -53,10 +53,8 @@ public class AllAppointmentsController implements Initializable {
         custIdCol.setCellValueFactory(new PropertyValueFactory<>("custId"));
         custNameCol.setCellValueFactory(new PropertyValueFactory<>("custName"));
         locationCol.setCellValueFactory(new PropertyValueFactory<>("location"));
-//        startCol.setCellValueFactory(new PropertyValueFactory<>("readOnlyStart"));
         startDateCol.setCellValueFactory(new PropertyValueFactory<>("readOnlyStartDate"));
         startTimeCol.setCellValueFactory(new PropertyValueFactory<>("readOnlyStartTime"));
-//        endCol.setCellValueFactory(new PropertyValueFactory<>("readOnlyEnd"));
         endDateCol.setCellValueFactory(new PropertyValueFactory<>("readOnlyEndDate"));
         endTimeCol.setCellValueFactory(new PropertyValueFactory<>("readOnlyEndTime"));
         contactCol.setCellValueFactory(new PropertyValueFactory<>("contactId"));

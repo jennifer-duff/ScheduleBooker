@@ -9,6 +9,7 @@
         <Button fx:id="activeTab" layoutX="226.0" layoutY="34.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="175.0" styleClass="tabs" text="CUSTOMERS" AnchorPane.topAnchor="34.0" />
         <Button layoutX="411.0" layoutY="34.0" mnemonicParsing="false" onAction="#viewContacts" prefHeight="37.0" prefWidth="175.0" styleClass="tabs" text="CONTACTS" AnchorPane.topAnchor="34.0" />
         <AnchorPane fx:id="bodyBackground" layoutX="38.0" layoutY="55.0" prefHeight="552.0" prefWidth="1055.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+            <Label fx:id="msgLabel" layoutX="40.0" layoutY="19.0" AnchorPane.leftAnchor="41.0" AnchorPane.topAnchor="19.0" />
             <TableView fx:id="customerTable" layoutX="40.0" layoutY="40.0" prefHeight="371.0" prefWidth="812.0" AnchorPane.bottomAnchor="79.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
                 <columns>
                     <TableColumn fx:id="custIdCol" prefWidth="69.0" styleClass="column, centeredCol" text="Cust. ID" />

@@ -1,5 +1,6 @@
 package Controllers;
 
+import Database.AppointmentDAO;
 import Database.CustomerDAO;
 import Models.Appointment;
 import Utilities.StageChangeUtils;
@@ -7,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -18,6 +20,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AllCustomersController implements Initializable {
+    @FXML private Label msgLabel;
     @FXML private TableView<Customer> customerTable;
     @FXML private TableColumn<Customer, Integer> custIdCol;
     @FXML private TableColumn<Customer, String> nameCol;
@@ -29,8 +32,7 @@ public class AllCustomersController implements Initializable {
 
     Stage stage;
 
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void updateTable(){
         ObservableList<Customer> allCustomers = CustomerDAO.getAllCustomers();
         customerTable.setItems(allCustomers);
         custIdCol.setCellValueFactory(new PropertyValueFactory<>("custId"));
@@ -40,6 +42,11 @@ public class AllCustomersController implements Initializable {
         zipCol.setCellValueFactory(new PropertyValueFactory<>("zip"));
         countryCol.setCellValueFactory(new PropertyValueFactory<>("country"));
         phoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
+    }
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        updateTable();
     }
 
     @FXML
@@ -94,7 +101,20 @@ public class AllCustomersController implements Initializable {
     }
 
     public void deleteCustomer(ActionEvent actionEvent) throws IOException {
+        ObservableList<Customer> selectedItems = customerTable.getSelectionModel().getSelectedItems();
+        Customer customer = selectedItems.get(0);
+        String custName = customer.getName();
+
         StageChangeUtils.showDeleteDialog(stage);
+        if (DialogController.wasDeleted){
+            CustomerDAO.deleteCustomer(customer);
+            updateTable();
+            msgLabel.setText("Customer \"" + custName + "\" was deleted.");
+        }
+        else{
+            msgLabel.setText("");
+        }
+        DialogController.wasDeleted = false;
     }
 
 

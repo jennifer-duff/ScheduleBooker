@@ -47,7 +47,7 @@
                   <Insets left="120.0" />
                </GridPane.margin></Label>
                 <Label alignment="BOTTOM_LEFT" styleClass="textFieldLabel" text="App. ID:" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                <TextField fx:id="appIdField" styleClass="customDisabledText" editable="false" prefHeight="25.0" prefWidth="218.0" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                <TextField fx:id="appIdField" alignment="CENTER" editable="false" prefHeight="25.0" prefWidth="218.0" styleClass="customDisabledText" GridPane.columnIndex="1" GridPane.rowIndex="1">
                     <GridPane.margin>
                         <Insets left="48.0" right="150.0" />
                     </GridPane.margin></TextField>
@@ -127,9 +127,16 @@
                   <Insets bottom="10.0" />
                </GridPane.margin>
             </Label>
-                <Label styleClass="textFieldLabel" text="Location" GridPane.columnIndex="1" GridPane.rowIndex="17" />
-                <TextField fx:id="locationField" styleClass="customDisabledText" editable="false" maxWidth="420.0" minWidth="420.0" prefHeight="25.0" prefWidth="420.0" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="18" />
+                <Label styleClass="textFieldLabel" text="Contact Name" GridPane.columnIndex="3" GridPane.rowIndex="14" />
+                <ComboBox fx:id="contactNameComboBox" prefHeight="25.0" prefWidth="267.0" promptText="Select one" GridPane.columnIndex="3" GridPane.rowIndex="15" />
             <Label fx:id="locationErrorMsg" alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="50.0" layoutY="396.0" styleClass="subErrorMsg" GridPane.columnIndex="3" GridPane.rowIndex="16">
+               <GridPane.margin>
+                  <Insets bottom="10.0" />
+               </GridPane.margin>
+            </Label>
+                <Label styleClass="textFieldLabel" text="Location" GridPane.columnIndex="1" GridPane.rowIndex="17" />
+                <TextField fx:id="locationField" editable="false" maxWidth="420.0" minWidth="420.0" prefHeight="25.0" prefWidth="420.0" styleClass="customDisabledText" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="18" />
+            <Label fx:id="contactErrorMsg" alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="50.0" layoutY="466.0" styleClass="subErrorMsg" GridPane.columnIndex="1" GridPane.rowIndex="19">
                <GridPane.margin>
                   <Insets bottom="10.0" />
                </GridPane.margin>
@@ -138,20 +145,13 @@
                <GridPane.margin>
                   <Insets left="190.0" />
                </GridPane.margin></Label>
-                <TextField fx:id="userIdField" maxWidth="43.0" minWidth="25.0" prefWidth="43.0" GridPane.columnIndex="3" GridPane.rowIndex="18">
+                <TextField fx:id="userIdField" alignment="CENTER" editable="false" maxWidth="43.0" minWidth="25.0" prefWidth="43.0" GridPane.columnIndex="3" GridPane.rowIndex="18">
                <GridPane.margin>
                   <Insets left="190.0" />
                </GridPane.margin></TextField>
-            <Label fx:id="userErrorMsg" alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="320.0" layoutY="396.0" styleClass="subErrorMsg" GridPane.columnIndex="1" GridPane.rowIndex="19">
+            <Label fx:id="userErrorMsg" alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="320.0" layoutY="396.0" styleClass="subErrorMsg" GridPane.columnIndex="3" GridPane.rowIndex="19">
                <GridPane.margin>
-                  <Insets bottom="10.0" />
-               </GridPane.margin>
-            </Label>
-                <Label styleClass="textFieldLabel" text="Contact Name" GridPane.columnIndex="3" GridPane.rowIndex="14" />
-                <ComboBox fx:id="contactNameComboBox" prefHeight="25.0" prefWidth="267.0" promptText="Select one" GridPane.columnIndex="3" GridPane.rowIndex="15" />
-            <Label fx:id="contactErrorMsg" alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="50.0" layoutY="466.0" styleClass="subErrorMsg" GridPane.columnIndex="3" GridPane.rowIndex="19">
-               <GridPane.margin>
-                  <Insets bottom="10.0" />
+                  <Insets bottom="10.0" left="170.0" />
                </GridPane.margin>
             </Label>
             </children>

@@ -72,6 +72,8 @@ public class AddModifyAppointmentController implements Initializable {
         TimeUtils.populateCustomerPicker(customerNameComboBox);
         TimeUtils.populateContactPicker(contactNameComboBox);
 
+        userIdField.setText(String.valueOf(LoginController.USER_ID));
+
         if(titleLabel.getText().equals("Add Appointment")){
             // set appId to next #
             int nextId = AppointmentDAO.getNextId();
@@ -226,10 +228,10 @@ public class AddModifyAppointmentController implements Initializable {
             customerErrorMsg.setText(requiredMsg);
             passesCheck = false;
         }
-        if(!(userIdField.getText().equals("1"))){
-            userErrorMsg.setText("* User ID must be \"1\"");
-            passesCheck = false;
-        }
+//        if(userIdField.getText().equals("")){
+//            userErrorMsg.setText("* Required");
+//            passesCheck = false;
+//        }
         if(contactNameComboBox.getValue() == null){
             contactErrorMsg.setText(requiredMsg);
             passesCheck = false;
