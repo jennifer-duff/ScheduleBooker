@@ -14,6 +14,7 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import javax.xml.stream.Location;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -39,8 +40,8 @@ public class AddModifyCustomerController implements Initializable {
         ObservableList<String> allCountries = LocationDAO.getAllCountryNames();
         countryComboBox.setItems(allCountries);
 
-        ObservableList<String> allDivisions = LocationDAO.getAllDivisionNames();
-        divisionComboBox.setItems(allDivisions);
+//        ObservableList<String> allDivisions = LocationDAO.getAllDivisionNames();
+//        divisionComboBox.setItems(allDivisions);
 
         // shift focus from custId (since it's non-editable) to next field ("Name")
         Platform.runLater(new Runnable() {
@@ -68,6 +69,7 @@ public class AddModifyCustomerController implements Initializable {
     }
 
     public void setModifyValues(Customer cust) {
+        custIdField.setText(String.valueOf(cust.getCustId()));
         nameField.setText(cust.getName());
         addressField.setText(cust.getStreetAddress());
         countryComboBox.setValue(cust.getCountry());
@@ -86,10 +88,25 @@ public class AddModifyCustomerController implements Initializable {
         String phone = phoneField.getText();
 
         Customer customer = new Customer(custId, name, address, divisionId, zip, phone);
-        CustomerDAO.addCustomer(customer);
+
+        if(titleLabel.getText().equals("Add Customer")){
+            CustomerDAO.addCustomer(customer);
+        }
+        else if(titleLabel.getText().equals("Modify Customer")){
+            CustomerDAO.modifyCustomer(customer);
+        }
 
         returnToCustomers(actionEvent);
     }
 
+    public void populateDivisionBox(String countryName){
+        int countryId = LocationDAO.getCountryId(countryName);
+        ObservableList<String> countryDivisions = LocationDAO.getCountryDivNames(countryId);
+        divisionComboBox.setItems(countryDivisions);
+    }
 
+    public void pullCountryName(){
+        String countryName= countryComboBox.getValue();
+        populateDivisionBox(countryName);
+    }
 }

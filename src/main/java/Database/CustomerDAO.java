@@ -112,7 +112,7 @@ public class CustomerDAO {
         return resultSet;
     }
 
-    public static void addCustomer(Customer cust){
+    public static void addCustomer(Customer cust) {
         String name = cust.getName();
         String address = cust.getStreetAddress();
         int divisionId = cust.getDivisionId();
@@ -122,25 +122,50 @@ public class CustomerDAO {
         try {
             String values =
                     "NULL, \"" +
-                    name + "\", \"" +
-                    address + "\", \"" +
-                    zip + "\", \"" +
-                    phone + "\", \"" +
-                    LocalDateTime.now() + "\", \"" +
-                    "User_1\", \"" +
-                    LocalDateTime.now() + "\", \"" +
-                    "User_1\", " +
-                    divisionId;
+                            name + "\", \"" +
+                            address + "\", \"" +
+                            zip + "\", \"" +
+                            phone + "\", \"" +
+                            LocalDateTime.now() + "\", \"" +
+                            "User_1\", \"" +
+                            LocalDateTime.now() + "\", \"" +
+                            "User_1\", " +
+                            divisionId;
 
 //            System.out.println(values);
             String query = "INSERT INTO customers VALUES (" + values + ")";
 //            System.out.println(query);
             PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
             statement.execute();
-        } catch (SQLException e) {
+        }
+        catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
+    public static void modifyCustomer(Customer cust) {
+        int custId = cust.getCustId();
+        String name = cust.getName();
+        String address = cust.getStreetAddress();
+        int divisionId = cust.getDivisionId();
+        String zip = cust.getZip();
+        String phone = cust.getPhone();
 
+        try {
+            String values =
+                    "Customer_Name = \"" + name + "\", " +
+                    "Address = \"" + address + "\", " +
+                    "Postal_Code = \"" + zip + "\", " +
+                    "Phone = \"" + phone + "\", " +
+                    "Last_Update = \"" + LocalDateTime.now() + "\", " +
+                    "Last_Updated_By = \"User_1\", "  +
+                    "Division_ID = " + divisionId;
+            String query = "UPDATE customers SET " + values + " WHERE Customer_ID = " + custId;
+            System.out.println(query);
+            PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

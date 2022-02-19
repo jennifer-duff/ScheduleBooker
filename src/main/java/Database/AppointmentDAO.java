@@ -93,19 +93,19 @@ public class AppointmentDAO {
         try {
             String values =
                     "Appointment_ID = \"" + appId + "\", " +
-                            "Title = \"" + title + "\", " +
-                            "Description = \"" + description + "\", " +
-                            "Location = \"" + location + "\", " +
-                            "Type = \"" + type + "\", " +
-                            "Start = \"" + localStart + "\", " +
-                            "End = \"" + localEnd + "\", " +
+                    "Title = \"" + title + "\", " +
+                    "Description = \"" + description + "\", " +
+                    "Location = \"" + location + "\", " +
+                    "Type = \"" + type + "\", " +
+                    "Start = \"" + localStart + "\", " +
+                    "End = \"" + localEnd + "\", " +
 //                            "Create_Date = \"" + creationDate + "\", " +
 //                            "Created_By = \"User_" + creationUser + "\", " +
-                            "Last_Update = \"" + LocalDateTime.now()  + "\", " +
-                            "Last_Updated_By = \"User_" + userId + "\", " +
-                            "Customer_ID = \"" + custId + "\", " +
-                            "User_ID = \"" + userId + "\", " +
-                            "Contact_ID = \"" + contactID + "\"";
+                    "Last_Update = \"" + LocalDateTime.now()  + "\", " +
+                    "Last_Updated_By = \"User_" + userId + "\", " +
+                    "Customer_ID = \"" + custId + "\", " +
+                    "User_ID = \"" + userId + "\", " +
+                    "Contact_ID = \"" + contactID + "\"";
 //            System.out.println(values);
             String query = "UPDATE appointments SET " + values + " WHERE APPOINTMENT_ID = " + appId;
 //            System.out.println(query);

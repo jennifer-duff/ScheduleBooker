@@ -34,6 +34,7 @@ public class StageChangeUtils {
             controller.setTitle(screenTitle);
             if(screenTitle.equals("Modify Customer")){
                 controller.setModifyValues(cust);
+                controller.populateDivisionBox(cust.getCountry());
             }
         }
         scene.getStylesheets().add(Objects.requireNonNull(Main.class.getResource("/com/jbdev/schedulebooker/stylesheets/app.css")).toExternalForm());

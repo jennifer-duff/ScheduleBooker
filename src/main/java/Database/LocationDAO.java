@@ -77,6 +77,23 @@ public class LocationDAO {
         return countryName;
     }
 
+    public static int getCountryId(String countryName) {
+        int countryId = 0;
+        try {
+            String divQuery = "SELECT Country_ID FROM countries WHERE Country = \"" + countryName + "\"";
+            PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(divQuery);
+            ResultSet resultSet = statement.executeQuery();
+            while(resultSet.next()) {
+                countryId = resultSet.getInt("Country_ID");
+            }
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return countryId;
+    }
+
+
     public static ObservableList<String> getAllCountryNames() {
         ObservableList<String> allCountries = FXCollections.observableArrayList();
         try {
@@ -111,5 +128,23 @@ public class LocationDAO {
             e.printStackTrace();
         }
         return allDivisions;
+    }
+
+    public static ObservableList<String> getCountryDivNames(int countryId){
+        ObservableList<String> countryDivs = FXCollections.observableArrayList();
+        try {
+            String query = "SELECT Division FROM first_level_divisions WHERE Country_ID = " + countryId;
+            PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+                String divisionName = resultSet.getString("Division");
+                countryDivs.add(divisionName);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return countryDivs;
     }
 }
