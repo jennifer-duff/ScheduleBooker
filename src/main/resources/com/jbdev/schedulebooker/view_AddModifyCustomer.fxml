@@ -43,7 +43,7 @@
                 <Label styleClass="textFieldLabel" text="Country" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                 <ComboBox fx:id="countryComboBox" onAction="#pullCountryName" prefHeight="25.0" prefWidth="230.0" promptText="Select One:" GridPane.columnIndex="1" GridPane.rowIndex="8" />
                 <Label styleClass="textFieldLabel" text="Division" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                <ComboBox fx:id="divisionComboBox" prefHeight="25.0" prefWidth="226.0" promptText="Choose Country, Then Select One:" GridPane.columnIndex="3" GridPane.rowIndex="8" />
+                <ComboBox fx:id="divisionComboBox" prefHeight="25.0" prefWidth="226.0" promptText="Choose Country, Then Select:" GridPane.columnIndex="3" GridPane.rowIndex="8" />
                 <Label styleClass="textFieldLabel" text="Zip Code" GridPane.columnIndex="1" GridPane.rowIndex="10" />
                 <Label layoutX="10.0" layoutY="207.0" styleClass="textFieldLabel" text="Phone" GridPane.columnIndex="3" GridPane.rowIndex="10" />
                 <TextField fx:id="zipField" GridPane.columnIndex="1" GridPane.rowIndex="11" />

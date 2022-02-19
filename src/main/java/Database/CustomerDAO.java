@@ -161,7 +161,7 @@ public class CustomerDAO {
                     "Last_Updated_By = \"User_1\", "  +
                     "Division_ID = " + divisionId;
             String query = "UPDATE customers SET " + values + " WHERE Customer_ID = " + custId;
-            System.out.println(query);
+//            System.out.println(query);
             PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
             statement.execute();
         } catch (SQLException e) {
