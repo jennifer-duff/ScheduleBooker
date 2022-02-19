@@ -3,6 +3,7 @@ package Controllers;
 import Database.AppointmentDAO;
 import Database.CustomerDAO;
 import Database.LocationDAO;
+import Models.Appointment;
 import Models.Customer;
 import Utilities.StageChangeUtils;
 import javafx.application.Platform;
@@ -91,8 +92,17 @@ public class AddModifyCustomerController implements Initializable {
         }
         else if(titleLabel.getText().equals("Modify Customer")){
             CustomerDAO.modifyCustomer(customer);
+            //if customer has any apps, update them:
+            ObservableList<Appointment> allapps = AppointmentDAO.getAllAppointments();
+            for(Appointment app : allapps){
+                if(app.getCustId() == customer.getCustId()){
+                    app.setCustName(customer.getName());
+                    app.setLocation(customer.getFullAddress());
+                    AppointmentDAO.modifyAppointment(app);
+                }
+            }
         }
-
+//        AllAppointmentsController.updateTable();
         returnToCustomers(actionEvent);
     }
 

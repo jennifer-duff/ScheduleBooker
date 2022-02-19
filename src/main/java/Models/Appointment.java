@@ -91,6 +91,10 @@ public class Appointment {
         return CustomerDAO.getCustomerName(this.custId);
     }
 
+    public void setCustName(String custName) {
+        this.custName = custName;
+    }
+
     public LocalDateTime getStartDateTime() {
         return startDateTime;
     }
