@@ -1,3 +1,4 @@
+/* --- TABS ------------------------------------------*/
 #tabBackground{
     -fx-background-color: -fx-pink;
 }
@@ -25,6 +26,8 @@
    -fx-z-index:1;
 }
 
+
+/* --- HEADINGS & TEXT -------------------------------*/
 .subHeading{
     -fx-font-family: "Manrope SemiBold";
     -fx-font-size: 12pt;
@@ -35,6 +38,7 @@
     -fx-font-family: "Manrope SemiBold";
 }
 
+/* --- TABLE -----------------------------------------*/
 .table-view{
     -fx-background-color: -fx-eggshell;
     -fx-effect: dropshadow(three-pass-box, -fx-gray, 1, 1.0, 10, 10);
@@ -58,20 +62,6 @@
     -fx-font-family: "Manrope ExtraBold";
     -fx-font-size: 10pt;
 }
-
-/*#startDateCol .label{
-    -fx-border-radius: 5px 0 0 0;
-    -fx-background-radius: 5px 0 0 0;
-    -fx-border-width: 4px 2px 0 0;
-    -fx-border-color: -fx-eggshell -fx-black -fx-eggshell -fx-eggshell;
-}
-
-#startTimeCol .label{
-    -fx-border-radius: 0 5px 0 0;
-    -fx-background-radius: 0 5px 0 0;
-    -fx-border-width: 4px 0px 0 2px;
-    -fx-border-color: -fx-eggshell -fx-eggshell -fx-eggshell -fx-black;
-} */
 
 .column{
    -fx-background-color: -fx-eggshell;
@@ -100,28 +90,36 @@
     -fx-background-color: -fx-dustyRose;
 }
 
-
-
 .table-row-cell:focused{
 }
 
 
-/*.table-view:focused:row-selection > .virtual-flow > .clipped-container > .sheet > .table-cell:selected{
-    -fx-background: transparent;
-    -fx-background-color: -fx-dustyRose;
-    -fx-text-fill: -fx-black;
-    -fx-table-cell-border-color: none;
-}
-
-.table-row-cell:filled > .table-cell: selected{
-    -fx-background: transparent;
-    -fx-background-color: -fx-dustyRose;
-}*/
-
+/* --- CONTACT COMBOBOX ------------------------------*/
 .combo-box{
     -fx-border-style: solid;
     -fx-border-color: -fx-dustyRose;
     -fx-border-width: 1px;
     -fx-border-radius: 5px;
     -fx-background-radius: 5px;
+}
+
+/* --- CONTACT SUBTAB BUTTONS-------------------------*/
+.subTabBtn{
+    -fx-font-family: "Manrope ExtraBold";
+    -fx-font-size: 9.5pt;
+    -fx-cursor: hand;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-background-color: -fx-pink;
+    -fx-text-fill: -fx-black;
+}
+
+.subTabBtn:hover{
+    -fx-background-color: -fx-dustyRose;
+}
+
+#activeBtn{
+    -fx-font-size: 9.5pt;
+    -fx-background-color: -fx-dustyRose;
+    -fx-text-fill: -fx-black;
 }

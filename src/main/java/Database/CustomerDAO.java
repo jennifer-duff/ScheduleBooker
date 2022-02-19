@@ -1,6 +1,7 @@
 package Database;
 
 import Controllers.LoginController;
+import Models.Appointment;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import Models.Customer;
@@ -171,6 +172,20 @@ public class CustomerDAO {
     }
 
     public static void deleteCustomer(Customer customer) {
-        System.out.println("DELETING A THING!");
+        //first, check if customer has any appointments and delete them
+        ObservableList<Appointment> allapps = AppointmentDAO.getAllAppointments();
+        for(Appointment app : allapps){
+            if(app.getCustId() == customer.getCustId()) {
+                AppointmentDAO.deleteAppointment(app);
+            }
+        }
+
+        try {
+            String query = "DELETE FROM customers WHERE Customer_ID = " + customer.getCustId();
+            PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
+            statement.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

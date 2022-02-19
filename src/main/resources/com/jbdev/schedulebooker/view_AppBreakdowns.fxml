@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="tabBackground" prefHeight="640.0" prefWidth="1214.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AppBreakdownsController">
+    <children>
+        <Button layoutX="37.0" layoutY="33.0" mnemonicParsing="false" onAction="#viewApps" prefHeight="37.0" prefWidth="175.0" styleClass="tabs" text="APPOINTMENTS" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="34.0" />
+        <Button layoutX="225.0" layoutY="34.0" mnemonicParsing="false" onAction="#viewCustomers" prefHeight="37.0" prefWidth="175.0" styleClass="tabs" text="CUSTOMERS" AnchorPane.topAnchor="34.0" />
+        <Button fx:id="activeTab" layoutX="410.0" layoutY="34.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="175.0" styleClass="tabs" text="REPORTS" AnchorPane.topAnchor="34.0" />
+        <AnchorPane fx:id="bodyBackground" layoutX="38.0" layoutY="70.0" prefHeight="553.0" prefWidth="1214.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
+         <Button layoutX="384.0" layoutY="22.0" mnemonicParsing="false" onAction="#viewContacts" prefHeight="25.0" prefWidth="150.0" styleClass="subTabBtn" text="Contact Schedules" />
+         <Button fx:id="activeBtn" layoutX="548.0" layoutY="22.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="189.0" styleClass="subTabBtn" text="Appointment Breakdowns" />
+         <Button layoutX="751.0" layoutY="22.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="69.0" styleClass="subTabBtn" text="Other" />
+            <Label layoutX="41.0" layoutY="79.0" styleClass="subHeading" text="Appointments by Type" AnchorPane.topAnchor="79.0" />
+            <Label fx:id="msgLabel" layoutX="327.0" layoutY="34.0" AnchorPane.topAnchor="34.0" />
+            <TableView fx:id="typeTable" layoutX="40.0" layoutY="104.0" prefHeight="416.0" prefWidth="272.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="902.0" AnchorPane.topAnchor="104.0">
+                <columns>
+                    <TableColumn fx:id="appTypeCol" prefWidth="149.0" resizable="false" styleClass="column" text="Appointment Type" />
+                    <TableColumn fx:id="appCountCol" maxWidth="172.0" prefWidth="116.0" resizable="false" styleClass="column" text="Total Count" />
+                </columns>
+            </TableView>
+        </AnchorPane>
+    </children>
+</AnchorPane>

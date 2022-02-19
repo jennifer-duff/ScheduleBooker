@@ -88,4 +88,16 @@ public class AllContactsController implements Initializable {
             msgLabel.setText("");
         }
     }
+
+    public void viewAppBreakdown(ActionEvent actionEvent) throws IOException {
+        StageChangeUtils.changeStage(
+                actionEvent,
+                "/com/jbdev/schedulebooker/view_AppBreakdowns.fxml",
+                "/com/jbdev/schedulebooker/stylesheets/mainTabPages.css",
+                "Reports | Appointment Breakdowns",
+                "",
+                null,
+                null
+        );
+    }
 }

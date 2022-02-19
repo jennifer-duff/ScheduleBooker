@@ -83,7 +83,7 @@ public class AllAppointmentsController implements Initializable {
             actionEvent,
             "/com/jbdev/schedulebooker/view_AllContacts.fxml",
             "/com/jbdev/schedulebooker/stylesheets/mainTabPages.css",
-            "All Contacts",
+            "Reports | Contact Schedules",
             "",
             null,
             null
