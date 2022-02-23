@@ -5,7 +5,8 @@
     -fx-gray: #5E6163;
     -fx-red: #d17356;
     -fx-dustyRose: #e6ad9c;
-    -fx-pink: #FAE7E1;
+    /*-fx-pink: #FAE7E1;*/
+    -fx-pink: #FAE7E0;
 }
 
 .text{

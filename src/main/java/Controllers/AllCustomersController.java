@@ -1,8 +1,6 @@
 package Controllers;
 
-import Database.AppointmentDAO;
 import Database.CustomerDAO;
-import Models.Appointment;
 import Utilities.StageChangeUtils;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -20,7 +18,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class AllCustomersController implements Initializable {
-    @FXML private Label msgLabel;
+    @FXML private Label errorMsg;
     @FXML private TableView<Customer> customerTable;
     @FXML private TableColumn<Customer, Integer> custIdCol;
     @FXML private TableColumn<Customer, String> nameCol;
@@ -87,34 +85,47 @@ public class AllCustomersController implements Initializable {
     }
 
     public void modifyCustomer(ActionEvent actionEvent) throws IOException {
-        ObservableList<Customer> selectedItems = customerTable.getSelectionModel().getSelectedItems();
-        Customer customer = selectedItems.get(0);
-        StageChangeUtils.changeStage(
-            actionEvent,
-            "/com/jbdev/schedulebooker/view_AddModifyCustomer.fxml",
-            "/com/jbdev/schedulebooker/stylesheets/addModify.css",
-            "Modify Customer",
-            "Modify Customer",
-            null,
-                customer
-        );
+        try {
+            errorMsg.setText("");
+            ObservableList<Customer> selectedItems = customerTable.getSelectionModel().getSelectedItems();
+            Customer customer = selectedItems.get(0);
+            StageChangeUtils.changeStage(
+                    actionEvent,
+                    "/com/jbdev/schedulebooker/view_AddModifyCustomer.fxml",
+                    "/com/jbdev/schedulebooker/stylesheets/addModify.css",
+                    "Modify Customer",
+                    "Modify Customer",
+                    null,
+                    customer
+            );
+        }
+        catch (Exception error){
+            errorMsg.setText("Whoops! Please select a row.");
+        }
     }
 
     public void deleteCustomer(ActionEvent actionEvent) throws IOException {
-        ObservableList<Customer> selectedItems = customerTable.getSelectionModel().getSelectedItems();
-        Customer customer = selectedItems.get(0);
-        String custName = customer.getName();
+        try{
+            errorMsg.setText("");
+            ObservableList<Customer> selectedItems = customerTable.getSelectionModel().getSelectedItems();
+            Customer customer = selectedItems.get(0);
+            String custName = customer.getName();
 
-        StageChangeUtils.showDeleteDialog(stage);
-        if (DialogController.wasDeleted){
-            CustomerDAO.deleteCustomer(customer);
-            updateTable();
-            msgLabel.setText("Customer \"" + custName + "\" was deleted.");
+            StageChangeUtils.showDeleteDialog(stage);
+            if (DialogController.wasDeleted){
+                CustomerDAO.deleteCustomer(customer);
+                updateTable();
+                errorMsg.setText("Customer \"" + custName + "\" was deleted.");
+            }
+            else{
+                errorMsg.setText("");
+            }
+            DialogController.wasDeleted = false;
         }
-        else{
-            msgLabel.setText("");
+        catch(Exception error){
+            errorMsg.setText("Whoops! Please select a row.");
         }
-        DialogController.wasDeleted = false;
+
     }
 
 

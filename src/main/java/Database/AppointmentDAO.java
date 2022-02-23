@@ -1,15 +1,14 @@
 package Database;
 
 import Controllers.LoginController;
+import Models.AppMonth;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import Models.Appointment;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class AppointmentDAO {
     public static void changeDescriptionCol(){
@@ -190,5 +189,87 @@ public class AppointmentDAO {
             e.printStackTrace();
         }
         return resultSet;
+    }
+
+    //For app breakdown stats:
+    public static ObservableList<String> getAppointmentTypes(){
+        ObservableList<String> appTypes = FXCollections.observableArrayList();
+        try{
+            String query = "SELECT DISTINCT Type FROM appointments";
+            PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+
+            while(resultSet.next()){
+                String type = resultSet.getString("Type");
+                appTypes.add(type);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return appTypes;
+    }
+
+    public static int getAppTypeCount(String type){
+        int typeCount = 0;
+        try{
+            String query = "SELECT Type, COUNT(*) FROM appointments WHERE Type = \"" + type + "\"";
+            PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+
+            while(resultSet.next()){
+                typeCount = resultSet.getInt("COUNT(*)");
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return typeCount;
+    }
+
+    public static ArrayList<ArrayList<String>> getAppMonths(){
+        ArrayList<ArrayList<String>> appMonthCounts = new ArrayList<ArrayList<String>>();
+        ObservableList<AppMonth> appMonthObjs = FXCollections.observableArrayList();
+
+        try{
+            String query = "SELECT Start FROM appointments";
+            PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+
+            while(resultSet.next()){
+                Timestamp startDate = resultSet.getTimestamp("Start");
+                String yearMonth = startDate.toString().substring(0,7);
+//                String month = startDate.toString().substring(5,7);
+//                String year = startDate.toString().substring(0, 4);
+                //convert to abbrev.
+//                month = convertMonthToAbbrev(month, year);
+//                int count = 0;
+//                if(!appMonthObjs.contains(month)){
+//                    AppMonth appMonthObj = new AppMonth(month, count);
+//                    appMonthObjs.add(appMonthObj);
+//                }
+                boolean wasFound = false;
+                for (int i = 0; i < appMonthCounts.size(); i++){
+                    if(!appMonthCounts.get(i).get(0).equalsIgnoreCase(yearMonth)){
+                        continue;
+                    }
+                    else{
+                        wasFound = true;
+                        int currCount = Integer.parseInt(appMonthCounts.get(i).get(1));
+                        currCount++;
+                        appMonthCounts.get(i).set(1, String.valueOf(currCount));
+                    }
+                }
+                if(!wasFound){
+                    ArrayList<String> tempArray = new ArrayList<String>();
+                    tempArray.add(yearMonth);
+                    tempArray.add("1");
+                    appMonthCounts.add(tempArray);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return appMonthCounts;
     }
 }

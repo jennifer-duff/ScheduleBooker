@@ -3,34 +3,34 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="tabBackground" prefHeight="547.0" prefWidth="1597.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AllAppointmentsController">
+<AnchorPane fx:id="tabBackground" prefHeight="547.0" prefWidth="1647.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AllAppointmentsController">
     <Button fx:id="activeTab" layoutX=" 37.0" layoutY="20.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="175.0" styleClass="tabs" text="APPOINTMENTS" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="34.0" />
     <Button layoutX="225.0" layoutY="34.0" mnemonicParsing="false" onAction="#viewCustomers" prefHeight="37.0" prefWidth="175.0" styleClass="tabs" text="CUSTOMERS" AnchorPane.topAnchor="34.0" />
     <Button layoutX="410.0" layoutY="34.0" mnemonicParsing="false" onAction="#viewContacts" prefHeight="37.0" prefWidth="175.0" styleClass="tabs" text="REPORTS" AnchorPane.topAnchor="34.0" />
     <AnchorPane fx:id="bodyBackground" layoutX="38.0" layoutY="55.0" prefHeight="477.0" prefWidth="1600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="70.0">
-        <Label fx:id="msgLabel" layoutX="40.0" layoutY="19.0" AnchorPane.leftAnchor="41.0" AnchorPane.topAnchor="19.0" />
+        <Label fx:id="errorMsg" layoutX="40.0" layoutY="19.0" AnchorPane.leftAnchor="41.0" AnchorPane.topAnchor="19.0" />
         <TableView fx:id="appTable" layoutX="40.0" layoutY="40.0" prefHeight="359.0" prefWidth="1495.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="40.0" AnchorPane.topAnchor="40.0">
             <columns>
                 <TableColumn fx:id="appIdCol" prefWidth="64.0" resizable="false" styleClass="column, centeredCol" text="App. ID" />
                 <TableColumn fx:id="titleCol" prefWidth="148.0" resizable="false" styleClass="column" text="Title" />
                 <TableColumn fx:id="typeCol" prefWidth="88.0" resizable="false" styleClass="column" text="Type" />
                 <TableColumn fx:id="descriptionCol" prefWidth="193.0" resizable="false" styleClass="column" text="Description" />
-                <TableColumn fx:id="custIdCol" prefWidth="76.0" resizable="false" styleClass="column, centeredCol" text="Cust. ID" />
-                <TableColumn fx:id="custNameCol" prefWidth="120.0" resizable="false" styleClass="column" text="Cust. Name" />
-                <TableColumn fx:id="locationCol" minWidth="0.0" prefWidth="262.0" resizable="false" styleClass="column" text="Location" />
+                <TableColumn fx:id="custIdCol" prefWidth="68.0" resizable="false" styleClass="column, centeredCol" text="Cust. ID" />
+                <TableColumn fx:id="custNameCol" prefWidth="121.0" resizable="false" styleClass="column" text="Cust. Name" />
+                <TableColumn fx:id="locationCol" minWidth="0.0" prefWidth="269.0" resizable="false" styleClass="column" text="Location" />
 <!--                <TableColumn fx:id="startCol" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" resizable="false" styleClass="column" text="Start">-->
 <!--               <columns>-->
-                  <TableColumn fx:id="startDateCol" editable="false" prefWidth="81.0" resizable="false" styleClass="column, centeredCol" text="Start Date" />
-                  <TableColumn fx:id="startTimeCol" prefWidth="82.0" resizable="false" styleClass="column, centeredCol" text="Start Time" />
+                  <TableColumn fx:id="startDateCol" editable="false" prefWidth="105.0" resizable="false" styleClass="column, centeredCol" text="Start Date" />
+                  <TableColumn fx:id="startTimeCol" prefWidth="99.0" resizable="false" styleClass="column, centeredCol" text="Start Time" />
 <!--               </columns></TableColumn>-->
 <!--                <TableColumn fx:id="endCol" maxWidth="130.0" minWidth="130.0" prefWidth="130.0" resizable="false" styleClass="column" text="End">-->
 <!--                    <columns>-->
-                        <TableColumn fx:id="endDateCol" prefWidth="76.0" styleClass="column, centeredCol" text="End Date" />
-                        <TableColumn fx:id="endTimeCol" prefWidth="72.0" styleClass="column, centeredCol" text="End Time" />
+                        <TableColumn fx:id="endDateCol" prefWidth="82.0" styleClass="column, centeredCol" text="End Date" />
+                        <TableColumn fx:id="endTimeCol" prefWidth="74.0" styleClass="column, centeredCol" text="End Time" />
 <!--                    </columns></TableColumn>-->
-                <TableColumn fx:id="contactCol" minWidth="0.0" prefWidth="92.0" resizable="false" styleClass="column, centeredCol" text="Contact ID" />
-                <TableColumn fx:id="contactNameCol" prefWidth="113.0" resizable="false" styleClass="column" text="Contact Name" />
-                <TableColumn fx:id="userIdCol" prefWidth="56.0" resizable="false" styleClass="column, centeredCol" text="User ID" />
+                <TableColumn fx:id="contactCol" minWidth="0.0" prefWidth="86.0" resizable="false" styleClass="column, centeredCol" text="Contact ID" />
+                <TableColumn fx:id="contactNameCol" prefWidth="118.0" resizable="false" styleClass="column" text="Contact Name" />
+                <TableColumn fx:id="userIdCol" prefWidth="58.0" resizable="false" styleClass="column, centeredCol" text="User ID" />
             </columns>
         </TableView>
         <Button layoutX="1326.0" layoutY="432.0" mnemonicParsing="false" onAction="#addApp" prefHeight="25.0" prefWidth="61.0" styleClass="appButton" text=" A D D " AnchorPane.bottomAnchor="20.0" AnchorPane.rightAnchor="234.0" />

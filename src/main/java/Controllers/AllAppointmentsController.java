@@ -22,7 +22,7 @@ import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class AllAppointmentsController implements Initializable {
-    @FXML private Label msgLabel;
+    @FXML private Label errorMsg;
     @FXML private TableView <Appointment> appTable;
     @FXML private TableColumn <Appointment, Integer> appIdCol;
     @FXML private TableColumn <Appointment, String> titleCol;
@@ -60,6 +60,10 @@ public class AllAppointmentsController implements Initializable {
         contactCol.setCellValueFactory(new PropertyValueFactory<>("contactId"));
         contactNameCol.setCellValueFactory(new PropertyValueFactory<>("contactName"));
         userIdCol.setCellValueFactory(new PropertyValueFactory<>("userId"));
+
+        startDateCol.setSortType(TableColumn.SortType.ASCENDING);
+        startTimeCol.setSortType(TableColumn.SortType.ASCENDING);
+        appTable.getSortOrder().setAll(startDateCol, startTimeCol);
     }
 
     public void initialize(URL location, ResourceBundle resources) {
@@ -103,35 +107,47 @@ public class AllAppointmentsController implements Initializable {
     }
 
     public void modifyApp(ActionEvent actionEvent) throws IOException {
-        ObservableList<Appointment> selectedItems = appTable.getSelectionModel().getSelectedItems();
-        Appointment appointment = selectedItems.get(0);
-        StageChangeUtils.changeStage(
-            actionEvent,
-            "/com/jbdev/schedulebooker/view_AddModifyAppointment.fxml",
-            "/com/jbdev/schedulebooker/stylesheets/addModify.css",
-            "Modify Appointment",
-            "Modify Appointment",
-            appointment,
-            null
-        );
+        try{
+            errorMsg.setText("");
+            ObservableList<Appointment> selectedItems = appTable.getSelectionModel().getSelectedItems();
+            Appointment appointment = selectedItems.get(0);
+            StageChangeUtils.changeStage(
+                    actionEvent,
+                    "/com/jbdev/schedulebooker/view_AddModifyAppointment.fxml",
+                    "/com/jbdev/schedulebooker/stylesheets/addModify.css",
+                    "Modify Appointment",
+                    "Modify Appointment",
+                    appointment,
+                    null
+            );
+        }
+        catch(Exception error){
+            errorMsg.setText("Whoops! Please select a row.");
+        }
+
     }
 
     public void deleteApp(ActionEvent actionEvent) throws IOException {
-        ObservableList<Appointment> selectedItems = appTable.getSelectionModel().getSelectedItems();
-        Appointment appointment = selectedItems.get(0);
-        String appTitle = appointment.getTitle();
-        int appId = appointment.getAppId();
-        String appType = appointment.getType();
-
-        StageChangeUtils.showDeleteDialog(stage);
-        if (DialogController.wasDeleted){
-            AppointmentDAO.deleteAppointment(appointment);
-            updateTable();
-            msgLabel.setText(appType + " appointment \"" + appTitle + "\" (#" +  appId + ") was deleted.");
+        try {
+            errorMsg.setText("");
+            ObservableList<Appointment> selectedItems = appTable.getSelectionModel().getSelectedItems();
+            Appointment appointment = selectedItems.get(0);
+            String appTitle = appointment.getTitle();
+            int appId = appointment.getAppId();
+            String appType = appointment.getType();
+            StageChangeUtils.showDeleteDialog(stage);
+            if (DialogController.wasDeleted){
+                AppointmentDAO.deleteAppointment(appointment);
+                updateTable();
+                errorMsg.setText(appType + " appointment \"" + appTitle + "\" (#" +  appId + ") was deleted.");
+            }
+            else{
+                errorMsg.setText("");
+            }
+            DialogController.wasDeleted = false;
         }
-        else{
-            msgLabel.setText("");
+        catch(Exception error){
+            errorMsg.setText("Whoops! Please select a row.");
         }
-        DialogController.wasDeleted = false;
     }
 }
