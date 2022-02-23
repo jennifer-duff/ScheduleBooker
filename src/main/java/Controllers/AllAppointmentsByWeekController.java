@@ -205,4 +205,29 @@ public class AllAppointmentsByWeekController implements Initializable {
             errorMsg.setText("Whoops! Please select a row.");
         }
     }
+
+    @FXML
+    public void viewApps(ActionEvent actionEvent) throws IOException {
+        StageChangeUtils.changeStage(
+                actionEvent,
+                "/com/jbdev/schedulebooker/view_AllAppointments.fxml",
+                "/com/jbdev/schedulebooker/stylesheets/mainTabPages.css",
+                "All Appointments",
+                "",
+                null,
+                null
+        );
+    }
+
+    public void viewAppsByMonth(ActionEvent actionEvent) throws IOException {
+        StageChangeUtils.changeStage(
+                actionEvent,
+                "/com/jbdev/schedulebooker/view_AllAppointmentsByMonth.fxml",
+                "/com/jbdev/schedulebooker/stylesheets/mainTabPages.css",
+                "All Appointments",
+                "",
+                null,
+                null
+        );
+    }
 }
