@@ -81,6 +81,10 @@ public class AllContactsController implements Initializable {
         endDateCol.setCellValueFactory(new PropertyValueFactory<>("readOnlyEndDate"));
         endTimeCol.setCellValueFactory(new PropertyValueFactory<>("readOnlyEndTime"));
 
+        startDateCol.setSortType(TableColumn.SortType.ASCENDING);
+        startTimeCol.setSortType(TableColumn.SortType.ASCENDING);
+        contactAppsTable.getSortOrder().setAll(startDateCol, startTimeCol);
+
         if(contactApps.size() == 0){
             msgLabel.setText("No appointments found for " + contactName);
         }

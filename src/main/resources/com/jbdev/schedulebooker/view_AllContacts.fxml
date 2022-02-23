@@ -3,30 +3,31 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="tabBackground" prefHeight="640.0" prefWidth="1214.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AllContactsController">
+<AnchorPane fx:id="tabBackground" prefHeight="640.0" prefWidth="1225.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AllContactsController">
     <children>
         <Button layoutX="37.0" layoutY="33.0" mnemonicParsing="false" onAction="#viewApps" prefHeight="37.0" prefWidth="175.0" styleClass="tabs" text="APPOINTMENTS" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="34.0" />
         <Button layoutX="225.0" layoutY="34.0" mnemonicParsing="false" onAction="#viewCustomers" prefHeight="37.0" prefWidth="175.0" styleClass="tabs" text="CUSTOMERS" AnchorPane.topAnchor="34.0" />
         <Button fx:id="activeTab" layoutX="410.0" layoutY="34.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="175.0" styleClass="tabs" text="REPORTS" AnchorPane.topAnchor="34.0" />
         <AnchorPane fx:id="bodyBackground" layoutX="38.0" layoutY="70.0" prefHeight="553.0" prefWidth="1214.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
-         <Button fx:id="activeBtn" layoutX="384.0" layoutY="22.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="150.0" styleClass="subTabBtn" text="Contact Schedules" />
-         <Button onAction="#viewAppBreakdown" layoutX="548.0" layoutY="22.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="189.0" styleClass="subTabBtn" text="Appointment Breakdowns" />
-         <Button layoutX="751.0" layoutY="22.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="69.0" styleClass="subTabBtn" text="Other" />
-            <Label layoutX="41.0" layoutY="72.0" styleClass="subHeading" text="Schedule for:" AnchorPane.topAnchor="72.0" />
-            <ComboBox fx:id="comboBox" layoutX="149.0" layoutY="68.0" onAction="#populateTable" prefWidth="150.0" promptText="Select One:" />
+         <Label layoutX="41.0" layoutY="21.0" styleClass="subHeading" text="View Report:" AnchorPane.topAnchor="15.0" />
+         <Button fx:id="activeBtn" layoutX="148.0" layoutY="19.0" mnemonicParsing="false" styleClass="subTabBtn" text=" C O N T A C T  S C H E D U L E S " AnchorPane.topAnchor="14.0" />
+         <Button layoutX="332.0" layoutY="19.0" mnemonicParsing="false" onAction="#viewAppBreakdown" styleClass="subTabBtn" text=" A P P O I N T M E N T  B R E A K D O W N S " AnchorPane.topAnchor="14.0" />
+         <Button layoutX="565.0" layoutY="19.0" mnemonicParsing="false" styleClass="subTabBtn" text=" O T H E R " AnchorPane.topAnchor="14.0" />
+            <Label layoutX="41.0" layoutY="72.0" styleClass="subSubHeading" text="Schedule for:" AnchorPane.topAnchor="72.0" />
+            <ComboBox fx:id="comboBox" layoutX="132.0" layoutY="68.0" onAction="#populateTable" prefWidth="150.0" promptText="Select One:" AnchorPane.leftAnchor="132.0" />
             <Label fx:id="msgLabel" layoutX="327.0" layoutY="34.0" AnchorPane.topAnchor="34.0" />
             <TableView fx:id="contactAppsTable" layoutX="40.0" layoutY="104.0" prefHeight="423.0" prefWidth="1131.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="40.0" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="104.0">
                 <columns>
-                    <TableColumn fx:id="appIdCol" prefWidth="69.0" resizable="false" styleClass="column, centeredCol" text="App. ID" />
-                    <TableColumn fx:id="titleCol" prefWidth="116.0" resizable="false" styleClass="column" text="Title" />
-                    <TableColumn fx:id="typeCol" prefWidth="119.0" resizable="false" styleClass="column" text="Type" />
-                    <TableColumn fx:id="descriptionCol" prefWidth="265.0" resizable="false" styleClass="column" text="Description" />
-                    <TableColumn fx:id="startDateCol" prefWidth="89.0" resizable="false" styleClass="column, centeredCol" text="Start Date" />
-               <TableColumn fx:id="startTimeCol" editable="false" resizable="false" styleClass="column, centeredCol" text="Start Time" />
-                    <TableColumn fx:id="endDateCol" prefWidth="84.0" resizable="false" styleClass="column, centeredCol" text="End Date" />
-               <TableColumn fx:id="endTimeCol" prefWidth="84.0" resizable="false" styleClass="column, centeredCol" text="End Time" />
-                    <TableColumn fx:id="custIdCol" prefWidth="68.0" resizable="false" styleClass="column, centeredCol" text="Cust. ID" />
-                    <TableColumn fx:id="custNameCol" maxWidth="172.0" prefWidth="146.0" resizable="false" styleClass="column" text="Cust. Name" />
+                    <TableColumn fx:id="appIdCol" editable="false" prefWidth="69.0" resizable="false" styleClass="column, centeredCol" text="App. ID" />
+                    <TableColumn fx:id="titleCol" editable="false" prefWidth="146.0" resizable="false" styleClass="column" text="Title" />
+                    <TableColumn fx:id="typeCol" editable="false" prefWidth="109.0" resizable="false" styleClass="column" text="Type" />
+                    <TableColumn fx:id="descriptionCol" editable="false" prefWidth="282.0" resizable="false" styleClass="column" text="Description" />
+                    <TableColumn fx:id="startDateCol" editable="false" prefWidth="91.0" resizable="false" styleClass="column, centeredCol" text="Start Date" />
+               <TableColumn fx:id="startTimeCol" editable="false" prefWidth="86.0" resizable="false" styleClass="column, centeredCol" text="Start Time" />
+                    <TableColumn fx:id="endDateCol" editable="false" prefWidth="77.0" resizable="false" styleClass="column, centeredCol" text="End Date" />
+               <TableColumn fx:id="endTimeCol" editable="false" prefWidth="78.0" resizable="false" styleClass="column, centeredCol" text="End Time" />
+                    <TableColumn fx:id="custIdCol" editable="false" prefWidth="66.0" resizable="false" styleClass="column, centeredCol" text="Cust. ID" />
+                    <TableColumn fx:id="custNameCol" editable="false" maxWidth="172.0" prefWidth="127.0" resizable="false" styleClass="column" text="Cust. Name" />
                 </columns>
             </TableView>
         </AnchorPane>

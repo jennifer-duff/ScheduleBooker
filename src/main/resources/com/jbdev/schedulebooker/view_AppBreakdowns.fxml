@@ -9,9 +9,10 @@
         <Button layoutX="225.0" layoutY="34.0" mnemonicParsing="false" onAction="#viewCustomers" prefHeight="37.0" prefWidth="175.0" styleClass="tabs" text="CUSTOMERS" AnchorPane.topAnchor="34.0" />
         <Button fx:id="activeTab" layoutX="410.0" layoutY="34.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="175.0" styleClass="tabs" text="REPORTS" AnchorPane.topAnchor="34.0" />
         <AnchorPane fx:id="bodyBackground" layoutX="38.0" layoutY="70.0" prefHeight="570.0" prefWidth="707.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
-         <Button layoutX="132.0" layoutY="22.0" mnemonicParsing="false" onAction="#viewContacts" prefHeight="25.0" prefWidth="150.0" styleClass="subTabBtn" text="Contact Schedules" />
-         <Button fx:id="activeBtn" layoutX="296.0" layoutY="22.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="189.0" styleClass="subTabBtn" text="Appointment Breakdowns" />
-         <Button layoutX="499.0" layoutY="22.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="69.0" styleClass="subTabBtn" text="Other" />
+            <Label layoutX="41.0" layoutY="21.0" styleClass="subHeading" text="View Report:" AnchorPane.topAnchor="15.0" />
+            <Button layoutX="148.0" layoutY="19.0" mnemonicParsing="false" onAction="#viewContacts" styleClass="subTabBtn" text=" C O N T A C T  S C H E D U L E S " AnchorPane.topAnchor="14.0" />
+            <Button fx:id="activeBtn" layoutX="332.0" layoutY="19.0" mnemonicParsing="false" styleClass="subTabBtn" text=" A P P O I N T M E N T  B R E A K D O W N S " AnchorPane.topAnchor="14.0" />
+            <Button layoutX="565.0" layoutY="19.0" mnemonicParsing="false" styleClass="subTabBtn" text=" O T H E R " AnchorPane.topAnchor="14.0" />
             <Label layoutX="95.0" layoutY="93.0" styleClass="subHeading" text="Appointments by Type" AnchorPane.topAnchor="93.0" />
             <TableView fx:id="typeTable" layoutX="92.0" layoutY="116.0" prefHeight="438.0" prefWidth="211.0" AnchorPane.bottomAnchor="60.0" AnchorPane.leftAnchor="92.0" AnchorPane.topAnchor="116.0">
                 <columns>

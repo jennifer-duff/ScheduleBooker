@@ -2,6 +2,7 @@ package Controllers;
 
 import Database.AppointmentDAO;
 import Utilities.StageChangeUtils;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,8 +19,10 @@ import Models.Appointment;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ResourceBundle;
+import java.time.temporal.WeekFields;
+import java.util.*;
 
 public class AllAppointmentsController implements Initializable {
     @FXML private Label errorMsg;
@@ -31,10 +34,8 @@ public class AllAppointmentsController implements Initializable {
     @FXML private TableColumn <Appointment, Integer> custIdCol;
     @FXML private TableColumn <Appointment, String> custNameCol;
     @FXML private TableColumn <Appointment, String> locationCol;
-//    @FXML private TableColumn <Appointment, LocalDateTime> startCol;
     @FXML private TableColumn <Appointment, String> startDateCol;
     @FXML private TableColumn <Appointment, String> startTimeCol;
-//    @FXML private TableColumn <Appointment, LocalDateTime> endCol;
     @FXML private TableColumn <Appointment, String> endDateCol;
     @FXML private TableColumn <Appointment, String> endTimeCol;
     @FXML private TableColumn <Appointment, Integer> contactCol;
@@ -42,6 +43,8 @@ public class AllAppointmentsController implements Initializable {
     @FXML private TableColumn <Appointment, Integer> userIdCol;
     ObservableList<Appointment> allAppointments;
     Stage stage;
+
+
 
     public void updateTable(){
         allAppointments = AppointmentDAO.getAllAppointments();
@@ -149,5 +152,17 @@ public class AllAppointmentsController implements Initializable {
         catch(Exception error){
             errorMsg.setText("Whoops! Please select a row.");
         }
+    }
+
+    public void viewAppsByWeek(ActionEvent actionEvent) throws IOException {
+        StageChangeUtils.changeStage(
+                actionEvent,
+                "/com/jbdev/schedulebooker/view_AllAppointmentsByWeek.fxml",
+                "/com/jbdev/schedulebooker/stylesheets/mainTabPages.css",
+                "All Appointments",
+                "",
+                null,
+                null
+        );
     }
 }

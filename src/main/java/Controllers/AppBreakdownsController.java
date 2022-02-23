@@ -16,71 +16,76 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Locale;
 import java.util.ResourceBundle;
 
 public class AppBreakdownsController implements Initializable {
     @FXML private TableView<AppType> typeTable;
-    @FXML private TableColumn<Appointment, String> appTypeCol;
-    @FXML private TableColumn<Appointment, Integer> appTypeCountCol;
+    @FXML private TableColumn<AppType, String> appTypeCol;
+    @FXML private TableColumn<AppType, Integer> appTypeCountCol;
     @FXML private TableView<AppMonth> monthTable;
-    @FXML private TableColumn<Appointment, String> appMonthCol;
-    @FXML private TableColumn<Appointment, Integer> appMonthCountCol;
+    @FXML private TableColumn<AppMonth, String> appMonthCol;
+    @FXML private TableColumn<AppMonth, Integer> appMonthCountCol;
 
-    public static String convertMonthToAbbrev(String yearMonthString){
-        String currYear = LocalDateTime.now().toString().substring(0, 4);
-        System.out.println("Current year: " + currYear);
-        String year = yearMonthString.substring(0, 4);
-        String month = yearMonthString.substring(5, 7);
+//    public static String convertMonthToAbbrev(String yearMonthString){
+//        String currYear = LocalDateTime.now().toString().substring(0, 4);
+//        String year = yearMonthString.substring(0, 4);
+//        String month = yearMonthString.substring(5, 7);
+//        String formattedDate = new SimpleDateFormat("MMMM yyyy", Locale.ENGLISH).format(yearMonthString);
+//        System.out.println(formattedDate);
+//        return formattedDate;
 
-        switch(month) {
-            case "01":
-                month = "January";
-                break;
-            case "02":
-                month = "February";
-                break;
-            case "03":
-                month = "March";
-                break;
-            case "04":
-                month = "April";
-                break;
-            case "05":
-                month = "May";
-                break;
-            case "06":
-                month = "June";
-                break;
-            case "07":
-                month = "July";
-                break;
-            case "08":
-                month = "August";
-                break;
-            case "09":
-                month = "September";
-                break;
-            case "10":
-                month = "October";
-                break;
-            case "11":
-                month = "November";
-                break;
-            case "12":
-                month = "December";
-                break;
-            default:
-                month = "Whoops! Error";
-                break;
-        }
-        //account for apps next year
-        if(!(year.equalsIgnoreCase(currYear))){
-            month = month + " [" + year + "]";
-        }
-        return month;
-    }
+//        switch(month) {
+//            case "01":
+//                month = "January";
+//                break;
+//            case "02":
+//                month = "February";
+//                break;
+//            case "03":
+//                month = "March";
+//                break;
+//            case "04":
+//                month = "April";
+//                break;
+//            case "05":
+//                month = "May";
+//                break;
+//            case "06":
+//                month = "June";
+//                break;
+//            case "07":
+//                month = "July";
+//                break;
+//            case "08":
+//                month = "August";
+//                break;
+//            case "09":
+//                month = "September";
+//                break;
+//            case "10":
+//                month = "October";
+//                break;
+//            case "11":
+//                month = "November";
+//                break;
+//            case "12":
+//                month = "December";
+//                break;
+//            default:
+//                month = "Whoops! Error";
+//                break;
+//        }
+//        //account for apps next year
+//        if(!(year.equalsIgnoreCase(currYear))){
+//            month = month + " [" + year + "]";
+//        }
+//        return month;
+//    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -95,11 +100,15 @@ public class AppBreakdownsController implements Initializable {
         appTypeCol.setCellValueFactory(new PropertyValueFactory<>("typeValue"));
         appTypeCountCol.setCellValueFactory(new PropertyValueFactory<>("typeCount"));
 
+        appTypeCol.setSortType(TableColumn.SortType.ASCENDING);
+        typeTable.getSortOrder().setAll(appTypeCol);
+
+
         ObservableList<AppMonth> allAppMonthObjs = FXCollections.observableArrayList();
         ArrayList<ArrayList<String>> appMonthCounts = AppointmentDAO.getAppMonths();
         for(ArrayList<String> appMonth : appMonthCounts){
             String monthyear = appMonth.get(0);
-            monthyear = convertMonthToAbbrev(monthyear);
+//            monthyear = convertMonthToAbbrev(monthyear);
             int count = Integer.parseInt(appMonth.get(1));
             AppMonth appMonthObj = new AppMonth(monthyear, count);
             allAppMonthObjs.add(appMonthObj);
@@ -107,6 +116,9 @@ public class AppBreakdownsController implements Initializable {
         monthTable.setItems(allAppMonthObjs);
         appMonthCol.setCellValueFactory(new PropertyValueFactory<>("appMonthValue"));
         appMonthCountCol.setCellValueFactory(new PropertyValueFactory<>("appMonthCount"));
+
+        appMonthCol.setSortType(TableColumn.SortType.ASCENDING);
+        monthTable.getSortOrder().setAll(appMonthCol);
     }
 
     @FXML

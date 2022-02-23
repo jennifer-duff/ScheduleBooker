@@ -79,6 +79,8 @@
     -fx-border-width: 1px;
 }
 
+
+/* --- Disabled fields -------------------------------*/
 #appIdField, #locationField, #custIdField, #userIdField{
     -fx-text-fill: #787878;
 }
@@ -288,3 +290,6 @@ date-picker:focused > .text-field,
     -fx-background-color: -fx-dustyRose
 }
 
+.date-picker-popup > * > .week-number-cell {
+    -fx-text-fill: -fx-red;
+}

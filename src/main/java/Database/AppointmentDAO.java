@@ -7,6 +7,7 @@ import javafx.collections.ObservableList;
 import Models.Appointment;
 
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -55,6 +56,11 @@ public class AppointmentDAO {
         }
         return allAppointments;
     }
+
+//    public static ObservableList<Appointment> getAppsByWeek(){
+//
+//    }
+
 
     public static void addAppointment(Appointment app){
         String title = app.getTitle();
@@ -238,16 +244,7 @@ public class AppointmentDAO {
 
             while(resultSet.next()){
                 Timestamp startDate = resultSet.getTimestamp("Start");
-                String yearMonth = startDate.toString().substring(0,7);
-//                String month = startDate.toString().substring(5,7);
-//                String year = startDate.toString().substring(0, 4);
-                //convert to abbrev.
-//                month = convertMonthToAbbrev(month, year);
-//                int count = 0;
-//                if(!appMonthObjs.contains(month)){
-//                    AppMonth appMonthObj = new AppMonth(month, count);
-//                    appMonthObjs.add(appMonthObj);
-//                }
+                String yearMonth = new SimpleDateFormat("yyyy - MMMM").format(startDate);
                 boolean wasFound = false;
                 for (int i = 0; i < appMonthCounts.size(); i++){
                     if(!appMonthCounts.get(i).get(0).equalsIgnoreCase(yearMonth)){
