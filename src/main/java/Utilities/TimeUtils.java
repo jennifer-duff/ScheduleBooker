@@ -8,32 +8,77 @@ import javafx.scene.control.ComboBox;
 import Models.Appointment;
 import Models.Customer;
 
+import java.time.*;
+import java.util.*;
+
+import static java.time.ZoneId.systemDefault;
+
 public class TimeUtils {
-    public static void populateHourPicker(ComboBox<String> comboBox){
+    public static String populateHourPicker(ComboBox<String> comboBox){
         ObservableList<String> hourArray = FXCollections.observableArrayList();
-        hourArray.add("01");
-        hourArray.add("02");
-        hourArray.add("03");
-        hourArray.add("04");
-        hourArray.add("05");
-        hourArray.add("06");
-        hourArray.add("07");
-        hourArray.add("08");
-        hourArray.add("09");
-        hourArray.add("10");
-        hourArray.add("11");
-        hourArray.add("12");
+        ArrayList<Integer> hourArrayInts = new ArrayList<Integer>();
+
+        //Convert 8:00amEST - 10:00PMEST to local time,
+        //then parse the ZonedDateTime to a string and extract the hour as an int,
+        //then add the int to the hourArrayInts list
+        for(int i = 8; i <= 22; i++){
+            LocalDate date = LocalDate.now();
+            LocalTime easternTime = LocalTime.of(i, 0);
+            LocalDateTime startDateTime = LocalDateTime.of(date, easternTime);
+            ZoneId EST = ZoneId.of("America/New_York");
+            ZonedDateTime easternZonedTime = ZonedDateTime.of(startDateTime, EST);
+
+            ZoneId localtimeZone = systemDefault();
+            ZonedDateTime localZonedTime = easternZonedTime.withZoneSameInstant(systemDefault());
+            int hour = Integer.parseInt(localZonedTime.toString().substring(11, 13));
+            hourArrayInts.add(hour);
+        }
+
+        //sort the hours
+        Collections.sort(hourArrayInts);
+
+        //convert the hours back to Strings, and add to final hourArray ObservableList
+        for(int hour : hourArrayInts){
+            String hourString = String.valueOf(hour);
+            if(hourString.equals("0") || hourString.equals("1") || hourString.equals("2") || hourString.equals("3") || hourString.equals("4") || hourString.equals("5") | hourString.equals("6") || hourString.equals("7") || hourString.equals("8") || hourString.equals("9")){
+                hourString = "0" + hourString;
+            }
+            hourArray.add(hourString);
+        }
+
+        //set the comboBox with the hourArray list
         comboBox.setItems(hourArray);
+        return hourArray.get(hourArray.size() - 1);
     }
 
-    public static void populateMinutePicker(ComboBox<String> comboBox){
+    public static void populateMinutePicker(ComboBox<String> minutecomboBox, ComboBox<String> hourcomboBox, String finalHour){
         ObservableList<String> minuteArray = FXCollections.observableArrayList();
         minuteArray.add("00");
         minuteArray.add("15");
         minuteArray.add("30");
         minuteArray.add("45");
-        comboBox.setItems(minuteArray);
+
+        if(hourcomboBox.getValue() == null){
+            minutecomboBox.setItems(minuteArray);
+        }
+        else if(hourcomboBox.getValue().equals(finalHour)) {
+            ObservableList<String> altMinuteArray = FXCollections.observableArrayList();
+            altMinuteArray.add("00");
+            minutecomboBox.setItems(altMinuteArray);
+            minutecomboBox.setValue(altMinuteArray.get(0));
+        }
+        else {
+            minutecomboBox.setItems(minuteArray);
+        }
     }
+
+//    public static void updateMinutePicker(ComboBox<String> hourcomboBox, ComboBox<String> minutecomboBox, String finalHour){
+//        //TODO: make it so you can't select minutes past business hours (i.e., you can't pick 22:30EST, etc.)
+//
+//
+//        }
+    //}
+
     public static void populateAmPmPicker(ComboBox<String> comboBox){
         ObservableList<String> amPmArray = FXCollections.observableArrayList();
         amPmArray.add("am");
@@ -70,7 +115,6 @@ public class TimeUtils {
     public static void setModifyTimeValues(String dateTime, Appointment app, ComboBox<String> hourPicker, ComboBox<String> minutePicker, ComboBox<String> amPmPicker){
         String hour = dateTime.substring(0, 2);
         int intHour = Integer.parseInt(hour);
-//        System.out.println(intHour);
         //00:00 -> 12:00am
         if(intHour == 0){
 //            System.out.println(intHour + " is in the MORNING");

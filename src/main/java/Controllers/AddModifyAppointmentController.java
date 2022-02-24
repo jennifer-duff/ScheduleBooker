@@ -60,14 +60,14 @@ public class AddModifyAppointmentController implements Initializable {
     String endMinute;
     String endAmPm;
 
+    String finalHour;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        TimeUtils.populateHourPicker(startHourPicker);
-        TimeUtils.populateMinutePicker(startMinutePicker);
-        TimeUtils.populateAmPmPicker(startAmPmPicker);
+        finalHour = TimeUtils.populateHourPicker(startHourPicker);
+        TimeUtils.populateMinutePicker(startMinutePicker, startHourPicker, finalHour);
         TimeUtils.populateHourPicker(endHourPicker);
-        TimeUtils.populateMinutePicker(endMinutePicker);
-        TimeUtils.populateAmPmPicker(endAmPmPicker);
+        TimeUtils.populateMinutePicker(endMinutePicker, endMinutePicker, finalHour);
 
         TimeUtils.populateCustomerPicker(customerNameComboBox);
         TimeUtils.populateContactPicker(contactNameComboBox);
@@ -93,6 +93,11 @@ public class AddModifyAppointmentController implements Initializable {
         titleLabel.setText(title);
     }
 
+    public void updateComboBoxes(){
+        TimeUtils.populateMinutePicker(startMinutePicker, startHourPicker, finalHour);
+        TimeUtils.populateMinutePicker(endMinutePicker, endHourPicker, finalHour);
+    }
+
     public void setModifyValues(Appointment app){
         appIdField.setText(String.valueOf(app.getAppId()));
         titleField.setText(app.getTitle());
@@ -100,10 +105,18 @@ public class AddModifyAppointmentController implements Initializable {
         descriptionField.setText(app.getDescription());
         startDatePicker.setValue(app.getStartDateTime().toLocalDate());
         String startTime = app.getStartDateTime().toLocalTime().toString();
-        TimeUtils.setModifyTimeValues(startTime, app, startHourPicker, startMinutePicker, startAmPmPicker);
+        String startHour = startTime.substring(0, 2);
+        String startMinute = startTime.substring(3);
+        startHourPicker.setValue(startHour);
+        startMinutePicker.setValue(startMinute);
+//        TimeUtils.setModifyTimeValues(startTime, app, startHourPicker, startMinutePicker, startAmPmPicker);
         endDatePicker.setValue(app.getEndDateTime().toLocalDate());
         String endTime = app.getEndDateTime().toLocalTime().toString();
-        TimeUtils.setModifyTimeValues(endTime, app, endHourPicker, endMinutePicker, endAmPmPicker);
+        String endHour = endTime.substring(0, 2);
+        String endMinute = endTime.substring(3);
+        endHourPicker.setValue(endHour);
+        endMinutePicker.setValue(endMinute);
+//        TimeUtils.setModifyTimeValues(endTime, app, endHourPicker, endMinutePicker, endAmPmPicker);
         int custId = app.getCustId();
         customerNameComboBox.setValue(CustomerDAO.getCustomerName(custId));
         locationField.setText(app.getLocation());
@@ -157,8 +170,6 @@ public class AddModifyAppointmentController implements Initializable {
             startDate = startDatePicker.getValue().toString();
             startHour = startHourPicker.getValue();
             startMinute = startMinutePicker.getValue();
-            startAmPm = startAmPmPicker.getValue();
-            startHour = TimeUtils.convertTo24Hr(startHour, startAmPm);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             String startDateString = startDate + " " + startHour + ":" + startMinute;
             startDateTime = LocalDateTime.parse(startDateString, formatter);
@@ -166,8 +177,6 @@ public class AddModifyAppointmentController implements Initializable {
             endDate = endDatePicker.getValue().toString();
             endHour = endHourPicker.getValue();
             endMinute = endMinutePicker.getValue();
-            endAmPm = endAmPmPicker.getValue();
-            endHour = TimeUtils.convertTo24Hr(endHour, endAmPm);
             String endDateString = endDate + " " + endHour + ":" + endMinute;
             endDateTime = LocalDateTime.parse(endDateString, formatter);
 
@@ -202,7 +211,6 @@ public class AddModifyAppointmentController implements Initializable {
     private String errorChecking(){
         boolean passesCheck = true;
         String requiredMsg = "* Required";
-        addModifyErrorMsg.setText("Whoops! Don't forget to fill out all fields.");
 
         if(titleField.getText().equals("")){
             titleErrorMsg.setText(requiredMsg);
@@ -216,11 +224,11 @@ public class AddModifyAppointmentController implements Initializable {
             descriptionErrorMsg.setText(requiredMsg);
             passesCheck = false;
         }
-        if(startDatePicker.getValue() == null || startHourPicker.getValue() == null || startMinutePicker.getValue() == null || startAmPmPicker.getValue() == null){
+        if(startDatePicker.getValue() == null || startHourPicker.getValue() == null || startMinutePicker.getValue() == null){
             startErrorMsg.setText("* All fields required");
             passesCheck = false;
         }
-        if(endDatePicker.getValue() == null || endHourPicker.getValue() == null || endMinutePicker.getValue() == null || endAmPmPicker.getValue() == null){
+        if(endDatePicker.getValue() == null || endHourPicker.getValue() == null || endMinutePicker.getValue() == null){
             endErrorMsg.setText("* All fields required");
             passesCheck = false;
         }
@@ -228,10 +236,6 @@ public class AddModifyAppointmentController implements Initializable {
             customerErrorMsg.setText(requiredMsg);
             passesCheck = false;
         }
-//        if(userIdField.getText().equals("")){
-//            userErrorMsg.setText("* Required");
-//            passesCheck = false;
-//        }
         if(contactNameComboBox.getValue() == null){
             contactErrorMsg.setText(requiredMsg);
             passesCheck = false;
@@ -241,6 +245,7 @@ public class AddModifyAppointmentController implements Initializable {
             return "PASS";
         }
         else {
+            addModifyErrorMsg.setText("Whoops! Don't forget to fill out all fields.");
             return "FAIL";
         }
     }
