@@ -44,7 +44,19 @@ public class AllAppointmentsController implements Initializable {
     ObservableList<Appointment> allAppointments;
     Stage stage;
 
-
+    public void checkForApps() throws IOException {
+        LocalDateTime now = LocalDateTime.now();
+        LocalDateTime nowPlus15 = now.plusMinutes(15);
+        for(Appointment app : allAppointments){
+            LocalDateTime start = app.getStartDateTime();
+            if(start.isEqual(now) || ( start.isAfter(now) && start.isBefore(nowPlus15) || start.isEqual(nowPlus15))){
+//                System.out.println("UPCOMING APPOINTMENT!");
+                if(!DialogController.notificationShown){
+                    StageChangeUtils.showNotificationDialog(stage, app.getAppId(), app.getStartDateTime());
+                }
+            }
+        }
+    }
 
     public void updateTable(){
         allAppointments = AppointmentDAO.getAllAppointments();
@@ -71,6 +83,11 @@ public class AllAppointmentsController implements Initializable {
 
     public void initialize(URL location, ResourceBundle resources) {
         updateTable();
+        try {
+            checkForApps();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void viewCustomers(ActionEvent actionEvent) throws IOException {

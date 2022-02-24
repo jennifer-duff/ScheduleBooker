@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="252.0" prefWidth="440.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.DialogController">
+    <Label alignment="CENTER" contentDisplay="CENTER" layoutX="-5.0" layoutY="37.0" prefHeight="17.0" prefWidth="600.0" styleClass="heading" text="Heads Up!" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+    <Label fx:id="subTitle" alignment="CENTER" contentDisplay="CENTER" layoutY="108.0" prefHeight="17.0" prefWidth="398.0" text="You have an appointment coming up soon:" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+   <Label layoutX="76.0" layoutY="146.0" text="Appointment ID:" />
+   <Label fx:id="appIdLabel" layoutX="171.0" layoutY="146.0" text="Label" />
+   <Label layoutX="208.0" layoutY="146.0" text="on" />
+   <Label fx:id="startDateLabel" layoutX="233.0" layoutY="146.0" text="startDate" />
+   <Label layoutX="289.0" layoutY="146.0" text="at" />
+   <Label fx:id="startTimeLabel" layoutX="308.0" layoutY="146.0" text="startTime" />
+    <Button fx:id="cancelBtn" layoutX="321.0" layoutY="193.0" mnemonicParsing="false" onAction="#showNotification" styleClass="appButton" text="  O K  " AnchorPane.bottomAnchor="34.0" AnchorPane.rightAnchor="36.0" />
+</AnchorPane>
