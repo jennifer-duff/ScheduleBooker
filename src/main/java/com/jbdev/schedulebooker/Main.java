@@ -27,6 +27,9 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         LocationDAO.changeLocationCol();
         AppointmentDAO.changeDescriptionCol();
+        AppointmentDAO.changeStartEndToTimestamp();
+        AppointmentDAO.updateEntries();
+
         System.setProperty("prism.lcdtext", "false");
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("view_login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());

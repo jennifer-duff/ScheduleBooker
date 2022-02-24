@@ -2,16 +2,21 @@ package Database;
 
 import Controllers.LoginController;
 import Models.AppMonth;
+import com.mysql.cj.protocol.Resultset;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import Models.Appointment;
 
 import java.sql.*;
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
+import java.time.*;
 import java.util.ArrayList;
 
+import static java.time.ZoneId.systemDefault;
+
 public class AppointmentDAO {
+
+    //initial db operations
     public static void changeDescriptionCol(){
         try {
             String query = "ALTER TABLE appointments CHANGE COLUMN `Description` `Description` LONGTEXT";
@@ -21,6 +26,64 @@ public class AppointmentDAO {
         catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void changeStartEndToTimestamp(){
+        //OG type was 'datetime
+        try {
+            String query = "ALTER TABLE appointments CHANGE COLUMN `Start` `Start` timestamp;";
+            PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
+            statement.execute();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            String query = "ALTER TABLE appointments CHANGE COLUMN `End` `End` timestamp;";
+            PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
+            statement.execute();
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void updateEntries(){
+        ObservableList<Appointment> allApps =  getAllAppointments();
+        for(Appointment app : allApps){
+            modifyAppointment(app);
+        }
+    }
+
+    public static LocalDateTime convertToUTC(LocalDateTime systemLocalDateTime){
+        //convert system LocalDateTime to ZonedLocalDateTime
+        ZoneId systemZone = systemDefault();
+        ZonedDateTime systemZonedTime = systemLocalDateTime.atZone(systemZone);
+
+        //convert system Zonedtime to UTC zonedtime
+        ZoneId utcZone = ZoneId.of("Etc/UTC");
+        ZonedDateTime utcZonedTime = systemZonedTime.withZoneSameInstant(utcZone);
+
+        //get utc LocalDateTime from utzZonedTime
+        LocalDateTime utcLocalDateTime = utcZonedTime.toLocalDateTime();
+
+        return utcLocalDateTime;
+    }
+
+    public static LocalDateTime convertFromUTC(LocalDateTime utcLocalDateTime){
+        //convert utcLocalDateTime to ZonedDateTime
+        ZoneId utcZone = ZoneId.of("Etc/UTC");
+        ZonedDateTime utcZonedTime = utcLocalDateTime.atZone(utcZone);
+
+        //convert utcZonedTime to systemLocalTime
+        ZoneId systemZone = systemDefault();
+        ZonedDateTime systemZonedTime = utcZonedTime.withZoneSameInstant(systemZone);
+
+        //get system LocalDateTime from system ZonedTime
+        LocalDateTime systemLocalDateTime = systemZonedTime.toLocalDateTime();
+
+        return systemLocalDateTime;
     }
 
     public static ObservableList<Appointment> getAllAppointments(){
@@ -40,14 +103,22 @@ public class AppointmentDAO {
                 String type = resultSet.getString("Type");
                 int custId = resultSet.getInt("Customer_ID");
                 String location = resultSet.getString("Location");
-                Timestamp startDateTimestamp = resultSet.getTimestamp("Start");
-                Timestamp endDateTimestamp = resultSet.getTimestamp("End");
-                LocalDateTime startDateTime = startDateTimestamp.toLocalDateTime();
-                LocalDateTime endDateTime = endDateTimestamp.toLocalDateTime();
+                Timestamp systemStartTimestamp = resultSet.getTimestamp("Start");
+                LocalDateTime systemStartLocalDateTime = systemStartTimestamp.toLocalDateTime();
+//                Timestamp utcStartDateTimestamp = resultSet.getTimestamp("Start");
+//                LocalDateTime utcStartLocalDateTime = utcStartDateTimestamp.toLocalDateTime();
+//                LocalDateTime systemStartLocalDateTime = convertFromUTC(utcStartLocalDateTime);
+
+                Timestamp systemEndDateTimestamp = resultSet.getTimestamp("End");
+                LocalDateTime systemEndLocalDateTime = systemEndDateTimestamp.toLocalDateTime();
+//                Timestamp utcEndDateTimestamp = resultSet.getTimestamp("End");
+//                LocalDateTime utcEndLocalDateTime = utcEndDateTimestamp.toLocalDateTime();
+//                LocalDateTime systemEndLocalDateTime = convertFromUTC(utcEndLocalDateTime);
+
                 int userId = resultSet.getInt("User_ID");
                 int contactId = resultSet.getInt("Contact_ID");
 
-                Appointment appointment = new Appointment(appId, title, description, type, custId, location,startDateTime, endDateTime, contactId, userId);
+                Appointment appointment = new Appointment(appId, title, description, type, custId, location, systemStartLocalDateTime, systemEndLocalDateTime, contactId, userId);
                 allAppointments.add(appointment);
             }
 
@@ -57,38 +128,42 @@ public class AppointmentDAO {
         return allAppointments;
     }
 
-//    public static ObservableList<Appointment> getAppsByWeek(){
-//
-//    }
-
-
     public static void addAppointment(Appointment app){
         String title = app.getTitle();
         String description = app.getDescription();
         String type = app.getType();
         int custId = app.getCustId();
         String location = app.getLocation();
+
         LocalDateTime localStart = app.getStartDateTime();
+        LocalDateTime utcStart = convertToUTC(localStart);            //convert to UTC for storage
+        Timestamp timestampedStart = Timestamp.valueOf(utcStart);     //convert to TimeStamp for saving in database
+//        Timestamp timestampedStart = Timestamp.valueOf(localStart);
+
         LocalDateTime localEnd = app.getEndDateTime();
+        LocalDateTime utcEnd = convertToUTC(localEnd);
+        Timestamp timestampedEnd = Timestamp.valueOf(utcEnd);         //convert to TimeStamp for saving in database:
+//        Timestamp timestampedEnd = Timestamp.valueOf(localEnd);
+
         int userId = app.getUserId();
         int contactID = app.getContactId();
 
         try {
             String values =
-                    "NULL, \"" +                            //Appointment_ID
+                    "NULL, \"" +                           //Appointment_ID
                     title + "\", \"" +                     //Title
                     description + "\", \"" +               //Description
-                    location + "\", \"" +                   //Location
-                    type + "\", \"" +                       //Type
-                    localStart + "\", \""  +                //Start
-                    localEnd + "\", \"" +                  //End
+                    location + "\", \"" +                  //Location
+                    type + "\", \"" +                      //Type
+                    timestampedStart + "\", \""  +         //Start
+                    timestampedEnd + "\", \"" +            //End
                     LocalDateTime.now() + "\", \"" +       //Create_Date
                     LoginController.USERNAME + "\", \"" +  //Created_By
                     LocalDateTime.now()  + "\", \"" +      //Last_Update
                     LoginController.USERNAME + "\", \"" +  //Last_Updated_By
                     custId + "\", \"" +                    //Customer_ID
                     userId + "\", \"" +                    //User_ID
-                    contactID + "\"";                       //Contact_ID
+                    contactID + "\"";                      //Contact_ID
             String query = "INSERT INTO appointments VALUES (" + values + ")";
             System.out.println(query);
             PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
@@ -99,26 +174,23 @@ public class AppointmentDAO {
     }
 
     public static void modifyAppointment (Appointment app){
-//        String creationUser = "";
-//        Timestamp creationDate = null;
-//        try{
-//            ResultSet resultSet = getLastResultSet();
-//            while (resultSet.next()) {
-//                creationDate = resultSet.getTimestamp("Create_Date");
-//                creationUser = resultSet.getString("Created_By");
-//            }
-//        }
-//        catch (SQLException e) {
-//            e.printStackTrace();
-//        }
         int appId = app.getAppId();
         String title = app.getTitle();
         String description = app.getDescription();
         String type = app.getType();
         int custId = app.getCustId();
         String location = app.getLocation();
+
         LocalDateTime localStart = app.getStartDateTime();
+        LocalDateTime utcStart = convertToUTC(localStart);            //convert to UTC for storage
+        Timestamp timestampedStart = Timestamp.valueOf(utcStart);     //convert to TimeStamp for saving in database
+//        Timestamp timestampedStart = Timestamp.valueOf(localStart);
+
         LocalDateTime localEnd = app.getEndDateTime();
+        LocalDateTime utcEnd = convertToUTC(localEnd);
+        Timestamp timestampedEnd = Timestamp.valueOf(utcEnd);         //convert to TimeStamp for saving in database
+//        Timestamp timestampedEnd = Timestamp.valueOf(localEnd);
+
         int userId = app.getUserId();
         int contactID = app.getContactId();
         try {
@@ -128,16 +200,13 @@ public class AppointmentDAO {
                     "Description = \"" + description + "\", " +
                     "Location = \"" + location + "\", " +
                     "Type = \"" + type + "\", " +
-                    "Start = \"" + localStart + "\", " +
-                    "End = \"" + localEnd + "\", " +
-//                            "Create_Date = \"" + creationDate + "\", " +
-//                            "Created_By = \"User_" + creationUser + "\", " +
+                    "Start = \"" + timestampedStart + "\", " +
+                    "End = \"" + timestampedEnd + "\", " +
                     "Last_Update = \"" + LocalDateTime.now()  + "\", " +
                     "Last_Updated_By = \"User_" + userId + "\", " +
                     "Customer_ID = \"" + custId + "\", " +
                     "User_ID = \"" + userId + "\", " +
                     "Contact_ID = \"" + contactID + "\"";
-//            System.out.println(values);
             String query = "UPDATE appointments SET " + values + " WHERE APPOINTMENT_ID = " + appId;
 //            System.out.println(query);
             PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
@@ -195,6 +264,26 @@ public class AppointmentDAO {
             e.printStackTrace();
         }
         return resultSet;
+    }
+
+    public static String checkForOverlap(String customerName, LocalDateTime start, LocalDateTime end){
+        try{
+            String query = "SELECT * FROM appointments WHERE (timestamp(Start) BETWEEN \"" + start + "\" AND \"" + end + "\") OR (timestamp(End) BETWEEN \"" + start + "\" AND \"" + end + "\")";
+            System.out.println(query);
+            PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
+            ResultSet resultSet = statement.executeQuery();
+
+            while (resultSet.next()) {
+               int custId = resultSet.getInt("Customer_ID");
+               String custName = CustomerDAO.getCustomerName(custId);
+               if(custName.equals(customerName)){
+                   return "OVERLAP";
+               }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return "CLEAR";
     }
 
     //For app breakdown stats:

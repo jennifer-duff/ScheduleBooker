@@ -17,11 +17,7 @@ public class Appointment {
     private String custName;
     private String location;
     private LocalDateTime startDateTime;
-    private String readOnlyStartDate;
-    private String readOnlyStartTime;
     private LocalDateTime endDateTime;
-    private String readOnlyEndDate;
-    private String readOnlyEndTime;
     private int contactId;
     private String contactName;
     private int userId;
@@ -105,14 +101,12 @@ public class Appointment {
 
     public String getReadOnlyStartDate(){
         LocalDate startDate = this.startDateTime.toLocalDate();
-        readOnlyStartDate = String.valueOf(startDate);
-        return readOnlyStartDate;
+        return String.valueOf(startDate);
     }
 
     public String getReadOnlyStartTime(){
         LocalTime startTime = this.startDateTime.toLocalTime();
-        readOnlyStartTime = String.valueOf(startTime);
-        return readOnlyStartTime;
+        return String.valueOf(startTime);
     }
 
     public LocalDateTime getEndDateTime() {
@@ -125,13 +119,13 @@ public class Appointment {
 
     public String getReadOnlyEndDate(){
         LocalDate endDate = this.endDateTime.toLocalDate();
-        readOnlyEndDate = String.valueOf(endDate);
+        String readOnlyEndDate = String.valueOf(endDate);
         return readOnlyEndDate;
     }
 
     public String getReadOnlyEndTime(){
         LocalTime endTime = this.endDateTime.toLocalTime();
-        readOnlyEndTime = String.valueOf(endTime);
+        String readOnlyEndTime = String.valueOf(endTime);
         return readOnlyEndTime;
     }
 

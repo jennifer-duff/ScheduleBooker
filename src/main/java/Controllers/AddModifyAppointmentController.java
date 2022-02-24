@@ -5,7 +5,7 @@ import Database.ContactDAO;
 import Database.CustomerDAO;
 import Models.Customer;
 import Utilities.StageChangeUtils;
-import Utilities.TimeUtils;
+import Utilities.PopulateFieldUtils;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -64,13 +64,13 @@ public class AddModifyAppointmentController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        finalHour = TimeUtils.populateHourPicker(startHourPicker);
-        TimeUtils.populateMinutePicker(startMinutePicker, startHourPicker, finalHour);
-        TimeUtils.populateHourPicker(endHourPicker);
-        TimeUtils.populateMinutePicker(endMinutePicker, endMinutePicker, finalHour);
+        finalHour = PopulateFieldUtils.populateHourPicker(startHourPicker);
+        PopulateFieldUtils.populateMinutePicker(startMinutePicker, startHourPicker, finalHour);
+        PopulateFieldUtils.populateHourPicker(endHourPicker);
+        PopulateFieldUtils.populateMinutePicker(endMinutePicker, endMinutePicker, finalHour);
 
-        TimeUtils.populateCustomerPicker(customerNameComboBox);
-        TimeUtils.populateContactPicker(contactNameComboBox);
+        PopulateFieldUtils.populateCustomerPicker(customerNameComboBox);
+        PopulateFieldUtils.populateContactPicker(contactNameComboBox);
 
         userIdField.setText(String.valueOf(LoginController.USER_ID));
 
@@ -94,8 +94,8 @@ public class AddModifyAppointmentController implements Initializable {
     }
 
     public void updateComboBoxes(){
-        TimeUtils.populateMinutePicker(startMinutePicker, startHourPicker, finalHour);
-        TimeUtils.populateMinutePicker(endMinutePicker, endHourPicker, finalHour);
+        PopulateFieldUtils.populateMinutePicker(startMinutePicker, startHourPicker, finalHour);
+        PopulateFieldUtils.populateMinutePicker(endMinutePicker, endHourPicker, finalHour);
     }
 
     public void setModifyValues(Appointment app){
@@ -212,6 +212,7 @@ public class AddModifyAppointmentController implements Initializable {
         boolean passesCheck = true;
         String requiredMsg = "* Required";
 
+        //check to ensure all fields are filled out
         if(titleField.getText().equals("")){
             titleErrorMsg.setText(requiredMsg);
             passesCheck = false;
@@ -240,12 +241,41 @@ public class AddModifyAppointmentController implements Initializable {
             contactErrorMsg.setText(requiredMsg);
             passesCheck = false;
         }
+        // check - if any of the above triggered, stop now & return an error msg
+        if(!passesCheck){
+            addModifyErrorMsg.setText("Whoops! Don't forget to fill out all fields.");
+            return "FAIL";
+        }
+
+        //check to ensure customer doesn't already have an app scheduled for that DateTime
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        String startString = startDate + " " + startHour + ":" + startMinute;
+        LocalDateTime startLocalDateTime = LocalDateTime.parse(startString, formatter);
+        LocalDateTime utcStart = AppointmentDAO.convertToUTC(startLocalDateTime);
+
+        String endString = endDate + " " + endHour + ":" + endMinute;
+        LocalDateTime endLocalDateTime= LocalDateTime.parse(endString, formatter);
+        LocalDateTime utcEnd = AppointmentDAO.convertToUTC(endLocalDateTime);
+
+        String customerName = customerNameComboBox.getValue();
+//        String result = AppointmentDAO.checkForOverlap(customerName, startString, endString);
+        String result = AppointmentDAO.checkForOverlap(customerName, utcStart, utcEnd);
+
+        if(result.equals("CLEAR")){
+            passesCheck = true;
+        }
+        else if (result.equals("OVERLAP")){
+            addModifyErrorMsg.setText("Whoops! " + customerName + " already has an appointment scheduled at that time.");
+            startErrorMsg.setText("* Double-check start date/time");
+            endErrorMsg.setText("* Double-check end date/time");
+            passesCheck = false;
+            return "FAIL";
+        }
 
         if(passesCheck){
             return "PASS";
         }
         else {
-            addModifyErrorMsg.setText("Whoops! Don't forget to fill out all fields.");
             return "FAIL";
         }
     }
