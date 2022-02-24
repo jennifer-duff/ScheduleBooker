@@ -266,10 +266,10 @@ public class AppointmentDAO {
         return resultSet;
     }
 
-    public static String checkForOverlap(String customerName, LocalDateTime start, LocalDateTime end){
+    public static String checkForOverlap(int appId, String customerName, LocalDateTime start, LocalDateTime end){
         try{
             String query = "SELECT * FROM appointments WHERE (timestamp(Start) BETWEEN \"" + start + "\" AND \"" + end + "\") OR (timestamp(End) BETWEEN \"" + start + "\" AND \"" + end + "\")";
-            System.out.println(query);
+//            System.out.println(query);
             PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
 
@@ -277,7 +277,10 @@ public class AppointmentDAO {
                int custId = resultSet.getInt("Customer_ID");
                String custName = CustomerDAO.getCustomerName(custId);
                if(custName.equals(customerName)){
-                   return "OVERLAP";
+                   int currappId = resultSet.getInt("Appointment_ID");
+                   if(appId != currappId){
+                       return "OVERLAP";
+                   }
                }
             }
         } catch (SQLException e) {

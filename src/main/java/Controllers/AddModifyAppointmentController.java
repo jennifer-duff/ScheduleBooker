@@ -61,6 +61,7 @@ public class AddModifyAppointmentController implements Initializable {
     String endAmPm;
 
     String finalHour;
+    int appId;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -149,7 +150,7 @@ public class AddModifyAppointmentController implements Initializable {
         contactErrorMsg.setText("");
 
         //Pull input values from fields
-        int appId = 0;
+        appId = 0;
         String title = "";
         String type = "";
         String description = "";
@@ -258,14 +259,32 @@ public class AddModifyAppointmentController implements Initializable {
         LocalDateTime utcEnd = AppointmentDAO.convertToUTC(endLocalDateTime);
 
         String customerName = customerNameComboBox.getValue();
-//        String result = AppointmentDAO.checkForOverlap(customerName, startString, endString);
-        String result = AppointmentDAO.checkForOverlap(customerName, utcStart, utcEnd);
 
+        String result = AppointmentDAO.checkForOverlap(appId, customerName, utcStart, utcEnd);
         if(result.equals("CLEAR")){
             passesCheck = true;
         }
         else if (result.equals("OVERLAP")){
             addModifyErrorMsg.setText("Whoops! " + customerName + " already has an appointment scheduled at that time.");
+            startErrorMsg.setText("* Double-check start date/time");
+            endErrorMsg.setText("* Double-check end date/time");
+            passesCheck = false;
+            return "FAIL";
+        }
+
+        //Ensure end time is after start time
+        if(endLocalDateTime.isAfter(startLocalDateTime)){
+            passesCheck = true;
+        }
+        else if(endLocalDateTime.isEqual(startLocalDateTime)){
+            addModifyErrorMsg.setText("Whoops! Appointment start and end times can't be the same");
+            startErrorMsg.setText("* Double-check start date/time");
+            endErrorMsg.setText("* Double-check end date/time");
+            passesCheck = false;
+            return "FAIL";
+        }
+        else if(endLocalDateTime.isBefore(startLocalDateTime)){
+            addModifyErrorMsg.setText("Whoops! Appointments can't end before they start.");
             startErrorMsg.setText("* Double-check start date/time");
             endErrorMsg.setText("* Double-check end date/time");
             passesCheck = false;
