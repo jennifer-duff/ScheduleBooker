@@ -11,7 +11,7 @@
     <Label fx:id="subTitle" alignment="CENTER" contentDisplay="CENTER" layoutY="111.0" prefHeight="17.0"
            prefWidth="398.0" text="Are you sure you want to delete this?" textAlignment="CENTER"
            AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"/>
-    <Label fx:id="subText" alignment="CENTER" contentDisplay="CENTER" layoutY="140.0" prefHeight="17.0" prefWidth="398.0"
+    <Label fx:id="subText" alignment="CENTER" styleClass="subText" contentDisplay="CENTER" layoutY="140.0" prefHeight="17.0" prefWidth="398.0"
            text="(This can't be undone)" textAlignment="CENTER" AnchorPane.leftAnchor="0.0"
            AnchorPane.rightAnchor="0.0"/>
     <Button fx:id="cancelBtn" layoutX="230.0" layoutY="197.0" mnemonicParsing="false" onAction="#returnToHome"

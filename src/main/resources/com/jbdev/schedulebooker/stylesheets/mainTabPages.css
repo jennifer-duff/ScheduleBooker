@@ -60,6 +60,30 @@
     -fx-background-color: -fx-dustyRose;
 }
 
+/* --- APP NOTIFICATION POPUP ------------------------*/
+.notificationPopUp{
+    -fx-background-color: -fx-eggshell;
+    -fx-background-radius: 0 0 5px 5px;
+    -fx-effect: dropshadow(three-pass-box, -fx-gray, 1, 1.0, 5, 5);
+}
+
+.notificationHeader{
+    -fx-font-family: "Manrope ExtraBold";
+    -fx-font-size: 12pt;
+}
+
+#upcomingAppsLabel{
+    -fx-text-fill: -fx-red;
+}
+
+.notificationSubHeader{
+    -fx-font-size: 9pt;
+}
+
+.notificationBold{
+    -fx-font-family: "Manrope SemiBold";
+}
+
 /* --- TABLE -----------------------------------------*/
 .table-view{
     -fx-background-color: -fx-eggshell;

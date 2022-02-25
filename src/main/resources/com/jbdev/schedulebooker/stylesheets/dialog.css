@@ -6,6 +6,11 @@
     -fx-font-size: 12.25pt;
     -fx-font-family: "Manrope SemiBold";
 }
-#subText{
+
+.subText{
     -fx-font-size: 10pt;
+}
+
+.boldedText{
+    -fx-font-family: "Manrope SemiBold";
 }

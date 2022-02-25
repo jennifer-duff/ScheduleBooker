@@ -80,9 +80,9 @@ public class StageChangeUtils {
         newStage.initModality(Modality.APPLICATION_MODAL);
         newStage.initOwner(stage);
         newStage.setAlwaysOnTop(true);
-        Parent scene = fxmlLoader.load();
             DialogController controller = new DialogController();
             controller.setAppInfo(appId, start);
+        Parent scene = fxmlLoader.load();
         scene.getStylesheets().add(Objects.requireNonNull(Main.class.getResource("/com/jbdev/schedulebooker/stylesheets/app.css")).toExternalForm());
         scene.getStylesheets().add(Objects.requireNonNull(Main.class.getResource("/com/jbdev/schedulebooker/stylesheets/dialog.css")).toExternalForm());
         newStage.setScene(new Scene(scene));

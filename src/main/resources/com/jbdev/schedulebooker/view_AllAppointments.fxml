@@ -7,6 +7,18 @@
     <Button fx:id="activeTab" layoutX=" 37.0" layoutY="20.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="175.0" styleClass="tabs" text="APPOINTMENTS" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="34.0" />
     <Button layoutX="225.0" layoutY="34.0" mnemonicParsing="false" onAction="#viewCustomers" prefHeight="37.0" prefWidth="175.0" styleClass="tabs" text="CUSTOMERS" AnchorPane.topAnchor="34.0" />
     <Button layoutX="410.0" layoutY="34.0" mnemonicParsing="false" onAction="#viewContacts" prefHeight="37.0" prefWidth="175.0" styleClass="tabs" text="REPORTS" AnchorPane.topAnchor="34.0" />
+    <AnchorPane fx:id="noUpcomingAppsPopup" prefHeight="52.0" prefWidth="284.0" styleClass="notificationPopUp" visible="false" AnchorPane.rightAnchor="32.0">
+        <Label fx:id="noUpcomingAppsLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="14.0" prefHeight="17.0" prefWidth="221.0" styleClass="notificationHeader" text="No Upcoming Appointments" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+    </AnchorPane>
+    <AnchorPane fx:id="upcomingAppPopup" prefHeight="54.0" prefWidth="304.0" styleClass="notificationPopUp" visible="false" AnchorPane.rightAnchor="32.0">
+        <Label fx:id="upcomingAppsLabel" alignment="CENTER" contentDisplay="CENTER" layoutY="4.0" prefHeight="17.0" prefWidth="221.0" styleClass="notificationHeader" text="Upcoming Appointment:" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" />
+      <Label layoutX="24.0" layoutY="30.0" styleClass="notificationSubHeader" text="Appointment #" />
+      <Label fx:id="appIdLabel" layoutX="110.0" layoutY="30.0" styleClass="notificationSubHeader, notificationBold" text="#" />
+      <Label layoutX="129.0" layoutY="30.0" styleClass="notificationSubHeader" text="on" />
+      <Label fx:id="startDateLabel" layoutX="152.0" layoutY="30.0" styleClass="notificationSubHeader, notificationBold" text="YYYY-MM-DD" />
+      <Label layoutX="228.0" layoutY="30.0" styleClass="notificationSubHeader" text="at" />
+      <Label fx:id="startTimeLabel" layoutX="245.0" layoutY="30.0" styleClass="notificationSubHeader, notificationBold" text="HH:MM" />
+    </AnchorPane>
     <AnchorPane fx:id="bodyBackground" layoutX="38.0" layoutY="55.0" prefHeight="477.0" prefWidth="1600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="70.0">
       <Label layoutX="41.0" layoutY="15.0" styleClass="subHeading" text="View appointments by:" AnchorPane.topAnchor="15.0" />
       <Button fx:id="activeBtn" layoutX="224.0" layoutY="14.0" mnemonicParsing="false" onAction="#viewApps" styleClass="subTabBtn" text=" A L L " AnchorPane.topAnchor="14.0" />

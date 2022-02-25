@@ -2,7 +2,6 @@ package Controllers;
 
 import Database.AppointmentDAO;
 import Utilities.StageChangeUtils;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,20 +10,22 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.control.skin.TableHeaderRow;
-import javafx.scene.control.skin.TableViewSkinBase;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import Models.Appointment;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.temporal.WeekFields;
 import java.util.*;
 
 public class AllAppointmentsController implements Initializable {
+    @FXML private AnchorPane noUpcomingAppsPopup;
+    @FXML private AnchorPane upcomingAppPopup;
+    @FXML private Label appIdLabel;
+    @FXML private Label startDateLabel;
+    @FXML private Label startTimeLabel;
+
     @FXML private Label errorMsg;
     @FXML private TableView <Appointment> appTable;
     @FXML private TableColumn <Appointment, Integer> appIdCol;
@@ -43,19 +44,35 @@ public class AllAppointmentsController implements Initializable {
     @FXML private TableColumn <Appointment, Integer> userIdCol;
     ObservableList<Appointment> allAppointments;
     Stage stage;
+    public static Boolean checkedForApps = false;
 
-    public void checkForApps() throws IOException {
-        LocalDateTime now = LocalDateTime.now();
-        LocalDateTime nowPlus15 = now.plusMinutes(15);
-        for(Appointment app : allAppointments){
-            LocalDateTime start = app.getStartDateTime();
-            if(start.isEqual(now) || ( start.isAfter(now) && start.isBefore(nowPlus15) || start.isEqual(nowPlus15))){
-//                System.out.println("UPCOMING APPOINTMENT!");
-                if(!DialogController.notificationShown){
-                    StageChangeUtils.showNotificationDialog(stage, app.getAppId(), app.getStartDateTime());
+    public void checkForApps(){
+        if(checkedForApps){
+            noUpcomingAppsPopup.setVisible(false);
+            upcomingAppPopup.setVisible(false);
+        }
+        else{
+            LocalDateTime now = LocalDateTime.now();
+            LocalDateTime nowPlus15 = now.plusMinutes(15);
+            for(Appointment app : allAppointments){
+                LocalDateTime start = app.getStartDateTime();
+                if(start.isEqual(now) || ( start.isAfter(now) && start.isBefore(nowPlus15) || start.isEqual(nowPlus15))){
+                    appIdLabel.setText(String.valueOf(app.getAppId()));
+                    startDateLabel.setText(app.getReadOnlyStartDate());
+                    startTimeLabel.setText(app.getReadOnlyStartTime());
+                    upcomingAppPopup.setVisible(true);
+                    checkedForApps = true;
+                    return;
+//                if(!DialogController.notificationShown){
+//                    StageChangeUtils.showNotificationDialog(stage, app.getAppId(), app.getStartDateTime());
+//                }
+                }
+                else{
+                    noUpcomingAppsPopup.setVisible(true);
                 }
             }
         }
+        checkedForApps = true;
     }
 
     public void updateTable(){
@@ -83,11 +100,12 @@ public class AllAppointmentsController implements Initializable {
 
     public void initialize(URL location, ResourceBundle resources) {
         updateTable();
-        try {
-            checkForApps();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        checkForApps();
+//        try {
+//            checkForApps();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public void viewCustomers(ActionEvent actionEvent) throws IOException {
@@ -113,6 +131,7 @@ public class AllAppointmentsController implements Initializable {
             null
         );
     }
+
 
     public void addApp(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
@@ -170,6 +189,7 @@ public class AllAppointmentsController implements Initializable {
             errorMsg.setText("Whoops! Please select a row.");
         }
     }
+
 
     public void viewApps(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(

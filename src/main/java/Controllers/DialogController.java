@@ -2,12 +2,15 @@ package Controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+import java.net.URL;
 import java.time.LocalDateTime;
+import java.util.ResourceBundle;
 
-public class DialogController {
+public class DialogController implements Initializable {
     @FXML private Label appIdLabel;
     @FXML private Label startDateLabel;
     @FXML private Label startTimeLabel;
@@ -17,15 +20,25 @@ public class DialogController {
     public static Boolean wasDeleted = false;
     public static Boolean notificationShown = false;
 
-    public void setAppInfo(int appId, LocalDateTime start){
-        System.out.println(appId + String.valueOf(start));
-        appIdLabel.setText(String.valueOf(appId));
-        startDateLabel.setText(String.valueOf(start.toLocalDate()));
-        startTimeLabel.setText(String.valueOf(start.toLocalTime()));
+    public static String appId;
+    public static String startdate;
+    public static String startTime;
+
+    public void setAppInfo(int appIdIncoming, LocalDateTime start){
+//        System.out.println("AppID: " + appIdIncoming + "  " + String.valueOf(start.toLocalDate()) + " " + start.toLocalTime());
+        appId = String.valueOf(appIdIncoming);
+        startdate = String.valueOf(start.toLocalDate());
+        startTime = String.valueOf(start.toLocalTime());
     }
 
-    //TODO: move above method contents into "initializable" method, and set String vars for all necessary parts
-
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        if(appId != null && startdate != null && startTime != null){
+            appIdLabel.setText(appId);
+            startDateLabel.setText(startdate);
+            startTimeLabel.setText(startTime);
+        }
+    }
     public void showNotification(ActionEvent actionEvent){
         notificationShown = true;
         returnToHome(actionEvent);
