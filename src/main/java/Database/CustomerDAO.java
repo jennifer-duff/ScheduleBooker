@@ -36,6 +36,10 @@ public class CustomerDAO {
         return allCustomers;
     }
 
+//    public static ObservableList<Appointment> getCustApps(){
+//
+//    }
+
     public static String getCustomerName(int custId) {
         String customerName = null;
         try {

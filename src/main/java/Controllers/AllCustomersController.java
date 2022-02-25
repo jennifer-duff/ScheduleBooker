@@ -63,7 +63,7 @@ public class AllCustomersController implements Initializable {
     public void viewContacts(ActionEvent actionEvent) throws IOException {
        StageChangeUtils.changeStage(
             actionEvent,
-            "/com/jbdev/schedulebooker/view_AllContacts.fxml",
+               "/com/jbdev/schedulebooker/view_Report_ContactSchedules.fxml",
             "/com/jbdev/schedulebooker/stylesheets/mainTabPages.css",
             "Reports | Contact Schedules",
             "",
@@ -84,7 +84,7 @@ public class AllCustomersController implements Initializable {
         );
     }
 
-    public void modifyCustomer(ActionEvent actionEvent) throws IOException {
+    public void modifyCustomer(ActionEvent actionEvent){
         try {
             errorMsg.setText("");
             ObservableList<Customer> selectedItems = customerTable.getSelectionModel().getSelectedItems();
@@ -104,7 +104,7 @@ public class AllCustomersController implements Initializable {
         }
     }
 
-    public void deleteCustomer(ActionEvent actionEvent) throws IOException {
+    public void deleteCustomer(ActionEvent actionEvent){
         try{
             errorMsg.setText("");
             ObservableList<Customer> selectedItems = customerTable.getSelectionModel().getSelectedItems();

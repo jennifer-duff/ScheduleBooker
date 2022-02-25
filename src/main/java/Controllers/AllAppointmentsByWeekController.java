@@ -44,7 +44,7 @@ public class AllAppointmentsByWeekController implements Initializable {
     Stage stage;
 
     private Callback<DatePicker, DateCell> disableNotSunday(){
-        final Callback<DatePicker, DateCell> dayCellFactory = (final DatePicker datePicker) -> new DateCell() {
+        return (final DatePicker datePicker1) -> new DateCell() {
             @Override
             public void updateItem(LocalDate item, boolean empty) {
                 super.updateItem(item, empty);
@@ -55,7 +55,6 @@ public class AllAppointmentsByWeekController implements Initializable {
                 }
             }
         };
-        return dayCellFactory;
     }
 
     @Override
@@ -68,7 +67,7 @@ public class AllAppointmentsByWeekController implements Initializable {
             updateTable();
         }
         catch(Exception error){
-            return;
+            System.out.println(error);
         }
     }
     
@@ -140,7 +139,7 @@ public class AllAppointmentsByWeekController implements Initializable {
     public void viewContacts(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
                 actionEvent,
-                "/com/jbdev/schedulebooker/view_AllContacts.fxml",
+                "/com/jbdev/schedulebooker/view_Report_ContactSchedules.fxml",
                 "/com/jbdev/schedulebooker/stylesheets/mainTabPages.css",
                 "Reports | Contact Schedules",
                 "",
@@ -161,7 +160,7 @@ public class AllAppointmentsByWeekController implements Initializable {
         );
     }
 
-    public void modifyApp(ActionEvent actionEvent) throws IOException {
+    public void modifyApp(ActionEvent actionEvent){
         try{
             errorMsg.setText("");
             ObservableList<Appointment> selectedItems = appTable.getSelectionModel().getSelectedItems();
@@ -182,7 +181,7 @@ public class AllAppointmentsByWeekController implements Initializable {
 
     }
 
-    public void deleteApp(ActionEvent actionEvent) throws IOException {
+    public void deleteApp(ActionEvent actionEvent){
         try {
             errorMsg.setText("");
             ObservableList<Appointment> selectedItems = appTable.getSelectionModel().getSelectedItems();

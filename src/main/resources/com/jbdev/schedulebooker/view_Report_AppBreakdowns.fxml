@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="tabBackground" prefHeight="684.0" prefWidth="806.0" xmlns="http://javafx.com/javafx/11.0.14-internal"
+            xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.Report_AppBreakdownsController">
+    <Button layoutX="37.0" layoutY="33.0" mnemonicParsing="false" onAction="#viewApps" prefHeight="37.0"
+            prefWidth="175.0" styleClass="tabs" text="APPOINTMENTS" AnchorPane.leftAnchor="40.0"
+            AnchorPane.topAnchor="34.0"/>
+    <Button layoutX="225.0" layoutY="34.0" mnemonicParsing="false" onAction="#viewCustomers" prefHeight="37.0"
+            prefWidth="175.0" styleClass="tabs" text="CUSTOMERS" AnchorPane.topAnchor="34.0"/>
+    <Button fx:id="activeTab" layoutX="410.0" layoutY="34.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="175.0"
+            styleClass="tabs" text="REPORTS" AnchorPane.topAnchor="34.0"/>
+    <AnchorPane fx:id="bodyBackground" layoutX="38.0" layoutY="70.0" prefHeight="570.0" prefWidth="707.0"
+                AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                AnchorPane.topAnchor="70.0">
+        <Label layoutX="41.0" layoutY="21.0" styleClass="subHeading" text="View Report:" AnchorPane.topAnchor="15.0"/>
+        <Button layoutX="148.0" layoutY="19.0" mnemonicParsing="false" onAction="#viewContacts" styleClass="subTabBtn"
+                text=" C O N T A C T  S C H E D U L E S " AnchorPane.topAnchor="14.0"/>
+        <Button fx:id="activeBtn" layoutX="332.0" layoutY="19.0" mnemonicParsing="false" styleClass="subTabBtn"
+                text=" A P P O I N T M E N T  B R E A K D O W N S " AnchorPane.topAnchor="14.0"/>
+        <Button layoutX="565.0" layoutY="19.0" mnemonicParsing="false" onAction="#viewCustomerSchedules"
+                styleClass="subTabBtn" text="C U S T O M E R  S C H E D U L E S " AnchorPane.topAnchor="14.0"/>
+        <Label fx:id="errorMsg" alignment="CENTER" contentDisplay="CENTER" layoutX="324.0" layoutY="61.0"
+               textAlignment="CENTER"/>
+        <Label layoutX="95.0" layoutY="83.0" styleClass="subHeading" text="Appointments by Type"
+               AnchorPane.topAnchor="83.0"/>
+        <TableView fx:id="typeTable" layoutX="92.0" layoutY="106.0" prefHeight="438.0" prefWidth="211.0"
+                   AnchorPane.bottomAnchor="70.0" AnchorPane.leftAnchor="92.0" AnchorPane.topAnchor="106.0">
+            <columns>
+                <TableColumn fx:id="appTypeCol" prefWidth="149.0" resizable="false" styleClass="column"
+                             text="Appointment Type"/>
+                <TableColumn fx:id="appTypeCountCol" maxWidth="172.0" prefWidth="58.0" resizable="false"
+                             styleClass="column, centeredCol" text="Count"/>
+            </columns>
+        </TableView>
+        <Label layoutX="487.0" layoutY="83.0" styleClass="subHeading" text="Appointments by Month"/>
+        <TableView fx:id="monthTable" layoutX="493.0" layoutY="106.0" prefHeight="438.0" prefWidth="219.0"
+                   AnchorPane.bottomAnchor="70.0" AnchorPane.rightAnchor="102.0">
+        <columns>
+            <TableColumn fx:id="appMonthCol" prefWidth="158.0" resizable="false" styleClass="column"
+                         text="Appointment Month"/>
+            <TableColumn fx:id="appMonthCountCol" maxWidth="172.0" prefWidth="57.0" resizable="false"
+                         styleClass="column, centeredCol" text="Count"/>
+        </columns>
+        </TableView>
+    </AnchorPane>
+</AnchorPane>

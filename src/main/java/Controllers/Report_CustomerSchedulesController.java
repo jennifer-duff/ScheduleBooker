@@ -1,8 +1,14 @@
 package Controllers;
 
+import Database.AppointmentDAO;
 import Database.ContactDAO;
+import Database.CustomerDAO;
+import Models.Appointment;
+import Models.Customer;
 import Utilities.StageChangeUtils;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,14 +17,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
-import Models.Appointment;
 
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
-public class AllContactsController implements Initializable {
+public class Report_CustomerSchedulesController implements Initializable {
     @FXML private Label msgLabel;
     @FXML private ComboBox<String> comboBox;
     @FXML private TableView<Appointment> contactAppsTable;
@@ -34,41 +39,52 @@ public class AllContactsController implements Initializable {
     @FXML private TableColumn <Appointment, Integer> custIdCol;
     @FXML private TableColumn <Appointment, String> custNameCol;
 
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        comboBox.setItems(ContactDAO.getAllContactNames());
-    }
-
     @FXML
     public void viewCustomers(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
-            actionEvent,
-            "/com/jbdev/schedulebooker/view_AllCustomers.fxml",
-            "/com/jbdev/schedulebooker/stylesheets/mainTabPages.css",
-            "All Customers",
-            "",
-            null,
-            null
+                actionEvent,
+                "/com/jbdev/schedulebooker/view_AllCustomers.fxml",
+                "/com/jbdev/schedulebooker/stylesheets/mainTabPages.css",
+                "All Customers",
+                "",
+                null,
+                null
         );
     }
 
     @FXML
     public void viewApps(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
-            actionEvent,
-            "/com/jbdev/schedulebooker/view_AllAppointments.fxml",
-            "/com/jbdev/schedulebooker/stylesheets/mainTabPages.css",
-            "All Appointments",
-            "",
-            null,
-            null
+                actionEvent,
+                "/com/jbdev/schedulebooker/view_AllAppointments.fxml",
+                "/com/jbdev/schedulebooker/stylesheets/mainTabPages.css",
+                "All Appointments",
+                "",
+                null,
+                null
         );
     }
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        ObservableList<Customer> allCustomers = CustomerDAO.getAllCustomers();
+        ObservableList<String> customerNames = FXCollections.observableArrayList();
+        for(Customer customer : allCustomers){
+            String custName = customer.getName();
+            customerNames.add(custName);
+        }
+        comboBox.setItems(customerNames);
+    }
+
     public void populateTable(){
-        String contactName = comboBox.getValue();
-        ObservableList<Appointment> contactApps = ContactDAO.getContactApps(contactName);
+        String customerName = comboBox.getValue();
+        ObservableList<Appointment> allApps = AppointmentDAO.getAllAppointments();
+        ObservableList<Appointment> contactApps = FXCollections.observableArrayList();
+        for(Appointment app : allApps){
+            if(app.getCustName().equals(customerName)){
+                contactApps.add(app);
+            }
+        }
         contactAppsTable.setItems(contactApps);
         appIdCol.setCellValueFactory(new PropertyValueFactory<>("appId"));
         titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
@@ -86,7 +102,7 @@ public class AllContactsController implements Initializable {
         contactAppsTable.getSortOrder().setAll(startDateCol, startTimeCol);
 
         if(contactApps.size() == 0){
-            msgLabel.setText("No appointments found for " + contactName);
+            msgLabel.setText("No appointments found for " + customerName);
         }
         else {
             msgLabel.setText("");
@@ -96,9 +112,21 @@ public class AllContactsController implements Initializable {
     public void viewAppBreakdown(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
                 actionEvent,
-                "/com/jbdev/schedulebooker/view_AppBreakdowns.fxml",
+                "/com/jbdev/schedulebooker/view_Report_AppBreakdowns.fxml",
                 "/com/jbdev/schedulebooker/stylesheets/mainTabPages.css",
                 "Reports | Appointment Breakdowns",
+                "",
+                null,
+                null
+        );
+    }
+
+    public void viewContacts(ActionEvent actionEvent) throws IOException {
+        StageChangeUtils.changeStage(
+                actionEvent,
+                "/com/jbdev/schedulebooker/view_Report_ContactSchedules.fxml",
+                "/com/jbdev/schedulebooker/stylesheets/mainTabPages.css",
+                "Reports | Contact Schedules",
                 "",
                 null,
                 null

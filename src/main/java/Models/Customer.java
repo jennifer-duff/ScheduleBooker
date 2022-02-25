@@ -69,13 +69,6 @@ public class Customer {
     public String getCountry(){
         return LocationDAO.getCountryName(this.divisionId);
     }
-//    public String getCountry() {
-//        return country;
-//    }
-//
-//    public void setCountry(String country) {
-//        this.country = country;
-//    }
 
     public String getFullAddress(){
         String divisionName = LocationDAO.getDivisionName(this.divisionId);
