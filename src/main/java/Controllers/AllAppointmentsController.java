@@ -63,9 +63,6 @@ public class AllAppointmentsController implements Initializable {
                     upcomingAppPopup.setVisible(true);
                     checkedForApps = true;
                     return;
-//                if(!DialogController.notificationShown){
-//                    StageChangeUtils.showNotificationDialog(stage, app.getAppId(), app.getStartDateTime());
-//                }
                 }
                 else{
                     noUpcomingAppsPopup.setVisible(true);
@@ -101,11 +98,6 @@ public class AllAppointmentsController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         updateTable();
         checkForApps();
-//        try {
-//            checkForApps();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
     }
 
     public void viewCustomers(ActionEvent actionEvent) throws IOException {

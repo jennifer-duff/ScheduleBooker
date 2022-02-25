@@ -68,24 +68,4 @@ public class StageChangeUtils {
         newStage.setScene(new Scene(scene));
         newStage.showAndWait();
     }
-
-    public static void showNotificationDialog(Stage stage, int appId, LocalDateTime start) throws IOException {
-        Stage newStage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("view_dialog_AppNotification.fxml"));
-        Image icon = new Image(Objects.requireNonNull(Main.class.getResourceAsStream("/com/jbdev/schedulebooker/assets/scheduleBookerIcon.png")));
-        newStage.getIcons().add(icon);
-        newStage.setTitle("Appointment Notification");
-        newStage.setResizable(false);
-        newStage.centerOnScreen();
-        newStage.initModality(Modality.APPLICATION_MODAL);
-        newStage.initOwner(stage);
-        newStage.setAlwaysOnTop(true);
-            DialogController controller = new DialogController();
-            controller.setAppInfo(appId, start);
-        Parent scene = fxmlLoader.load();
-        scene.getStylesheets().add(Objects.requireNonNull(Main.class.getResource("/com/jbdev/schedulebooker/stylesheets/app.css")).toExternalForm());
-        scene.getStylesheets().add(Objects.requireNonNull(Main.class.getResource("/com/jbdev/schedulebooker/stylesheets/dialog.css")).toExternalForm());
-        newStage.setScene(new Scene(scene));
-        newStage.showAndWait();
-    }
 }
