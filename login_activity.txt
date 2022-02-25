@@ -1,0 +1,9 @@
+L O G I N   A T T E M P T   L O G
+
+LOGIN ATTEMPT: User "test" attempted login on 2022-02-25 at 18:53:35 and was SUCCESSFUL
+LOGIN ATTEMPT: User "test" attempted login on 2022-02-25 at 18:54:10 and was SUCCESSFUL
+LOGIN ATTEMPT: User "test" attempted login on 2022-02-25 at 18:55:38 and was SUCCESSFUL
+LOGIN ATTEMPT: User "UNRECOGNIZED USER" attempted login on 2022-02-25 at 18:56:26 and was UNSUCCESSFUL
+LOGIN ATTEMPT: User "UNRECOGNIZED USER" attempted login on 2022-02-25 at 19:09:53 and was UNSUCCESSFUL
+LOGIN ATTEMPT: User "test" attempted login on 2022-02-25 at 19:09:55 and was SUCCESSFUL
+LOGIN ATTEMPT: User "test" attempted login on 2022-02-25 at 20:56:50 and was SUCCESSFUL

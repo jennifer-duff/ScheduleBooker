@@ -1,5 +1,6 @@
 package Controllers;
 
+import Database.AppointmentDAO;
 import Database.UserDAO;
 import Utilities.StageChangeUtils;
 import javafx.event.ActionEvent;
@@ -9,8 +10,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -28,7 +32,7 @@ public class LoginController implements Initializable {
 
     private String lang;
     public static int USER_ID;
-    public static String USERNAME;
+    public static String USERNAME = "UNRECOGNIZED USER";
 
 
     public void initialize(URL location, ResourceBundle resources) {
@@ -53,14 +57,40 @@ public class LoginController implements Initializable {
         }
     }
 
+    public void writeToLog(Boolean isSuccessful) throws IOException {
+        LocalDateTime now = LocalDateTime.now();
+        String date = String.valueOf( AppointmentDAO.convertToUTC(now).toLocalDate());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
+        String time = String.valueOf( AppointmentDAO.convertToUTC(now).toLocalTime()).substring(0, 8);
+//        String username = String.valueOf(USER_ID);
+        String success = "";
+        if(isSuccessful){
+            success = "SUCCESSFUL";
+        }
+        else{
+            success = "UNSUCCESSFUL";
+        }
+        String string = "LOGIN ATTEMPT: User \"" + USERNAME + "\" attempted login on " + date + " at " + time + " and was " + success + "\n";
+
+        try{
+            String filename= "login_activity.txt";
+            FileWriter fw = new FileWriter(filename,true);  //the true will append the new data
+            fw.write(string);                                       //appends the string to the file
+            fw.close();
+        }
+        catch(IOException ioe)
+        {
+            System.err.println("IOException: " + ioe.getMessage());
+        }
+    }
+
     @FXML
     public void enterApp(ActionEvent actionEvent) throws IOException {
         String username = usernameField.getText();
-        String password = usernameField.getText();
+        String password = passwordField.getText();
         boolean isValidLogin = false;
         int rowCount = UserDAO.getUserRowCount();
         ArrayList<ArrayList<String>> loginList = UserDAO.getUsernamesAndPasswords(rowCount);
-//        System.out.println(loginList);
         for(ArrayList<String> userPassCombo : loginList ){
             String currUser = userPassCombo.get(0);
             String currPass = userPassCombo.get(1);
@@ -73,6 +103,7 @@ public class LoginController implements Initializable {
         }
 
         if(isValidLogin){
+            writeToLog(true);
             errorMsg.setText("");
             StageChangeUtils.changeStage(
                     actionEvent,
@@ -85,6 +116,7 @@ public class LoginController implements Initializable {
             );
         }
         else{
+            writeToLog(false);
             if(lang.equalsIgnoreCase("english")){
                 errorMsg.setText("Invalid username / password");
             }
