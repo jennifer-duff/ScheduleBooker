@@ -14,7 +14,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -36,14 +35,6 @@ public class LoginController implements Initializable {
 
 
     public void initialize(URL location, ResourceBundle resources) {
-//        String systemDefaultZone = String.valueOf(systemDefault());
-//        systemDefaultZone = systemDefaultZone.replace("_", " ");
-//        systemDefaultZone = systemDefaultZone.replace("/", " / ");
-//        countryLabel.setText(systemDefaultZone);
-
-//        String userCountry = System.getProperty("user.country");
-//        String userLang = System.getProperty("user.language");
-
         Locale locale = Locale.getDefault();
         lang = locale.getDisplayLanguage();
         String country = locale.getDisplayCountry();
@@ -57,13 +48,11 @@ public class LoginController implements Initializable {
         }
     }
 
-    public void writeToLog(Boolean isSuccessful) throws IOException {
+    public void writeToLog(Boolean isSuccessful){
         LocalDateTime now = LocalDateTime.now();
         String date = String.valueOf( AppointmentDAO.convertToUTC(now).toLocalDate());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm:ss");
         String time = String.valueOf( AppointmentDAO.convertToUTC(now).toLocalTime()).substring(0, 8);
-//        String username = String.valueOf(USER_ID);
-        String success = "";
+        String success;
         if(isSuccessful){
             success = "SUCCESSFUL";
         }
@@ -124,7 +113,5 @@ public class LoginController implements Initializable {
                 errorMsg.setText("Identifiant / mot de passe ne sont pas valide");
             }
         }
-
-
     }
 }
