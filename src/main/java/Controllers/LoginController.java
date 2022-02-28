@@ -44,7 +44,7 @@ public class LoginController implements Initializable {
             loginLabel.setText("Se Connecter");
             usernameLabel.setText("Identifiant");
             passwordLabel.setText("Mot de Passe");
-            enterBtn.setText(" E n t r é e ");
+            enterBtn.setText(" E N T R É E ");
         }
     }
 
@@ -64,7 +64,7 @@ public class LoginController implements Initializable {
         try{
             String filename= "login_activity.txt";
             FileWriter fw = new FileWriter(filename,true);  //the true will append the new data
-            fw.write(string);                                       //appends the string to the file
+            fw.write(string);                               //appends the string to the file
             fw.close();
         }
         catch(IOException ioe)
