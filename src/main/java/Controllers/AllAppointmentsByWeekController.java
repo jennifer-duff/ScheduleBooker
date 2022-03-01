@@ -49,10 +49,10 @@ public class AllAppointmentsByWeekController implements Initializable {
      * LAMBDA EXPRESSION
      * This method contains a lambda expression. The expression is used to simplify the process of getting the first day
      * of every week, and then disabling the selection of every DateCell that is not on the first day of the week.
-     * This wil allow the user to effecitvely specify a week number by choosing the first day of the desired week, as
+     * This wil allow the user to effectively specify a week number by choosing the first day of the desired week, as
      * executed in the updateTable() method.
      *
-     * @return      A Datepicker used during initialization to create a dayCellFactory
+     * @return      A DatePicker used during initialization to create a dayCellFactory
      */
     private Callback<DatePicker, DateCell> disableNotFirstOfWeek(){
 
@@ -76,7 +76,7 @@ public class AllAppointmentsByWeekController implements Initializable {
     /**
      * Initializes the stage
      *
-     * @param url               The URL to be used in the stage's initializtion
+     * @param url               The URL to be used in the stage's initialization
      * @param resourceBundle    The ResourceBundle to be used in the stage's initialization
      */
     @Override
@@ -223,7 +223,7 @@ public class AllAppointmentsByWeekController implements Initializable {
 
 
     /**
-     * Displays the Delete Confirmation dialog box.
+     * Displays the "Delete Confirmation"d dialog box.
      * If the user confirms the delete action, deletes the appointment from the database*
      */
     public void deleteApp(){

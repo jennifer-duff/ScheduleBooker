@@ -18,6 +18,7 @@ import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
+@SuppressWarnings("unchecked")
 public class Report_ContactSchedulesController implements Initializable {
     @FXML private Label msgLabel;
     @FXML private ComboBox<String> comboBox;
@@ -38,7 +39,7 @@ public class Report_ContactSchedulesController implements Initializable {
     /**
      * Initializes the stage
      *
-     * @param url               The URL to be used in the stage's initializtion
+     * @param url               The URL to be used in the stage's initialization
      * @param resourceBundle    The ResourceBundle to be used in the stage's initialization
      */
     @Override

@@ -181,7 +181,7 @@ public class Appointment {
     }
 
     /**
-     * @return the endd date/time of the appointment
+     * @return the end date/time of the appointment
      */
     public LocalDateTime getEndDateTime() {
         return endDateTime;
@@ -200,8 +200,7 @@ public class Appointment {
      */
     public String getReadOnlyEndDate(){
         LocalDate endDate = this.endDateTime.toLocalDate();
-        String readOnlyEndDate = String.valueOf(endDate);
-        return readOnlyEndDate;
+        return String.valueOf(endDate);
     }
 
     /**
@@ -209,8 +208,7 @@ public class Appointment {
      */
     public String getReadOnlyEndTime(){
         LocalTime endTime = this.endDateTime.toLocalTime();
-        String readOnlyEndTime = String.valueOf(endTime);
-        return readOnlyEndTime;
+        return String.valueOf(endTime);
     }
 
     /**

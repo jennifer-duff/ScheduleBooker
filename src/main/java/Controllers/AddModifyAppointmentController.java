@@ -62,7 +62,7 @@ public class AddModifyAppointmentController implements Initializable {
     /**
      * Initializes the stage
      *
-     * @param url               The URL to be used in the stage's initializtion
+     * @param url               The URL to be used in the stage's initialization
      * @param resourceBundle    The ResourceBundle to be used in the stage's initialization
      */
     @Override
@@ -106,7 +106,7 @@ public class AddModifyAppointmentController implements Initializable {
     /**
      * Populates the "hour" and "minute" ComboBoxes w/ the appropriate options.
      * Options are based on the company's opening/closing times, and are translated into the user's local time.
-     * This prevents users from choosing appointment times outside of the company's operating hours
+     * This prevents users from choosing appointment times outside the company's operating hours
      */
     public void updateComboBoxes(){
         PopulateFieldUtils.populateMinutePicker(startMinutePicker, startHourPicker, finalHour);
@@ -117,7 +117,7 @@ public class AddModifyAppointmentController implements Initializable {
     /**
      * Pre-populates the "Modify" screen with the appropriate values for the selected appointment
      *
-     * @param app           The Appointment entity whose information will be pre-loaded into the "Modify" screen
+     * @param app           The Appointment entity whose information will be preloaded into the "Modify" screen
      */
     public void setModifyValues(Appointment app){
         appIdField.setText(String.valueOf(app.getAppId()));

@@ -17,7 +17,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
-import java.util.function.Predicate;
 
 public class LoginController implements Initializable {
     @FXML private Label loginLabel;
@@ -38,7 +37,7 @@ public class LoginController implements Initializable {
     /**
      * Initializes the stage
      *
-     * @param url               The URL to be used in the stage's initializtion
+     * @param url               The URL to be used in the stage's initialization
      * @param resourceBundle    The ResourceBundle to be used in the stage's initialization
      */
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -59,7 +58,7 @@ public class LoginController implements Initializable {
     /**
      * Records the login attempt to the "login_activity.txt" file
      *
-     * @param isSuccessful  Used to determine whether or not the login was successful, so that the method can log the
+     * @param isSuccessful  Used to determine whether the login was successful, so that the method can log the
      *                      attempt appropriately
      */
     public void writeToLog(Boolean isSuccessful){

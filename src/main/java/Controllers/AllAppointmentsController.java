@@ -111,7 +111,7 @@ public class AllAppointmentsController implements Initializable {
     /**
      * Initializes the stage
      *
-     * @param url               The URL to be used in the stage's initializtion
+     * @param url               The URL to be used in the stage's initialization
      * @param resourceBundle    The ResourceBundle to be used in the stage's initialization
      */
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -205,7 +205,7 @@ public class AllAppointmentsController implements Initializable {
 
 
     /**
-     * Displays the Delete Confirmation dialog box.
+     * Displays the "Delete Confirmation" dialog box.
      * If the user confirms the delete action, deletes the appointment from the database*
      */
     public void deleteApp(){

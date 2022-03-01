@@ -9,7 +9,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -19,8 +18,8 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+@SuppressWarnings("unchecked")
 public class Report_AppBreakdownsController implements Initializable {
-    @FXML private Label errorMsg;
     @FXML private TableView<AppType> typeTable;
     @FXML private TableColumn<AppType, String> appTypeCol;
     @FXML private TableColumn<AppType, Integer> appTypeCountCol;
@@ -32,7 +31,7 @@ public class Report_AppBreakdownsController implements Initializable {
     /**
      * Initializes the stage
      *
-     * @param url               The URL to be used in the stage's initializtion
+     * @param url               The URL to be used in the stage's initialization
      * @param resourceBundle    The ResourceBundle to be used in the stage's initialization
      */
     @Override

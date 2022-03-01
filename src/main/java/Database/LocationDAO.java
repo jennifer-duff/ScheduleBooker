@@ -139,28 +139,6 @@ public class LocationDAO {
 
 
     /**
-     * @return              A list of all division names
-     */
-    public static ObservableList<String> getAllDivisionNames() {
-        ObservableList<String> allDivisions = FXCollections.observableArrayList();
-        try {
-            String query = "SELECT Division FROM first_level_divisions";
-            PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
-            ResultSet resultSet = statement.executeQuery();
-
-            while (resultSet.next()) {
-                String divisionName = resultSet.getString("Division");
-                allDivisions.add(divisionName);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-        return allDivisions;
-    }
-
-
-    /**
      * @param countryId     The ID of the country in which the customer lives
      * @return              A list of all division names within the given country
      */

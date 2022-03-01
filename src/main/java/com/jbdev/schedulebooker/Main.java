@@ -3,7 +3,6 @@ package com.jbdev.schedulebooker;
 import Database.AppointmentDAO;
 import Database.DatabaseConnection;
 import Database.LocationDAO;
-import Models.Appointment;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;

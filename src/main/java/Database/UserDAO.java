@@ -9,17 +9,17 @@ public class UserDAO {
 
     /**
      * @param rowCount  The number of rows that will be present in the list to be returned
-     * @return          A list of sublists, containing each username/password combination
+     * @return          A list of sub-lists, containing each username/password combination
      */
     public static ArrayList<ArrayList<String>> getUsernamesAndPasswords(int rowCount) {
-        ArrayList<ArrayList<String>> loginList = new ArrayList<ArrayList<String> >(rowCount);
+        ArrayList<ArrayList<String>> loginList = new ArrayList<>(rowCount);
         try {
             String query = "SELECT * FROM users";
             PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
 
             while (resultSet.next()) {
-                ArrayList<String> userNameAndPassword = new ArrayList<String>();
+                ArrayList<String> userNameAndPassword = new ArrayList<>();
                 String username = resultSet.getString("User_Name");
                 String password = resultSet.getString("Password");
                 userNameAndPassword.add(username);

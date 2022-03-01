@@ -50,7 +50,7 @@ public class AllCustomersController implements Initializable {
     /**
      * Initializes the stage
      *
-     * @param url               The URL to be used in the stage's initializtion
+     * @param url               The URL to be used in the stage's initialization
      * @param resourceBundle    The ResourceBundle to be used in the stage's initialization
      */
     @Override
@@ -121,7 +121,6 @@ public class AllCustomersController implements Initializable {
      * Switches to the "Modify Customer" screen
      *
      * @param actionEvent       The ActionEvent associated with the user pressing the "Modify Customer" button
-     * @throws IOException      The Exception that is thrown if the stage change operation fails
      */
     public void modifyCustomer(ActionEvent actionEvent){
         try {
@@ -145,10 +144,10 @@ public class AllCustomersController implements Initializable {
 
 
     /**
-     * Displays the Delete Confirmation dialog box.
+     * Displays the "Delete Confirmation" dialog box.
      * If the user confirms the delete action, deletes the customer from the database*
      */
-    public void deleteCustomer(ActionEvent actionEvent){
+    public void deleteCustomer(){
         try{
             errorMsg.setText("");
             ObservableList<Customer> selectedItems = customerTable.getSelectionModel().getSelectedItems();

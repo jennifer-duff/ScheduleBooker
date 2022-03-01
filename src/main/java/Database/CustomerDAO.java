@@ -125,7 +125,7 @@ public class CustomerDAO {
 
 
     /**
-     * @return          The Customer that was most recently added to the databse
+     * @return          The Customer that was most recently added to the database
      */
     public static ResultSet getLastResultSet(){
         ResultSet resultSet = null;
@@ -210,8 +210,8 @@ public class CustomerDAO {
      */
     public static void deleteCustomer(Customer customer) {
         //first, check if customer has any appointments and delete them
-        ObservableList<Appointment> allapps = AppointmentDAO.getAllAppointments();
-        for(Appointment app : allapps){
+        ObservableList<Appointment> allApps = AppointmentDAO.getAllAppointments();
+        for(Appointment app : allApps){
             if(app.getCustId() == customer.getCustId()) {
                 AppointmentDAO.deleteAppointment(app);
             }

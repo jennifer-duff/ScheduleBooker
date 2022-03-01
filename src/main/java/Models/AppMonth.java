@@ -51,7 +51,7 @@ public class AppMonth {
     }
 
     /**
-     * @param appMonthCount the number of appointments to set as occuring in the given month
+     * @param appMonthCount the number of appointments to set as occurring in the given month
      */
     public void setAppMonthCount(int appMonthCount) {
         this.appMonthCount = appMonthCount;

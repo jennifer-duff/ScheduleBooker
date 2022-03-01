@@ -1,7 +1,6 @@
 package Database;
 
 import Controllers.LoginController;
-import Models.AppMonth;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import Models.Appointment;
@@ -62,6 +61,9 @@ public class AppointmentDAO {
     public static void updateEntries(){
         ObservableList<Appointment> allApps =  getAllAppointments();
         for(Appointment app : allApps){
+            int custId = app.getCustId();
+            String fullLocation = CustomerDAO.getCustomerById(custId).getFullAddress();
+            app.setLocation(fullLocation);
             modifyAppointment(app);
         }
     }
@@ -73,6 +75,7 @@ public class AppointmentDAO {
      * @param systemLocalDateTime   A DateTime in the user's local timezone, as determined by the system's settings
      * @return                      The DateTime of the user-inputted value, converted into UTC timezone
      */
+    @SuppressWarnings("UnnecessaryLocalVariable")
     public static LocalDateTime convertToUTC(LocalDateTime systemLocalDateTime){
         //convert system LocalDateTime to ZonedLocalDateTime
         ZoneId systemZone = systemDefault();
@@ -110,15 +113,9 @@ public class AppointmentDAO {
                 String location = resultSet.getString("Location");
                 Timestamp systemStartTimestamp = resultSet.getTimestamp("Start");
                 LocalDateTime systemStartLocalDateTime = systemStartTimestamp.toLocalDateTime();
-//                Timestamp utcStartDateTimestamp = resultSet.getTimestamp("Start");
-//                LocalDateTime utcStartLocalDateTime = utcStartDateTimestamp.toLocalDateTime();
-//                LocalDateTime systemStartLocalDateTime = convertFromUTC(utcStartLocalDateTime);
 
                 Timestamp systemEndDateTimestamp = resultSet.getTimestamp("End");
                 LocalDateTime systemEndLocalDateTime = systemEndDateTimestamp.toLocalDateTime();
-//                Timestamp utcEndDateTimestamp = resultSet.getTimestamp("End");
-//                LocalDateTime utcEndLocalDateTime = utcEndDateTimestamp.toLocalDateTime();
-//                LocalDateTime systemEndLocalDateTime = convertFromUTC(utcEndLocalDateTime);
 
                 int userId = resultSet.getInt("User_ID");
                 int contactId = resultSet.getInt("Contact_ID");
@@ -231,7 +228,7 @@ public class AppointmentDAO {
 
 
     /**
-     * @param app   The appointment to delete from the datbase
+     * @param app   The appointment to delete from the database
      */
     public static void deleteAppointment(Appointment app) {
         try {
@@ -314,8 +311,8 @@ public class AppointmentDAO {
                int custId = resultSet.getInt("Customer_ID");
                String custName = CustomerDAO.getCustomerName(custId);
                if(custName.equals(customerName)){
-                   int currappId = resultSet.getInt("Appointment_ID");
-                   if(appId != currappId){
+                   int currAppId = resultSet.getInt("Appointment_ID");
+                   if(appId != currAppId){
                        return "OVERLAP";
                    }
                }
@@ -378,8 +375,7 @@ public class AppointmentDAO {
      * @return  An array containing sub-arrays that indicate the number of appointments in each month of the year(s)
      */
     public static ArrayList<ArrayList<String>> getAppMonths(){
-        ArrayList<ArrayList<String>> appMonthCounts = new ArrayList<ArrayList<String>>();
-        ObservableList<AppMonth> appMonthObjs = FXCollections.observableArrayList();
+        ArrayList<ArrayList<String>> appMonthCounts = new ArrayList<>();
 
         try{
             String query = "SELECT Start FROM appointments";
@@ -390,19 +386,16 @@ public class AppointmentDAO {
                 Timestamp startDate = resultSet.getTimestamp("Start");
                 String yearMonth = new SimpleDateFormat("yyyy - MMMM").format(startDate);
                 boolean wasFound = false;
-                for (int i = 0; i < appMonthCounts.size(); i++){
-                    if(!appMonthCounts.get(i).get(0).equalsIgnoreCase(yearMonth)){
-                        continue;
-                    }
-                    else{
+                for (ArrayList<String> appMonthCount : appMonthCounts) {
+                    if (appMonthCount.get(0).equalsIgnoreCase(yearMonth)) {
                         wasFound = true;
-                        int currCount = Integer.parseInt(appMonthCounts.get(i).get(1));
+                        int currCount = Integer.parseInt(appMonthCount.get(1));
                         currCount++;
-                        appMonthCounts.get(i).set(1, String.valueOf(currCount));
+                        appMonthCount.set(1, String.valueOf(currCount));
                     }
                 }
                 if(!wasFound){
-                    ArrayList<String> tempArray = new ArrayList<String>();
+                    ArrayList<String> tempArray = new ArrayList<>();
                     tempArray.add(yearMonth);
                     tempArray.add("1");
                     appMonthCounts.add(tempArray);

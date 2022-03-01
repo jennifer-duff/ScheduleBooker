@@ -44,7 +44,7 @@ public class AllAppointmentsByMonthController implements Initializable {
     /**
      * Initializes the stage
      *
-     * @param url               The URL to be used in the stage's initializtion
+     * @param url               The URL to be used in the stage's initialization
      * @param resourceBundle    The ResourceBundle to be used in the stage's initialization
      */
     @Override
@@ -64,7 +64,7 @@ public class AllAppointmentsByMonthController implements Initializable {
         months.add("December");
         monthComboBox.setItems(months);
 
-        //populate year combobox based on years in database
+        //populate year ComboBox based on years in database
         ObservableList<String> years = FXCollections.observableArrayList();
         allAppointments = AppointmentDAO.getAllAppointments();
         for(Appointment app : allAppointments){
@@ -83,8 +83,8 @@ public class AllAppointmentsByMonthController implements Initializable {
         try{
             updateTable();
         }
-        catch(Exception error){
-            return;
+        catch(Exception ignored){
+
         }
     }
 
@@ -228,12 +228,10 @@ public class AllAppointmentsByMonthController implements Initializable {
 
 
     /**
-     * Displays the Delete Confirmation dialog box.
+     * Displays the "Delete Confirmation" dialog box.
      * If the user confirms the delete action, deletes the appointment from the database
-     *
-     * @param actionEvent       The ActionEvent associated with the user pressing the "Delete Appointment" button
-     */
-    public void deleteApp(ActionEvent actionEvent){
+     **/
+    public void deleteApp(){
         try {
             errorMsg.setText("");
             ObservableList<Appointment> selectedItems = appTable.getSelectionModel().getSelectedItems();

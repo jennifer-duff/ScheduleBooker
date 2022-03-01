@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 
 public class DatabaseConnection {
     /**
-     * The protocol used to connect to the databse
+     * The protocol used to connect to the database
      */
     private static final String protocol = "jdbc";
 
@@ -20,7 +20,7 @@ public class DatabaseConnection {
     private static final String location = "//localhost/";
 
     /**
-     * The name of the databse
+     * The name of the database
      */
     private static final String databaseName = "client_schedule";
 
@@ -35,7 +35,7 @@ public class DatabaseConnection {
     private static final String driver = "com.mysql.cj.jdbc.Driver";
 
     /**
-     * Username for connecting to the databsae
+     * Username for connecting to the database
      */
     private static final String userName = "sqlUser";
 

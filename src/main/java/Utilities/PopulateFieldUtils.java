@@ -67,28 +67,28 @@ public class PopulateFieldUtils {
 
 
     /**
-     * @param minutecomboBox    the ComboBox used to pick the start or end minute value of an appointment on the "Add/Modify Appointment" screen
-     * @param hourcomboBox      the ComboBox used to pick the start or end hour of an appointment on the "Add/Modify Appointment" screen
+     * @param minuteComboBox    the ComboBox used to pick the start or end minute value of an appointment on the "Add/Modify Appointment" screen
+     * @param hourComboBox      the ComboBox used to pick the start or end hour of an appointment on the "Add/Modify Appointment" screen
      * @param finalHour         Closing time - Used to prevent users from scheduling apps in that last hour (i.e., prevent scheduling for times like 22:15EST, 22:30EST, etc.)
      */
-    public static void populateMinutePicker(ComboBox<String> minutecomboBox, ComboBox<String> hourcomboBox, String finalHour){
+    public static void populateMinutePicker(ComboBox<String> minuteComboBox, ComboBox<String> hourComboBox, String finalHour){
         ObservableList<String> minuteArray = FXCollections.observableArrayList();
         minuteArray.add("00");
         minuteArray.add("15");
         minuteArray.add("30");
         minuteArray.add("45");
 
-        if(hourcomboBox.getValue() == null){
-            minutecomboBox.setItems(minuteArray);
+        if(hourComboBox.getValue() == null){
+            minuteComboBox.setItems(minuteArray);
         }
-        else if(hourcomboBox.getValue().equals(finalHour)) {
+        else if(hourComboBox.getValue().equals(finalHour)) {
             ObservableList<String> altMinuteArray = FXCollections.observableArrayList();
             altMinuteArray.add("00");
-            minutecomboBox.setItems(altMinuteArray);
-            minutecomboBox.setValue(altMinuteArray.get(0));
+            minuteComboBox.setItems(altMinuteArray);
+            minuteComboBox.setValue(altMinuteArray.get(0));
         }
         else {
-            minutecomboBox.setItems(minuteArray);
+            minuteComboBox.setItems(minuteArray);
         }
     }
 

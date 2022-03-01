@@ -34,7 +34,7 @@ public class AddModifyCustomerController implements Initializable {
     /**
      * Initializes the stage
      *
-     * @param url               The URL to be used in the stage's initializtion
+     * @param url               The URL to be used in the stage's initialization
      * @param resourceBundle    The ResourceBundle to be used in the stage's initialization
      */
     @Override
@@ -90,7 +90,7 @@ public class AddModifyCustomerController implements Initializable {
     /**
      * Pre-populates the "Modify" screen with the appropriate values for the selected customer
      *
-     * @param cust          The Customer entity whose information will be pre-loaded into the "Modify" screen
+     * @param cust          The Customer entity whose information will be preloaded into the "Modify" screen
      */
     public void setModifyValues(Customer cust) {
         custIdField.setText(String.valueOf(cust.getCustId()));
@@ -126,8 +126,8 @@ public class AddModifyCustomerController implements Initializable {
         else if(titleLabel.getText().equals("Modify Customer")){
             CustomerDAO.modifyCustomer(customer);
             //if customer has any apps, update them:
-            ObservableList<Appointment> allapps = AppointmentDAO.getAllAppointments();
-            for(Appointment app : allapps){
+            ObservableList<Appointment> allApps = AppointmentDAO.getAllAppointments();
+            for(Appointment app : allApps){
                 if(app.getCustId() == customer.getCustId()){
                     app.setCustName(customer.getName());
                     app.setLocation(customer.getFullAddress());
