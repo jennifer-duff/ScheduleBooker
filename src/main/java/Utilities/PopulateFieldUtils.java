@@ -12,7 +12,15 @@ import java.util.*;
 
 import static java.time.ZoneId.systemDefault;
 
+/**
+ * Utilities to pre-populate ComboBoxes on the Add/Modify Appointment screens
+ */
 public class PopulateFieldUtils {
+    /**
+     * @param   comboBox the ComboBox used to pick the start or end hour of an appointment on the "Add/Modify Appointment" screen
+     * @return  The final hour in the list (e.g., closing time) - Used to prevent users from scheduling apps in that last hour
+     *          (i.e., prevent scheduling for times like 22:15EST, 22:30EST, etc.). Value is passed to populateMinutePicker() to handle this.
+     */
     public static String populateHourPicker(ComboBox<String> comboBox){
         ObservableList<String> hourArray = FXCollections.observableArrayList();
         ArrayList<Integer> hourArrayInts = new ArrayList<>();
@@ -57,6 +65,12 @@ public class PopulateFieldUtils {
         return hourArray.get(hourArray.size() - 1);
     }
 
+
+    /**
+     * @param minutecomboBox    the ComboBox used to pick the start or end minute value of an appointment on the "Add/Modify Appointment" screen
+     * @param hourcomboBox      the ComboBox used to pick the start or end hour of an appointment on the "Add/Modify Appointment" screen
+     * @param finalHour         Closing time - Used to prevent users from scheduling apps in that last hour (i.e., prevent scheduling for times like 22:15EST, 22:30EST, etc.)
+     */
     public static void populateMinutePicker(ComboBox<String> minutecomboBox, ComboBox<String> hourcomboBox, String finalHour){
         ObservableList<String> minuteArray = FXCollections.observableArrayList();
         minuteArray.add("00");
@@ -78,6 +92,10 @@ public class PopulateFieldUtils {
         }
     }
 
+
+    /**
+     * @param comboBox  The ComboBox used to pick the customer's name on the "Add/Modify Appointment" screen
+     */
     public static void populateCustomerPicker(ComboBox<String> comboBox){
         ObservableList<String> customerNames = FXCollections.observableArrayList();
         ObservableList<Customer> allCustomers = CustomerDAO.getAllCustomers();
@@ -88,6 +106,10 @@ public class PopulateFieldUtils {
         comboBox.setItems(customerNames);
     }
 
+
+    /**
+     * @param comboBox  The ComboBox used to pick the contact's name on the "Add/Modify Appointment" screen
+     */
     public static void populateContactPicker(ComboBox<String> comboBox){
         ObservableList<String> allContactNames = ContactDAO.getAllContactNames();
         comboBox.setItems(allContactNames);

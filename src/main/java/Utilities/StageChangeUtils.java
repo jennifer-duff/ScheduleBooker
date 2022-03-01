@@ -17,7 +17,22 @@ import Models.Customer;
 import java.io.IOException;
 import java.util.Objects;
 
+/**
+ * Utilities to change stages within the app
+ */
 public class StageChangeUtils {
+    /**
+     * A method for switching between stages
+     *
+     * @param actionEvent   The ActionEvent for the stage change
+     * @param view          The path of the FXML file for the new stage
+     * @param stylesheet    The path of the CSS stylesheet for new stage
+     * @param taskbarTitle  The title that should be set in the taskbar for the new stage
+     * @param screenTitle   The H1 heading of the new stage
+     * @param app           The Appointment entity associated with the new stage (if not applicable, st to "null")
+     * @param cust          The Customer entity associated with the new stage (if not applicable, st to "null")
+     * @throws IOException  The exception thrown if the stage change does not work
+     */
     public static void changeStage(ActionEvent actionEvent, String view, String stylesheet, String taskbarTitle, String screenTitle, Appointment app, Customer cust) throws IOException {
         Stage stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(view));
@@ -48,6 +63,13 @@ public class StageChangeUtils {
         stage.show();
     }
 
+
+    /**
+     * A method for showing a custom dialog box used to confirm a "Delete" action
+     *
+     * @param stage         The stage for the dialog box
+     * @throws IOException  The exception thrown if showing the stage does not work
+     */
     public static void showDeleteDialog(Stage stage) throws IOException {
         Stage newStage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("view_dialog.fxml"));
