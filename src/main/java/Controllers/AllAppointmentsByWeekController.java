@@ -92,12 +92,12 @@ public class AllAppointmentsByWeekController implements Initializable {
             }
         }
 
+        appTable.setItems(appsByWeek);
         if(appsByWeek.size() == 0){
             errorMsg.setText("Whoops, no appointments that week!");
         }
         else{
             errorMsg.setText("");
-            appTable.setItems(appsByWeek);
             appIdCol.setCellValueFactory(new PropertyValueFactory<>("appId"));
             titleCol.setCellValueFactory(new PropertyValueFactory<>("title"));
             descriptionCol.setCellValueFactory(new PropertyValueFactory<>("description"));
