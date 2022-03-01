@@ -2,7 +2,6 @@ package Database;
 
 import Controllers.LoginController;
 import Models.AppMonth;
-import com.mysql.cj.protocol.Resultset;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import Models.Appointment;
@@ -15,8 +14,11 @@ import java.util.ArrayList;
 import static java.time.ZoneId.systemDefault;
 
 public class AppointmentDAO {
+    //initial DB operations:
 
-    //initial db operations
+    /**
+     * SQL query to update the "Description" column of the database
+     */
     public static void changeDescriptionCol(){
         try {
             String query = "ALTER TABLE appointments CHANGE COLUMN `Description` `Description` LONGTEXT";
@@ -28,6 +30,10 @@ public class AppointmentDAO {
         }
     }
 
+
+    /**
+     * SQL query to update the "Start" and "End" columns of the database
+     */
     public static void changeStartEndToTimestamp(){
         //OG type was 'datetime
         try {
@@ -49,6 +55,10 @@ public class AppointmentDAO {
         }
     }
 
+
+    /**
+     * SQL query to update the default values in the database, so that customer's addresses are used as the location for all apps
+     */
     public static void updateEntries(){
         ObservableList<Appointment> allApps =  getAllAppointments();
         for(Appointment app : allApps){
@@ -56,6 +66,13 @@ public class AppointmentDAO {
         }
     }
 
+
+    /***
+     * A method to convert from a DateTime from the local TimeZone to UTC TimeZone
+     *
+     * @param systemLocalDateTime   A DateTime in the user's local timezone, as determined by the system's settings
+     * @return                      The DateTime of the user-inputted value, converted into UTC timezone
+     */
     public static LocalDateTime convertToUTC(LocalDateTime systemLocalDateTime){
         //convert system LocalDateTime to ZonedLocalDateTime
         ZoneId systemZone = systemDefault();
@@ -71,21 +88,9 @@ public class AppointmentDAO {
         return utcLocalDateTime;
     }
 
-    public static LocalDateTime convertFromUTC(LocalDateTime utcLocalDateTime){
-        //convert utcLocalDateTime to ZonedDateTime
-        ZoneId utcZone = ZoneId.of("Etc/UTC");
-        ZonedDateTime utcZonedTime = utcLocalDateTime.atZone(utcZone);
-
-        //convert utcZonedTime to systemLocalTime
-        ZoneId systemZone = systemDefault();
-        ZonedDateTime systemZonedTime = utcZonedTime.withZoneSameInstant(systemZone);
-
-        //get system LocalDateTime from system ZonedTime
-        LocalDateTime systemLocalDateTime = systemZonedTime.toLocalDateTime();
-
-        return systemLocalDateTime;
-    }
-
+    /**
+     * @return  A list of all appointments in the database
+     */
     public static ObservableList<Appointment> getAllAppointments(){
         ObservableList<Appointment> allAppointments = FXCollections.observableArrayList();
         try{
@@ -128,6 +133,10 @@ public class AppointmentDAO {
         return allAppointments;
     }
 
+
+    /**
+     * @param app   The appointment to add to the database
+     */
     public static void addAppointment(Appointment app){
         String title = app.getTitle();
         String description = app.getDescription();
@@ -173,6 +182,10 @@ public class AppointmentDAO {
         }
     }
 
+
+    /**
+     * @param app   The appointment to modify
+     */
     public static void modifyAppointment (Appointment app){
         int appId = app.getAppId();
         String title = app.getTitle();
@@ -216,6 +229,10 @@ public class AppointmentDAO {
         }
     }
 
+
+    /**
+     * @param app   The appointment to delete from the datbase
+     */
     public static void deleteAppointment(Appointment app) {
         try {
             String query = "DELETE FROM appointments WHERE Appointment_ID = " + app.getAppId();
@@ -226,6 +243,11 @@ public class AppointmentDAO {
         }
     }
 
+
+    /**
+     * @param contactId The ID of the contact to look up
+     * @return          The name of the contact that has the inputted ID
+     */
     public static String getContactName(int contactId){
         String contactName = null;
         try {
@@ -241,6 +263,10 @@ public class AppointmentDAO {
         return contactName;
     }
 
+
+    /**
+     * @return the ID that will be used for the next added Appointment (used to populate the ID field of the "Add Appointment" screen)
+     */
     public static int getNextId(){
         int currId = 0;
         try{
@@ -254,6 +280,10 @@ public class AppointmentDAO {
         return (currId + 1);
     }
 
+
+    /**
+     * @return  the last Appointment added to the database
+     */
     public static ResultSet getLastResultSet(){
         ResultSet resultSet = null;
         try{
@@ -266,10 +296,17 @@ public class AppointmentDAO {
         return resultSet;
     }
 
+
+    /**
+     * @param appId         The ID of the appointment that the user is attempting to Add/Modify
+     * @param customerName  The name of the customer that the appointment is for
+     * @param start         The start DateTime of the appointment
+     * @param end           The end DateTime of the appointment
+     * @return              A String indicating if the appointment overlaps w/ any others ("OVERLAP" or not "CLEAR)
+     */
     public static String checkForOverlap(int appId, String customerName, LocalDateTime start, LocalDateTime end){
         try{
             String query = "SELECT * FROM appointments WHERE (timestamp(Start) BETWEEN \"" + start + "\" AND \"" + end + "\") OR (timestamp(End) BETWEEN \"" + start + "\" AND \"" + end + "\")";
-//            System.out.println(query);
             PreparedStatement statement = DatabaseConnection.getConnection().prepareStatement(query);
             ResultSet resultSet = statement.executeQuery();
 
@@ -289,7 +326,13 @@ public class AppointmentDAO {
         return "CLEAR";
     }
 
+
+
     //For app breakdown stats:
+
+    /**
+     * @return  A list of all appointment types
+     */
     public static ObservableList<String> getAppointmentTypes(){
         ObservableList<String> appTypes = FXCollections.observableArrayList();
         try{
@@ -308,6 +351,11 @@ public class AppointmentDAO {
         return appTypes;
     }
 
+
+    /**
+     * @param type  An appointment type to look up
+     * @return      The number of appointments in the database of the given type
+     */
     public static int getAppTypeCount(String type){
         int typeCount = 0;
         try{
@@ -325,6 +373,10 @@ public class AppointmentDAO {
         return typeCount;
     }
 
+
+    /**
+     * @return  An array containing sub-arrays that indicate the number of appointments in each month of the year(s)
+     */
     public static ArrayList<ArrayList<String>> getAppMonths(){
         ArrayList<ArrayList<String>> appMonthCounts = new ArrayList<ArrayList<String>>();
         ObservableList<AppMonth> appMonthObjs = FXCollections.observableArrayList();
