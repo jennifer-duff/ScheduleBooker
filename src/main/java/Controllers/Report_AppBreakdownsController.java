@@ -29,18 +29,16 @@ public class Report_AppBreakdownsController implements Initializable {
     @FXML private TableColumn<AppMonth, Integer> appMonthCountCol;
 
 
+    /**
+     * Initializes the stage
+     *
+     * @param url               The URL to be used in the stage's initializtion
+     * @param resourceBundle    The ResourceBundle to be used in the stage's initialization
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<AppType> appTypeCounts = FXCollections.observableArrayList();
         ObservableList<String> appTypes = AppointmentDAO.getAppointmentTypes();
-
-//        if(appTypes.size() == 0){
-//            errorMsg.setText("No appointments found");
-//            return;
-//        }
-//        else{
-//            errorMsg.setText("");
-//        }
 
         for(String type : appTypes){
             int typeCount = AppointmentDAO.getAppTypeCount(type);
@@ -72,6 +70,13 @@ public class Report_AppBreakdownsController implements Initializable {
         monthTable.getSortOrder().setAll(appMonthCol);
     }
 
+
+    /**
+     * Switches to the "Appointments" tab
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "Appointments" tab
+     * @throws IOException      The Exception that is thrown if the stage change operation fails
+     */
     @FXML
     public void viewApps(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
@@ -85,6 +90,13 @@ public class Report_AppBreakdownsController implements Initializable {
         );
     }
 
+
+    /**
+     * Switches to the "Customers" tab
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "Customers" tab
+     * @throws IOException      The Exception that is thrown if the stage change operation fails
+     */
     public void viewCustomers(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
                 actionEvent,
@@ -97,7 +109,14 @@ public class Report_AppBreakdownsController implements Initializable {
         );
     }
 
-    public void viewContacts(ActionEvent actionEvent) throws IOException {
+
+    /**
+     * Switches to the "Contact Schedules" screen
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "Contact Schedules" screen
+     * @throws IOException      The Exception that is thrown if the stage change operation fails
+     */
+    public void viewContactSchedules(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
                 actionEvent,
                 "/com/jbdev/schedulebooker/view_Report_ContactSchedules.fxml",
@@ -109,6 +128,13 @@ public class Report_AppBreakdownsController implements Initializable {
         );
     }
 
+
+    /**
+     * Switches to the "Customer Schedules" screen
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "Customer Schedules" screen
+     * @throws IOException      The Exception that is thrown if the stage change operation fails
+     */
     public void viewCustomerSchedules(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
                 actionEvent,
@@ -120,5 +146,4 @@ public class Report_AppBreakdownsController implements Initializable {
                 null
         );
     }
-
 }

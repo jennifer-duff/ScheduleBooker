@@ -17,7 +17,7 @@
                 AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                 AnchorPane.topAnchor="70.0">
         <Label layoutX="41.0" layoutY="21.0" styleClass="subHeading" text="View Report:" AnchorPane.topAnchor="15.0"/>
-        <Button layoutX="148.0" layoutY="19.0" mnemonicParsing="false" onAction="#viewContacts" styleClass="subTabBtn"
+        <Button layoutX="148.0" layoutY="19.0" mnemonicParsing="false" onAction="#viewContactSchedules" styleClass="subTabBtn"
                 text=" C O N T A C T  S C H E D U L E S " AnchorPane.topAnchor="14.0"/>
         <Button layoutX="332.0" layoutY="19.0" mnemonicParsing="false" onAction="#viewAppBreakdown"
                 styleClass="subTabBtn" text=" A P P O I N T M E N T  B R E A K D O W N S " AnchorPane.topAnchor="14.0"/>

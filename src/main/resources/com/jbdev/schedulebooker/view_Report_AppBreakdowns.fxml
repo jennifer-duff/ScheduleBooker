@@ -9,7 +9,7 @@
     <Button fx:id="activeTab" layoutX="410.0" layoutY="34.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="175.0" styleClass="tabs" text="REPORTS" AnchorPane.topAnchor="34.0" />
     <AnchorPane fx:id="bodyBackground" layoutX="38.0" layoutY="70.0" prefHeight="607.0" prefWidth="806.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="70.0">
         <Label layoutX="41.0" layoutY="21.0" styleClass="subHeading" text="View Report:" AnchorPane.topAnchor="15.0" />
-        <Button layoutX="148.0" layoutY="19.0" mnemonicParsing="false" onAction="#viewContacts" styleClass="subTabBtn" text=" C O N T A C T  S C H E D U L E S " AnchorPane.topAnchor="14.0" />
+        <Button layoutX="148.0" layoutY="19.0" mnemonicParsing="false" onAction="#viewContactSchedules" styleClass="subTabBtn" text=" C O N T A C T  S C H E D U L E S " AnchorPane.topAnchor="14.0" />
         <Button fx:id="activeBtn" layoutX="332.0" layoutY="19.0" mnemonicParsing="false" styleClass="subTabBtn" text=" A P P O I N T M E N T  B R E A K D O W N S " AnchorPane.topAnchor="14.0" />
         <Button layoutX="565.0" layoutY="19.0" mnemonicParsing="false" onAction="#viewCustomerSchedules" styleClass="subTabBtn" text="C U S T O M E R  S C H E D U L E S " AnchorPane.topAnchor="14.0" />
         <Label fx:id="errorMsg" alignment="CENTER" contentDisplay="CENTER" layoutX="324.0" layoutY="61.0" textAlignment="CENTER" />

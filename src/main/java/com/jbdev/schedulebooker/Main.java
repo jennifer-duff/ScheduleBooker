@@ -17,12 +17,24 @@ import java.util.Objects;
 public class Main extends Application {
     public static final String APP_TITLE = "ScheduleBooker";
 
+    /**
+     * Launches the program and opens the database connection
+     *
+     * @param args  Command-line arguments
+     */
     public static void main(String[] args) {
         DatabaseConnection.openConnection();
         launch();
         DatabaseConnection.closeConnection();
     }
 
+
+    /**
+     * Sets up any universal variables / settings, and displays the login screen
+     *
+     * @param stage         The login stage
+     * @throws IOException  The Exception that is thrown if the stage change operation fails
+     */
     @Override
     public void start(Stage stage) throws IOException {
         LocationDAO.changeLocationCol();

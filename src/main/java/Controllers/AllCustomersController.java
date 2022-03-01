@@ -30,6 +30,10 @@ public class AllCustomersController implements Initializable {
 
     Stage stage;
 
+
+    /**
+     * Updates the TableView with data for all customers in the database,
+     */
     public void updateTable(){
         ObservableList<Customer> allCustomers = CustomerDAO.getAllCustomers();
         customerTable.setItems(allCustomers);
@@ -42,11 +46,25 @@ public class AllCustomersController implements Initializable {
         phoneCol.setCellValueFactory(new PropertyValueFactory<>("phone"));
     }
 
+
+    /**
+     * Initializes the stage
+     *
+     * @param url               The URL to be used in the stage's initializtion
+     * @param resourceBundle    The ResourceBundle to be used in the stage's initialization
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         updateTable();
     }
 
+
+    /**
+     * Switches to the "All Appointments" view
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "View All Appointments" button
+     * @throws IOException      The Exception that is thrown if the stage change operation fails
+     */
     @FXML
     public void viewApps(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
@@ -60,7 +78,14 @@ public class AllCustomersController implements Initializable {
         );
     }
 
-    public void viewContacts(ActionEvent actionEvent) throws IOException {
+
+    /**
+     * Switches to the "Reports" tab
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "Reports" tab
+     * @throws IOException      The Exception that is thrown if the stage change operation fails
+     */
+    public void viewReports(ActionEvent actionEvent) throws IOException {
        StageChangeUtils.changeStage(
             actionEvent,
                "/com/jbdev/schedulebooker/view_Report_ContactSchedules.fxml",
@@ -72,6 +97,13 @@ public class AllCustomersController implements Initializable {
        );
     }
 
+
+    /**
+     * Switches to the "Add Customer" screen
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "Add Customer" button
+     * @throws IOException      The Exception that is thrown if the stage change operation fails
+     */
     public void addCustomer(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
             actionEvent,
@@ -84,6 +116,13 @@ public class AllCustomersController implements Initializable {
         );
     }
 
+
+    /**
+     * Switches to the "Modify Customer" screen
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "Modify Customer" button
+     * @throws IOException      The Exception that is thrown if the stage change operation fails
+     */
     public void modifyCustomer(ActionEvent actionEvent){
         try {
             errorMsg.setText("");
@@ -104,6 +143,11 @@ public class AllCustomersController implements Initializable {
         }
     }
 
+
+    /**
+     * Displays the Delete Confirmation dialog box.
+     * If the user confirms the delete action, deletes the customer from the database*
+     */
     public void deleteCustomer(ActionEvent actionEvent){
         try{
             errorMsg.setText("");
@@ -127,6 +171,4 @@ public class AllCustomersController implements Initializable {
         }
 
     }
-
-
 }

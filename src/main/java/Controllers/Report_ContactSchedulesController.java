@@ -35,11 +35,24 @@ public class Report_ContactSchedulesController implements Initializable {
     @FXML private TableColumn <Appointment, String> custNameCol;
 
 
+    /**
+     * Initializes the stage
+     *
+     * @param url               The URL to be used in the stage's initializtion
+     * @param resourceBundle    The ResourceBundle to be used in the stage's initialization
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         comboBox.setItems(ContactDAO.getAllContactNames());
     }
 
+
+    /**
+     * Switches to the "Customers" tab
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "Customers" tab
+     * @throws IOException      The Exception that is thrown if the stage change operation fails
+     */
     @FXML
     public void viewCustomers(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
@@ -53,6 +66,13 @@ public class Report_ContactSchedulesController implements Initializable {
         );
     }
 
+
+    /**
+     * Switches to the "Appointments" tab
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "Appointments" tab
+     * @throws IOException      The Exception that is thrown if the stage change operation fails
+     */
     @FXML
     public void viewApps(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
@@ -66,6 +86,11 @@ public class Report_ContactSchedulesController implements Initializable {
         );
     }
 
+
+    /**
+     * Populates the table with only those appointments assigned to the specified contact,
+     * and sorts those appointments by Start Date and then Start Time
+     */
     public void populateTable(){
         String contactName = comboBox.getValue();
         ObservableList<Appointment> contactApps = ContactDAO.getContactApps(contactName);
@@ -93,6 +118,12 @@ public class Report_ContactSchedulesController implements Initializable {
         }
     }
 
+    /**
+     * Switches to the "Appointment Breakdown" screen
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "Appointment Breakdown" screen
+     * @throws IOException      The Exception that is thrown if the stage change operation fails
+     */
     public void viewAppBreakdown(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
                 actionEvent,
@@ -105,6 +136,13 @@ public class Report_ContactSchedulesController implements Initializable {
         );
     }
 
+
+    /**
+     * Switches to the "CustomerSchedules" screen
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "CustomerSchedules" screen
+     * @throws IOException      The Exception that is thrown if the stage change operation fails
+     */
     public void viewCustomerSchedules(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
                 actionEvent,

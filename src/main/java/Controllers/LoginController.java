@@ -35,7 +35,13 @@ public class LoginController implements Initializable {
     public static String USERNAME = "UNRECOGNIZED USER";
 
 
-    public void initialize(URL location, ResourceBundle resources) {
+    /**
+     * Initializes the stage
+     *
+     * @param url               The URL to be used in the stage's initializtion
+     * @param resourceBundle    The ResourceBundle to be used in the stage's initialization
+     */
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         Locale locale = Locale.getDefault();
         lang = locale.getDisplayLanguage();
         String country = locale.getDisplayCountry();
@@ -49,6 +55,13 @@ public class LoginController implements Initializable {
         }
     }
 
+
+    /**
+     * Records the login attempt to the "login_activity.txt" file
+     *
+     * @param isSuccessful  Used to determine whether or not the login was successful, so that the method can log the
+     *                      attempt appropriately
+     */
     public void writeToLog(Boolean isSuccessful){
         LocalDateTime now = LocalDateTime.now();
         String date = String.valueOf( AppointmentDAO.convertToUTC(now).toLocalDate());
@@ -75,6 +88,12 @@ public class LoginController implements Initializable {
     }
 
 
+    /**
+     * Logs into the application, and presents the first screen ("All Appointments")
+     *
+     * @param actionEvent   The ActionEvent associated with the user hitting the "Enter" button
+     * @throws IOException  The Exception that is thrown if the stage change is unsuccessful
+     */
     @FXML
     public void enterApp(ActionEvent actionEvent) throws IOException {
         String username = usernameField.getText();
