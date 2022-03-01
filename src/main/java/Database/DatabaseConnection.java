@@ -4,16 +4,56 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 
 public class DatabaseConnection {
+    /**
+     * The protocol used to connect to the databse
+     */
     private static final String protocol = "jdbc";
-    private static final String vendor = ":mysql:";
-    private static final String location = "//localhost/";
-    private static final String databaseName = "client_schedule";
-    private static final String jdbcUrl = protocol + vendor + location + databaseName + "?connectionTimeZone = SERVER"; // LOCAL
-    private static final String driver = "com.mysql.cj.jdbc.Driver"; // Driver reference
-    private static final String userName = "sqlUser"; // Username
-    private static final String password = "Passw0rd!"; // Password
-    public static Connection connection;  // Connection Interface
 
+    /**
+     * The type of database we're connecting to (i.e., the vendor)
+     */
+    private static final String vendor = ":mysql:";
+
+    /**
+     * The location of the database
+     */
+    private static final String location = "//localhost/";
+
+    /**
+     * The name of the databse
+     */
+    private static final String databaseName = "client_schedule";
+
+    /**
+     * The URL that will be used to connect to the database
+     */
+    private static final String jdbcUrl = protocol + vendor + location + databaseName + "?connectionTimeZone = SERVER"; // LOCAL
+
+    /**
+     * Reference to the database driver
+     */
+    private static final String driver = "com.mysql.cj.jdbc.Driver";
+
+    /**
+     * Username for connecting to the databsae
+     */
+    private static final String userName = "sqlUser";
+
+    /**
+     * Password for connecting to the database
+     */
+    private static final String password = "Passw0rd!";
+
+    /**
+     * The Connection Interface
+     */
+    public static Connection connection;
+
+
+
+    /**
+     * A method to connect to the MySQL database
+     */
     public static void openConnection(){
         try {
             Class.forName(driver); // Locate Driver
@@ -26,10 +66,18 @@ public class DatabaseConnection {
         }
     }
 
+
+    /**
+     * @return  The database connection
+     */
     public static Connection getConnection(){
         return connection;
     }
 
+
+    /**
+     * A method to disconnect from the MySQL database
+     */
     public static void closeConnection() {
         try {
             connection.close();

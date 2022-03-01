@@ -17,10 +17,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.time.temporal.ChronoField;
-import java.time.temporal.IsoFields;
 import java.time.temporal.WeekFields;
 import java.util.*;
 
@@ -72,7 +68,6 @@ public class AllAppointmentsByWeekController implements Initializable {
     }
     
     public void updateTable(){
-        Locale locale = new Locale("en");
         LocalDate chosenDate = datePicker.getValue();
 
         if(chosenDate == null){
@@ -82,11 +77,9 @@ public class AllAppointmentsByWeekController implements Initializable {
         LocalDate endWeekDate = chosenDate.plusDays(6);
 
         ObservableList<Appointment> appsByWeek = FXCollections.observableArrayList();
-
         allAppointments = AppointmentDAO.getAllAppointments();
         for(Appointment app : allAppointments){
             LocalDate startDate = app.getStartDateTime().toLocalDate();
-
             if(startDate.isEqual(chosenDate) || startDate.isEqual(endWeekDate) || startDate.isAfter(chosenDate) && startDate.isBefore(endWeekDate)){
                 appsByWeek.add(app);
             }

@@ -11,6 +11,10 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class ContactDAO {
+
+    /**
+     * @return  A list of all contacts in the database
+     */
     public static ObservableList<String> getAllContactNames() {
         ObservableList<String> allContacts = FXCollections.observableArrayList();
         try {
@@ -31,6 +35,11 @@ public class ContactDAO {
         return allContacts;
     }
 
+
+    /**
+     * @param contactName   The name of the contact to look up
+     * @return              The ID of the given contact
+     */
     public static int getContactId(String contactName){
         int contactId = 0;
         try{
@@ -46,6 +55,11 @@ public class ContactDAO {
         return contactId;
     }
 
+
+    /**
+     * @param contactId     The ID of the contact to look up
+     * @return              The name of the given contact
+     */
     public static String getContactName(int contactId){
         String contactName = null;
         try{
@@ -61,6 +75,11 @@ public class ContactDAO {
         return contactName;
     }
 
+
+    /**
+     * @param contactName   The name of the contact to look up
+     * @return              A list of all the given contact's appointments
+     */
     public static ObservableList<Appointment> getContactApps(String contactName){
         ObservableList<Appointment> contactApps = FXCollections.observableArrayList();
 

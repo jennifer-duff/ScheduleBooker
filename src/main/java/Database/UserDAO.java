@@ -6,6 +6,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UserDAO {
+
+    /**
+     * @param rowCount  The number of rows that will be present in the list to be returned
+     * @return          A list of sublists, containing each username/password combination
+     */
     public static ArrayList<ArrayList<String>> getUsernamesAndPasswords(int rowCount) {
         ArrayList<ArrayList<String>> loginList = new ArrayList<ArrayList<String> >(rowCount);
         try {
@@ -29,6 +34,9 @@ public class UserDAO {
         return loginList;
     }
 
+    /**
+     * @return          The number of rows in the "users" table
+     */
     public static int getUserRowCount(){
         int rowCount = 0;
         try {
@@ -46,6 +54,12 @@ public class UserDAO {
         return rowCount;
     }
 
+
+    /**
+     *
+     * @param userName  The name of the user to look up
+     * @return          The ID of the given user
+     */
     public static int getUserId(String userName){
         int userId = 0;
         try {

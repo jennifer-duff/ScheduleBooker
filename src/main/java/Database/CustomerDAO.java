@@ -12,6 +12,9 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 public class CustomerDAO {
+    /**
+     * @return  A list of all customers in the database
+     */
     public static ObservableList<Customer> getAllCustomers() {
         ObservableList<Customer> allCustomers = FXCollections.observableArrayList();
         try {
@@ -36,10 +39,11 @@ public class CustomerDAO {
         return allCustomers;
     }
 
-//    public static ObservableList<Appointment> getCustApps(){
-//
-//    }
 
+    /**
+     * @param custId    The ID of the customer to look up
+     * @return          The name of the given customer
+     */
     public static String getCustomerName(int custId) {
         String customerName = null;
         try {
@@ -55,6 +59,11 @@ public class CustomerDAO {
         return customerName;
     }
 
+
+    /**
+     * @param custName  The name of the customer to look up
+     * @return          The ID of the given customer
+     */
     public static int getCustomerId(String custName) {
 //        System.out.print(custName + "   ID = ");
         int customerId = 0;
@@ -72,6 +81,11 @@ public class CustomerDAO {
         return customerId;
     }
 
+
+    /**
+     * @param custId    The ID of the customer to look up
+     * @return          The Customer entity of the given customer
+     */
     public static Customer getCustomerById(int custId){
         Customer customer = null;
         try {
@@ -89,10 +103,13 @@ public class CustomerDAO {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-//        System.out.println(customerId);
         return customer;
     }
 
+
+    /**
+     * @return          The ID that will be used for the next customer added to the database
+     */
     public static int getNextId(){
         int currId = 0;
         try{
@@ -106,6 +123,10 @@ public class CustomerDAO {
         return (currId + 1);
     }
 
+
+    /**
+     * @return          The Customer that was most recently added to the databse
+     */
     public static ResultSet getLastResultSet(){
         ResultSet resultSet = null;
         try{
@@ -118,6 +139,10 @@ public class CustomerDAO {
         return resultSet;
     }
 
+
+    /**
+     * @param cust      The customer to be added to the database
+     */
     public static void addCustomer(Customer cust) {
         String name = cust.getName();
         String address = cust.getStreetAddress();
@@ -149,6 +174,10 @@ public class CustomerDAO {
         }
     }
 
+
+    /**
+     * @param cust      The customer that will be modified
+     */
     public static void modifyCustomer(Customer cust) {
         int custId = cust.getCustId();
         String name = cust.getName();
@@ -175,6 +204,10 @@ public class CustomerDAO {
         }
     }
 
+
+    /**
+     * @param customer  The customer that will be deleted
+     */
     public static void deleteCustomer(Customer customer) {
         //first, check if customer has any appointments and delete them
         ObservableList<Appointment> allapps = AppointmentDAO.getAllAppointments();

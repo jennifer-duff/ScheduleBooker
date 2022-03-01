@@ -9,6 +9,9 @@ import java.sql.SQLException;
 
 public class LocationDAO {
 
+    /**
+     * Method for allowing the "location" Column to take the customer's full address
+     */
     public static void changeLocationCol(){
         try {
             String query = "ALTER TABLE appointments CHANGE COLUMN `Location` `Location` LONGTEXT";
@@ -20,6 +23,11 @@ public class LocationDAO {
         }
     }
 
+
+    /**
+     * @param divisionId    The ID of the division to look up
+     * @return              The name of the division
+     */
     public static String getDivisionName(int divisionId) {
         String divisionName = null;
         try {
@@ -36,6 +44,11 @@ public class LocationDAO {
         return divisionName;
     }
 
+
+    /**
+     * @param divisionName  The name of the division to look up
+     * @return              The ID of the division
+     */
     public static int getDivisionId(String divisionName) {
         int divisionId = 0;
         try {
@@ -52,6 +65,11 @@ public class LocationDAO {
         return divisionId;
     }
 
+
+    /**
+     * @param divisionId    The ID of the division (used to look up the division's country)
+     * @return              The name of the country in which the division exists
+     */
     public static String getCountryName(int divisionId) {
         int countryId = 0;
         String countryName = null;
@@ -76,6 +94,11 @@ public class LocationDAO {
         return countryName;
     }
 
+
+    /**
+     * @param countryName   The name of the country to look up
+     * @return              The ID of the given country
+     */
     public static int getCountryId(String countryName) {
         int countryId = 0;
         try {
@@ -92,6 +115,10 @@ public class LocationDAO {
         return countryId;
     }
 
+
+    /**
+     * @return              A list of all country names
+     */
     public static ObservableList<String> getAllCountryNames() {
         ObservableList<String> allCountries = FXCollections.observableArrayList();
         try {
@@ -110,6 +137,10 @@ public class LocationDAO {
         return allCountries;
     }
 
+
+    /**
+     * @return              A list of all division names
+     */
     public static ObservableList<String> getAllDivisionNames() {
         ObservableList<String> allDivisions = FXCollections.observableArrayList();
         try {
@@ -128,6 +159,11 @@ public class LocationDAO {
         return allDivisions;
     }
 
+
+    /**
+     * @param countryId     The ID of the country in which the customer lives
+     * @return              A list of all division names within the given country
+     */
     public static ObservableList<String> getCountryDivNames(int countryId){
         ObservableList<String> countryDivs = FXCollections.observableArrayList();
         try {
