@@ -11,11 +11,6 @@ import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class DialogController {
-    @FXML private Label appIdLabel;
-    @FXML private Label startDateLabel;
-    @FXML private Label startTimeLabel;
-    @FXML private Button cancelBtn;
-    @FXML private Button deleteBtn;
 
     public static Boolean wasDeleted = false;
 

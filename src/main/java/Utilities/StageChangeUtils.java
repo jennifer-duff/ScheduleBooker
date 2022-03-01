@@ -1,6 +1,5 @@
 package Utilities;
 
-import Controllers.DialogController;
 import com.jbdev.schedulebooker.Main;
 import Controllers.AddModifyAppointmentController;
 import Controllers.AddModifyCustomerController;
@@ -16,7 +15,6 @@ import Models.Appointment;
 import Models.Customer;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class StageChangeUtils {
@@ -49,7 +47,6 @@ public class StageChangeUtils {
         stage.centerOnScreen();
         stage.show();
     }
-
 
     public static void showDeleteDialog(Stage stage) throws IOException {
         Stage newStage = new Stage();

@@ -53,7 +53,7 @@ public class PopulateFieldUtils {
         //set the comboBox with the hourArray list
         comboBox.setItems(hourArray);
         //return the final hour, so we can prevent users from scheduling apps in that last hour
-        //(e.g, things like 22:15EST, 22:30EST, etc.) -> handled on the other end
+        //(e.g, things like 22:15EST, 22:30EST, etc.) -> handled in populateMinutePicker()
         return hourArray.get(hourArray.size() - 1);
     }
 
@@ -92,6 +92,4 @@ public class PopulateFieldUtils {
         ObservableList<String> allContactNames = ContactDAO.getAllContactNames();
         comboBox.setItems(allContactNames);
     }
-
-
 }

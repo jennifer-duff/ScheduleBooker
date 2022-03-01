@@ -182,7 +182,6 @@ public class AllAppointmentsController implements Initializable {
         }
     }
 
-
     public void viewApps(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
                 actionEvent,

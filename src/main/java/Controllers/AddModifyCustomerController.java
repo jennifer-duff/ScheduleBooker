@@ -102,7 +102,6 @@ public class AddModifyCustomerController implements Initializable {
                 }
             }
         }
-//        AllAppointmentsController.updateTable();
         returnToCustomers(actionEvent);
     }
 

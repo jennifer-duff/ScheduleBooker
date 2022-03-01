@@ -19,6 +19,8 @@ import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.temporal.ChronoField;
+import java.time.temporal.IsoFields;
 import java.time.temporal.WeekFields;
 import java.util.*;
 
@@ -43,15 +45,18 @@ public class AllAppointmentsByWeekController implements Initializable {
     ObservableList<Appointment> allAppointments;
     Stage stage;
 
-    private Callback<DatePicker, DateCell> disableNotSunday(){
+    // TODO: javadoc this lambda expression
+    private Callback<DatePicker, DateCell> disableNotFirstOfWeek(){
         return (final DatePicker datePicker1) -> new DateCell() {
             @Override
             public void updateItem(LocalDate item, boolean empty) {
                 super.updateItem(item, empty);
-                // Disable all except Sun
-                if (item.getDayOfWeek() != DayOfWeek.SUNDAY) {
+                //get first day of week
+                DayOfWeek firstDayOfWeek = WeekFields.of(Locale.getDefault()).getFirstDayOfWeek();
+
+                // Disable all except first day of week
+                if (item.getDayOfWeek() != firstDayOfWeek) {
                     setDisable(true);
-//                        setStyle("-fx-background-color: #ffc0cb;");
                 }
             }
         };
@@ -60,43 +65,73 @@ public class AllAppointmentsByWeekController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         datePicker.setShowWeekNumbers(true);
-        Callback<DatePicker, DateCell> dayCellFacotry = this.disableNotSunday();
-        datePicker.setDayCellFactory(dayCellFacotry);
+        Callback<DatePicker, DateCell> dayCellFactory = this.disableNotFirstOfWeek();
+        datePicker.setDayCellFactory(dayCellFactory);
 
-        try{
-            updateTable();
-        }
-        catch(Exception error){
-            System.out.println(error);
-        }
+        updateTable();
+//        try{
+//            updateTable();
+//        }
+//        catch(Exception error) {
+//            error.printStackTrace();
+//        }
     }
     
     public void updateTable(){
-        ObservableList<LocalDate> selectedDates = FXCollections.observableArrayList();
-        LocalDate weekStartLocal = null;
-        try{
-            weekStartLocal = datePicker.getValue();
-        }
-        catch(Exception error){
+        Locale locale = new Locale("en");
+        LocalDate chosenDate = datePicker.getValue();
+
+        if(chosenDate == null){
             return;
         }
-        Date weekStart = Date.from(weekStartLocal.atStartOfDay(ZoneId.systemDefault()).toInstant());
+
+        LocalDate endWeekDate = chosenDate.plusDays(6);
+
+//        int chosenWeekNum = chosenDate.get(WeekFields.of(locale).weekOfYear());
+//        int chosenWeekNum = chosenDate.get(ChronoField.ALIGNED_WEEK_OF_YEAR);
+//        int chosenWeekNum = chosenDate.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
+
+//        Date weekStart = Date.from(weekStartLocal.atStartOfDay(ZoneId.systemDefault()).toInstant());
         ObservableList<Appointment> appsByWeek = FXCollections.observableArrayList();
 
         //get weeknum of weekStart
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTime(weekStart);
-        int weekOfYear = calendar.get(Calendar.WEEK_OF_YEAR);
+//        Calendar calendar = new GregorianCalendar();
+//        calendar.setTime(weekStart);
+//        int weekOfYear = calendar.get(Calendar.WEEK_OF_YEAR);
 
         allAppointments = AppointmentDAO.getAllAppointments();
+
+//        allAppointments.forEach(app -> {
+//            LocalDateTime startDate = app.getStartDateTime();
+//            int currWeekNum = startDate.get(WeekFields.of(Locale.getDefault()).weekOfYear());
+//
+//            if(currWeekNum == chosenWeekNum){
+//                appsByWeek.add(app);
+//            }
+//        });
+
         for(Appointment app : allAppointments){
-            LocalDateTime startDate = app.getStartDateTime();
-            WeekFields weekFields = WeekFields.of(Locale.getDefault());
-            int currWeekNum = startDate.get(weekFields.weekOfWeekBasedYear());
-            if(currWeekNum == weekOfYear){
+            LocalDate startDate = app.getStartDateTime().toLocalDate();
+//            int currWeekNum = startDate.get(WeekFields.of(locale).weekOfYear());
+//            int currWeekNum = startDate.get(ChronoField.ALIGNED_WEEK_OF_YEAR);
+//            int currWeekNum = startDate.get(IsoFields.WEEK_OF_WEEK_BASED_YEAR);
+//            if(currWeekNum == chosenWeekNum){
+//                appsByWeek.add(app);
+//            }
+            if(startDate.isEqual(chosenDate) || startDate.isEqual(endWeekDate) || startDate.isAfter(chosenDate) && startDate.isBefore(endWeekDate)){
                 appsByWeek.add(app);
             }
         }
+
+//        for(Appointment app : allAppointments){
+//            LocalDateTime startDate = app.getStartDateTime();
+//            WeekFields weekFields = WeekFields.of(Locale.getDefault());
+//            int currWeekNum = startDate.get(weekFields.weekOfWeekBasedYear());
+//            if(currWeekNum == weekOfYear){
+//                appsByWeek.add(app);
+//            }
+//        }
+
         if(appsByWeek.size() == 0){
             errorMsg.setText("Whoops, no appointments that week!");
         }
@@ -181,7 +216,7 @@ public class AllAppointmentsByWeekController implements Initializable {
 
     }
 
-    public void deleteApp(ActionEvent actionEvent){
+    public void deleteApp(){
         try {
             errorMsg.setText("");
             ObservableList<Appointment> selectedItems = appTable.getSelectionModel().getSelectedItems();

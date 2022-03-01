@@ -1,14 +1,9 @@
 package Database;
 
-import Models.Appointment;
-
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Hashtable;
 
 public class UserDAO {
     public static ArrayList<ArrayList<String>> getUsernamesAndPasswords(int rowCount) {
