@@ -29,7 +29,6 @@ public class AddModifyAppointmentController implements Initializable {
     @FXML private Label startErrorMsg;
     @FXML private Label endErrorMsg;
     @FXML private Label customerErrorMsg;
-//    @FXML private Label locationErrorMsg;
     @FXML private Label userErrorMsg;
     @FXML private Label contactErrorMsg;
 
@@ -41,10 +40,8 @@ public class AddModifyAppointmentController implements Initializable {
     @FXML private DatePicker endDatePicker;
     @FXML private ComboBox<String> startHourPicker;
     @FXML private ComboBox<String> startMinutePicker;
-    @FXML private ComboBox<String> startAmPmPicker;
     @FXML private ComboBox<String> endHourPicker;
     @FXML private ComboBox<String> endMinutePicker;
-    @FXML private ComboBox<String> endAmPmPicker;
     @FXML private ComboBox<String> customerNameComboBox;
     @FXML private TextField locationField;
     @FXML private TextField userIdField;
@@ -53,16 +50,21 @@ public class AddModifyAppointmentController implements Initializable {
     String startDate;
     String startHour;
     String startMinute;
-    String startAmPm;
 
     String endDate;
     String endHour;
     String endMinute;
-    String endAmPm;
 
     String finalHour;
     int appId;
 
+
+    /**
+     * Initializes the stage
+     *
+     * @param url               The URL to be used in the stage's initializtion
+     * @param resourceBundle    The ResourceBundle to be used in the stage's initialization
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         finalHour = PopulateFieldUtils.populateHourPicker(startHourPicker);
@@ -90,15 +92,33 @@ public class AddModifyAppointmentController implements Initializable {
         });
     }
 
+
+    /**
+     * Sets the H1 heading for the screen
+     *
+     * @param title         The H1 heading to be used as the title for the screen
+     */
     public void setTitle(String title){
         titleLabel.setText(title);
     }
 
+
+    /**
+     * Populates the "hour" and "minute" ComboBoxes w/ the appropriate options.
+     * Options are based on the company's opening/closing times, and are translated into the user's local time.
+     * This prevents users from choosing appointment times outside of the company's operating hours
+     */
     public void updateComboBoxes(){
         PopulateFieldUtils.populateMinutePicker(startMinutePicker, startHourPicker, finalHour);
         PopulateFieldUtils.populateMinutePicker(endMinutePicker, endHourPicker, finalHour);
     }
 
+
+    /**
+     * Pre-populates the "Modify" screen with the appropriate values for the selected appointment
+     *
+     * @param app           The Appointment entity whose information will be pre-loaded into the "Modify" screen
+     */
     public void setModifyValues(Appointment app){
         appIdField.setText(String.valueOf(app.getAppId()));
         titleField.setText(app.getTitle());
@@ -125,6 +145,13 @@ public class AddModifyAppointmentController implements Initializable {
         contactNameComboBox.setValue(ContactDAO.getContactName(app.getContactId()));
     }
 
+
+    /**
+     * Returns to the "All Appointments" screen
+     *
+     * @param actionEvent   The ActionEvent associated with the user hitting a button to return to the "All Appointments" screen
+     * @throws IOException  The Exception associated with the stage change that is thrown if the operation fails
+     */
     public void returnToApps(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
                 actionEvent,
@@ -137,6 +164,13 @@ public class AddModifyAppointmentController implements Initializable {
         );
     }
 
+
+    /**
+     * Saves the appointment to the database
+     *
+     * @param actionEvent   The ActionEvent associated with the user hitting the "Save" button
+     * @throws IOException  The Exception associated with saving the Appointment to the database that is thrown if the operation fails
+     */
     public void saveApp(ActionEvent actionEvent) throws IOException {
         //re-set error msg fields
         addModifyErrorMsg.setText("");
@@ -208,7 +242,11 @@ public class AddModifyAppointmentController implements Initializable {
         returnToApps(actionEvent);
     }
 
-    //Error-checking
+
+    /**
+     * Validates user input and check for errors
+     * @return              A String indicating whether the input is valid ("PASS") or not ("FAIL")
+     */
     private String errorChecking(){
         boolean passesCheck = true;
         String requiredMsg = "* Required";
@@ -299,6 +337,10 @@ public class AddModifyAppointmentController implements Initializable {
         }
     }
 
+
+    /**
+     * Sets the "location" field of the "Add/Modify Appointment" screen to be the selected customer's full address
+     */
     public void selectLocation(){
         String customerName = customerNameComboBox.getValue();
         int customerId = CustomerDAO.getCustomerId(customerName);

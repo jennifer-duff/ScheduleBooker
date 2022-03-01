@@ -6,7 +6,7 @@
 <AnchorPane fx:id="tabBackground" prefHeight="610.0" prefWidth="1647.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controllers.AllAppointmentsByWeekController">
     <Button fx:id="activeTab" layoutX=" 37.0" layoutY="20.0" mnemonicParsing="false" prefHeight="37.0" prefWidth="175.0" styleClass="tabs" text="APPOINTMENTS" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="34.0" />
     <Button layoutX="225.0" layoutY="34.0" mnemonicParsing="false" onAction="#viewCustomers" prefHeight="37.0" prefWidth="175.0" styleClass="tabs" text="CUSTOMERS" AnchorPane.topAnchor="34.0" />
-    <Button layoutX="410.0" layoutY="34.0" mnemonicParsing="false" onAction="#viewContacts" prefHeight="37.0" prefWidth="175.0" styleClass="tabs" text="REPORTS" AnchorPane.topAnchor="34.0" />
+    <Button layoutX="410.0" layoutY="34.0" mnemonicParsing="false" onAction="#viewReports" prefHeight="37.0" prefWidth="175.0" styleClass="tabs" text="REPORTS" AnchorPane.topAnchor="34.0" />
     <AnchorPane fx:id="bodyBackground" layoutX="38.0" layoutY="55.0" prefHeight="477.0" prefWidth="1600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-10.0" AnchorPane.topAnchor="70.0">
       <Label layoutX="41.0" layoutY="15.0" styleClass="subHeading" text="View appointments by:" AnchorPane.topAnchor="15.0" />
       <Button layoutX="224.0" layoutY="14.0" mnemonicParsing="false" onAction="#viewApps" styleClass="subTabBtn" text=" A L L " AnchorPane.topAnchor="14.0" />

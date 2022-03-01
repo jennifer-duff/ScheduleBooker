@@ -39,6 +39,14 @@ public class AllAppointmentsByMonthController implements Initializable {
     ObservableList<Appointment> allAppointments;
     Stage stage;
 
+
+
+    /**
+     * Initializes the stage
+     *
+     * @param url               The URL to be used in the stage's initializtion
+     * @param resourceBundle    The ResourceBundle to be used in the stage's initialization
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         ObservableList<String> months = FXCollections.observableArrayList();
@@ -79,7 +87,16 @@ public class AllAppointmentsByMonthController implements Initializable {
             return;
         }
     }
-    
+
+
+    /**
+     * Updates the TableView such that it is populated only by those appointments set to begin during the
+     * specified month and year
+     *
+     * LAMBDA EXPRESSION
+     * This method includes a lambda expression. It is used to simplify the process of filtering appointments by month,
+     * so that they can be added to a new ObservableList that will be used to populate the table.
+     */
     public void updateTable(){
         ObservableList<Appointment> appsInMonth = FXCollections.observableArrayList();
         String pickedMonth = monthComboBox.getValue();
@@ -88,7 +105,7 @@ public class AllAppointmentsByMonthController implements Initializable {
             return;
         }
 
-        //TODO: javadoc this lambda expression
+        //LAMBDA EXPRESSION
         allAppointments.forEach(app -> {
             LocalDateTime startDate = app.getStartDateTime();
             String appMonth = String.valueOf(startDate.getMonth());
@@ -125,6 +142,13 @@ public class AllAppointmentsByMonthController implements Initializable {
         }
     }
 
+
+    /**
+     * Switches to the "Customers" tab
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "Customers" tab
+     * @throws IOException      The Exception that is thrown if the stage change operation fails
+     */
     public void viewCustomers(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
                 actionEvent,
@@ -137,7 +161,14 @@ public class AllAppointmentsByMonthController implements Initializable {
         );
     }
 
-    public void viewContacts(ActionEvent actionEvent) throws IOException {
+
+    /**
+    * Switches to the "Reports" tab
+    *
+    * @param actionEvent       The ActionEvent associated with the user pressing the "Customers" tab
+    * @throws IOException      The Exception that is thrown if the stage change operation fails
+    */
+    public void viewReports(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
                 actionEvent,
                 "/com/jbdev/schedulebooker/view_Report_ContactSchedules.fxml",
@@ -149,6 +180,13 @@ public class AllAppointmentsByMonthController implements Initializable {
         );
     }
 
+
+    /**
+     * Switches to the "Add Appointment" screen
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "Add Appointment" button
+     * @throws IOException      The Exception that is thrown if the stage change operation fails
+     */
     public void addApp(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
                 actionEvent,
@@ -161,6 +199,12 @@ public class AllAppointmentsByMonthController implements Initializable {
         );
     }
 
+
+    /**
+     * Switches to the "Modify Appointment" screen
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "Modify Appointment" button
+     */
     public void modifyApp(ActionEvent actionEvent){
         try{
             errorMsg.setText("");
@@ -182,6 +226,13 @@ public class AllAppointmentsByMonthController implements Initializable {
 
     }
 
+
+    /**
+     * Displays the Delete Confirmation dialog box.
+     * If the user confirms the delete action, deletes the appointment from the database
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "Delete Appointment" button
+     */
     public void deleteApp(ActionEvent actionEvent){
         try {
             errorMsg.setText("");
@@ -206,6 +257,13 @@ public class AllAppointmentsByMonthController implements Initializable {
         }
     }
 
+
+    /**
+     * Switches to the "All Appointments" view
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "View All Appointments" button
+     * @throws IOException      The Exception that is thrown if the stage change operation fails
+     */
     public void viewApps(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
                 actionEvent,
@@ -218,6 +276,13 @@ public class AllAppointmentsByMonthController implements Initializable {
         );
     }
 
+
+    /**
+     * Switches to the "Appointments By Week" view
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "View Appointments By Week" button
+     * @throws IOException      The Exception that is thrown if the stage change operation fails
+     */
     public void viewAppsByWeek(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
                 actionEvent,

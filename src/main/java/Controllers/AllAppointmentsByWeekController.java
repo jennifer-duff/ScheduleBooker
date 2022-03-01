@@ -41,8 +41,22 @@ public class AllAppointmentsByWeekController implements Initializable {
     ObservableList<Appointment> allAppointments;
     Stage stage;
 
-    // TODO: javadoc this lambda expression
+
+    /**
+     * Disables all DateCells except those that represent the first day of the week.
+     * The first day of the week is based on the user's current location, as determined by the system settings
+     *
+     * LAMBDA EXPRESSION
+     * This method contains a lambda expression. The expression is used to simplify the process of getting the first day
+     * of every week, and then disabling the selection of every DateCell that is not on the first day of the week.
+     * This wil allow the user to effecitvely specify a week number by choosing the first day of the desired week, as
+     * executed in the updateTable() method.
+     *
+     * @return      A Datepicker used during initialization to create a dayCellFactory
+     */
     private Callback<DatePicker, DateCell> disableNotFirstOfWeek(){
+
+        // LAMBDA EXPRESSION
         return (final DatePicker datePicker1) -> new DateCell() {
             @Override
             public void updateItem(LocalDate item, boolean empty) {
@@ -58,6 +72,13 @@ public class AllAppointmentsByWeekController implements Initializable {
         };
     }
 
+
+    /**
+     * Initializes the stage
+     *
+     * @param url               The URL to be used in the stage's initializtion
+     * @param resourceBundle    The ResourceBundle to be used in the stage's initialization
+     */
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         datePicker.setShowWeekNumbers(true);
@@ -66,7 +87,11 @@ public class AllAppointmentsByWeekController implements Initializable {
 
         updateTable();
     }
-    
+
+
+    /**
+     * Updates the TableView such that it is populated only with appointments that occur during the user-selected week
+     */
     public void updateTable(){
         LocalDate chosenDate = datePicker.getValue();
 
@@ -112,6 +137,13 @@ public class AllAppointmentsByWeekController implements Initializable {
         }
     }
 
+
+    /**
+     * Switches to the "Customers" tab
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "Customers" tab
+     * @throws IOException      The Exception that is thrown if the stage change operation fails
+     */
     public void viewCustomers(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
                 actionEvent,
@@ -124,7 +156,14 @@ public class AllAppointmentsByWeekController implements Initializable {
         );
     }
 
-    public void viewContacts(ActionEvent actionEvent) throws IOException {
+
+    /**
+     * Switches to the "Reports" tab
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "Reports" tab
+     * @throws IOException      The Exception that is thrown if the stage change operation fails
+     */
+    public void viewReports(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
                 actionEvent,
                 "/com/jbdev/schedulebooker/view_Report_ContactSchedules.fxml",
@@ -136,6 +175,13 @@ public class AllAppointmentsByWeekController implements Initializable {
         );
     }
 
+
+    /**
+     * Switches to the "Add Appointment" screen
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "Add Appointment" button
+     * @throws IOException      The Exception that is thrown if the stage change operation fails
+     */
     public void addApp(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
                 actionEvent,
@@ -148,6 +194,12 @@ public class AllAppointmentsByWeekController implements Initializable {
         );
     }
 
+
+    /**
+     * Switches to the "Modify Appointment" screen
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "Modify Appointment" button
+     */
     public void modifyApp(ActionEvent actionEvent){
         try{
             errorMsg.setText("");
@@ -169,6 +221,11 @@ public class AllAppointmentsByWeekController implements Initializable {
 
     }
 
+
+    /**
+     * Displays the Delete Confirmation dialog box.
+     * If the user confirms the delete action, deletes the appointment from the database*
+     */
     public void deleteApp(){
         try {
             errorMsg.setText("");
@@ -193,6 +250,13 @@ public class AllAppointmentsByWeekController implements Initializable {
         }
     }
 
+
+    /**
+     * Switches to the "All Appointments" view
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "View All Appointments" button
+     * @throws IOException      The Exception that is thrown if the stage change operation fails
+     */
     @FXML
     public void viewApps(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
@@ -206,6 +270,13 @@ public class AllAppointmentsByWeekController implements Initializable {
         );
     }
 
+
+    /**
+     * Switches to the "Appointments By Month" view
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "View Appointments By Month" button
+     * @throws IOException      The Exception that is thrown if the stage change operation fails
+     */
     public void viewAppsByMonth(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
                 actionEvent,

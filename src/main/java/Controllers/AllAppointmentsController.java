@@ -46,6 +46,13 @@ public class AllAppointmentsController implements Initializable {
     Stage stage;
     public static Boolean checkedForApps = false;
 
+
+    /**
+     * Checks for upcoming appointments upon login.
+     * If there are any appointments due to begin with the next 15 minutes, a message is shown displaying the
+     * appointment ID, start date, and start time.
+     * Else, a message is shown stating that there are no upcoming appointments
+     */
     public void checkForApps(){
         if(checkedForApps){
             noUpcomingAppsPopup.setVisible(false);
@@ -72,6 +79,11 @@ public class AllAppointmentsController implements Initializable {
         checkedForApps = true;
     }
 
+
+    /**
+     * Updates the TableView with data for all appointments in the database,
+     * and sorts the table by appointment Start Date and then Start Time
+     */
     public void updateTable(){
         allAppointments = AppointmentDAO.getAllAppointments();
         appTable.setItems(allAppointments);
@@ -95,11 +107,25 @@ public class AllAppointmentsController implements Initializable {
         appTable.getSortOrder().setAll(startDateCol, startTimeCol);
     }
 
-    public void initialize(URL location, ResourceBundle resources) {
+
+    /**
+     * Initializes the stage
+     *
+     * @param url               The URL to be used in the stage's initializtion
+     * @param resourceBundle    The ResourceBundle to be used in the stage's initialization
+     */
+    public void initialize(URL url, ResourceBundle resourceBundle) {
         updateTable();
         checkForApps();
     }
 
+
+    /**
+     * Switches to the "Customers" tab
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "Customers" tab
+     * @throws IOException      The Exception that is thrown if the stage change operation fails
+     */
     public void viewCustomers(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
                 actionEvent,
@@ -112,7 +138,14 @@ public class AllAppointmentsController implements Initializable {
         );
     }
 
-    public void viewContacts(ActionEvent actionEvent) throws IOException {
+
+    /**
+     * Switches to the "Reports" tab
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "Reports" tab
+     * @throws IOException      The Exception that is thrown if the stage change operation fails
+     */
+    public void viewReports(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
             actionEvent,
                 "/com/jbdev/schedulebooker/view_Report_ContactSchedules.fxml",
@@ -125,6 +158,12 @@ public class AllAppointmentsController implements Initializable {
     }
 
 
+    /**
+     * Switches to the "Add Appointment" screen
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "Add Appointment" button
+     * @throws IOException      The Exception that is thrown if the stage change operation fails
+     */
     public void addApp(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
             actionEvent,
@@ -137,6 +176,12 @@ public class AllAppointmentsController implements Initializable {
         );
     }
 
+
+    /**
+     * Switches to the "Modify Appointment" screen
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "Modify Appointment" button
+     */
     public void modifyApp(ActionEvent actionEvent){
         try{
             errorMsg.setText("");
@@ -158,7 +203,12 @@ public class AllAppointmentsController implements Initializable {
 
     }
 
-    public void deleteApp(ActionEvent actionEvent){
+
+    /**
+     * Displays the Delete Confirmation dialog box.
+     * If the user confirms the delete action, deletes the appointment from the database*
+     */
+    public void deleteApp(){
         try {
             errorMsg.setText("");
             ObservableList<Appointment> selectedItems = appTable.getSelectionModel().getSelectedItems();
@@ -182,18 +232,13 @@ public class AllAppointmentsController implements Initializable {
         }
     }
 
-    public void viewApps(ActionEvent actionEvent) throws IOException {
-        StageChangeUtils.changeStage(
-                actionEvent,
-                "/com/jbdev/schedulebooker/view_AllAppointments.fxml",
-                "/com/jbdev/schedulebooker/stylesheets/mainTabPages.css",
-                "All Appointments",
-                "",
-                null,
-                null
-        );
-    }
 
+    /**
+     * Switches to the "Appointments By Week" view
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "View Appointments By Week" button
+     * @throws IOException      The Exception that is thrown if the stage change operation fails
+     */
     public void viewAppsByWeek(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
                 actionEvent,
@@ -206,6 +251,13 @@ public class AllAppointmentsController implements Initializable {
         );
     }
 
+
+    /**
+     * Switches to the "Appointments By Month" view
+     *
+     * @param actionEvent       The ActionEvent associated with the user pressing the "View Appointments By Month" button
+     * @throws IOException      The Exception that is thrown if the stage change operation fails
+     */
     public void viewAppsByMonth(ActionEvent actionEvent) throws IOException {
         StageChangeUtils.changeStage(
                 actionEvent,
