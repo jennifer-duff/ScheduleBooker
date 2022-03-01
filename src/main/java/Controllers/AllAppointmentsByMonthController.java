@@ -88,6 +88,7 @@ public class AllAppointmentsByMonthController implements Initializable {
             return;
         }
 
+        //TODO: javadoc this lambda expression
         allAppointments.forEach(app -> {
             LocalDateTime startDate = app.getStartDateTime();
             String appMonth = String.valueOf(startDate.getMonth());
@@ -96,15 +97,6 @@ public class AllAppointmentsByMonthController implements Initializable {
                 appsInMonth.add(app);
             }
         });
-
-//        for(Appointment app : allAppointments){
-//            LocalDateTime startDate = app.getStartDateTime();
-//            String appMonth = String.valueOf(startDate.getMonth());
-//            String appYear = String.valueOf(startDate.getYear());
-//            if(appMonth.equalsIgnoreCase(pickedMonth) && appYear.equalsIgnoreCase(pickedYear)){
-//                appsInMonth.add(app);
-//            }
-//        }
 
         if(appsInMonth.size() == 0){
             errorMsg.setText("Whoops, no appointments that month!");
