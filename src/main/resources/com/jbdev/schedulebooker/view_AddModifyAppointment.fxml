@@ -122,6 +122,11 @@
             </Label>
                 <Label styleClass="textFieldLabel" text="Contact Name" GridPane.columnIndex="3" GridPane.rowIndex="13" />
                 <ComboBox fx:id="contactNameComboBox" prefHeight="25.0" prefWidth="267.0" promptText="Select one" GridPane.columnIndex="3" GridPane.rowIndex="14" />
+            <Label fx:id="contactErrorMsg" alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="50.0" layoutY="466.0" styleClass="subErrorMsg" GridPane.columnIndex="3" GridPane.rowIndex="15">
+               <GridPane.margin>
+                  <Insets bottom="10.0" />
+               </GridPane.margin>
+            </Label>
             <Label fx:id="locationErrorMsg" alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="50.0" layoutY="396.0" styleClass="subErrorMsg" GridPane.columnIndex="3" GridPane.rowIndex="15">
                <GridPane.margin>
                   <Insets bottom="10.0" />
@@ -129,11 +134,6 @@
             </Label>
                 <Label styleClass="textFieldLabel" text="Location" GridPane.columnIndex="1" GridPane.rowIndex="16" />
                 <TextField fx:id="locationField" editable="false" maxWidth="420.0" minWidth="420.0" prefHeight="25.0" prefWidth="420.0" styleClass="customDisabledText" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.rowIndex="17" />
-            <Label fx:id="contactErrorMsg" alignment="TOP_CENTER" contentDisplay="RIGHT" layoutX="50.0" layoutY="466.0" styleClass="subErrorMsg" GridPane.columnIndex="1" GridPane.rowIndex="18">
-               <GridPane.margin>
-                  <Insets bottom="10.0" />
-               </GridPane.margin>
-            </Label>
                 <Label styleClass="textFieldLabel" text="User ID" GridPane.columnIndex="3" GridPane.rowIndex="16">
                <GridPane.margin>
                   <Insets left="190.0" />

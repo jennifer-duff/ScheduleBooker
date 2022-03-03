@@ -88,3 +88,5 @@ LOGIN ATTEMPT: User "test" attempted login on 2022-03-03 at 19:46:15 and was SUC
 LOGIN ATTEMPT: User "test" attempted login on 2022-03-03 at 19:47:12 and was SUCCESSFUL
 LOGIN ATTEMPT: User "test" attempted login on 2022-03-03 at 19:48:13 and was SUCCESSFUL
 LOGIN ATTEMPT: User "test" attempted login on 2022-03-03 at 19:48:39 and was SUCCESSFUL
+LOGIN ATTEMPT: User "test" attempted login on 2022-03-03 at 20:16:16 and was SUCCESSFUL
+LOGIN ATTEMPT: User "test" attempted login on 2022-03-03 at 20:26:03 and was SUCCESSFUL
