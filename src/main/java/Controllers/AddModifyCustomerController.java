@@ -29,6 +29,14 @@ public class AddModifyCustomerController implements Initializable {
     @FXML private TextField zipField;
     @FXML private TextField phoneField;
 
+    @FXML private Label addModifyErrorMsg;
+    @FXML private Label nameErrorMsg;
+    @FXML private Label addressErrorMsg;
+    @FXML private Label countryErrorMsg;
+    @FXML private Label divisionErrorMsg;
+    @FXML private Label zipErrorMsg;
+    @FXML private Label phoneErrorMsg;
+
 
 
     /**
@@ -110,32 +118,100 @@ public class AddModifyCustomerController implements Initializable {
      * @throws IOException  The Exception associated with the Save event that is thrown if the operation fails
      */
     public void saveCustomer(ActionEvent actionEvent) throws IOException {
-        int custId = Integer.parseInt(custIdField.getText());
-        String name = nameField.getText();
-        String address = addressField.getText();
-        String divisionName = divisionComboBox.getValue();
-        int divisionId = LocationDAO.getDivisionId(divisionName);
-        String zip = zipField.getText();
-        String phone = phoneField.getText();
+        //clear all error msgs
+        addModifyErrorMsg.setText("");
+        nameErrorMsg.setText("");
+        addressErrorMsg.setText("");
+        countryErrorMsg.setText("");
+        divisionErrorMsg.setText("");
+        zipErrorMsg.setText("");
+        phoneErrorMsg.setText("");
 
-        Customer customer = new Customer(custId, name, address, divisionId, zip, phone);
-
-        if(titleLabel.getText().equals("Add Customer")){
-            CustomerDAO.addCustomer(customer);
+        // pull input from fields
+        int custId = 0;
+        String name = null;
+        String address = null;
+        int divisionId = 0;
+        String zip = null;
+        String phone = null;
+        try{
+            custId = Integer.parseInt(custIdField.getText());
+            name = nameField.getText();
+            address = addressField.getText();
+            String divisionName = divisionComboBox.getValue();
+            divisionId = LocationDAO.getDivisionId(divisionName);
+            zip = zipField.getText();
+            phone = phoneField.getText();
         }
-        else if(titleLabel.getText().equals("Modify Customer")){
-            CustomerDAO.modifyCustomer(customer);
-            //if customer has any apps, update them:
-            ObservableList<Appointment> allApps = AppointmentDAO.getAllAppointments();
-            for(Appointment app : allApps){
-                if(app.getCustId() == customer.getCustId()){
-                    app.setCustName(customer.getName());
-                    app.setLocation(customer.getFullAddress());
-                    AppointmentDAO.modifyAppointment(app);
+        catch (Exception error) {
+            error.printStackTrace();
+        }
+
+        boolean passesCheck = errorChecking();
+
+        if(passesCheck){
+            Customer customer = new Customer(custId, name, address, divisionId, zip, phone);
+            if(titleLabel.getText().equals("Add Customer")){
+                CustomerDAO.addCustomer(customer);
+            }
+            else if(titleLabel.getText().equals("Modify Customer")){
+                CustomerDAO.modifyCustomer(customer);
+                //if customer has any apps, update them:
+                ObservableList<Appointment> allApps = AppointmentDAO.getAllAppointments();
+                for(Appointment app : allApps){
+                    if(app.getCustId() == customer.getCustId()){
+                        app.setCustName(customer.getName());
+                        app.setLocation(customer.getFullAddress());
+                        AppointmentDAO.modifyAppointment(app);
+                    }
                 }
             }
+            returnToCustomers(actionEvent);
         }
-        returnToCustomers(actionEvent);
+
+    }
+
+
+    /**
+     * Validates user input, and displays error messages if any info is invalid and/or missing
+     */
+    public boolean errorChecking(){
+        boolean passesCheck = true;
+        String requiredMsg = "* Required";
+
+        //check to ensure all fields are filled out
+        if(nameField.getText().equals("")) {
+            nameErrorMsg.setText(requiredMsg);
+            passesCheck = false;
+        }
+        if(addressField.getText().equals("")){
+            addressErrorMsg.setText(requiredMsg);
+            passesCheck = false;
+        }
+        if(countryComboBox.getValue() == null){
+            countryErrorMsg.setText(requiredMsg);
+            passesCheck = false;
+        }
+        if(divisionComboBox.getValue() == null){
+            divisionErrorMsg.setText(requiredMsg);
+            passesCheck = false;
+        }
+        if(zipField.getText().equals("")){
+            zipErrorMsg.setText(requiredMsg);
+            passesCheck = false;
+        }
+        if(phoneField.getText().equals("")){
+            phoneErrorMsg.setText(requiredMsg);
+            passesCheck = false;
+        }
+
+        if(!passesCheck){
+            addModifyErrorMsg.setText("Whoops! Please fill out all fields");
+            return passesCheck;
+        }
+        else{
+            return passesCheck;
+        }
     }
 
 

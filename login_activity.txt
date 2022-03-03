@@ -79,3 +79,12 @@ LOGIN ATTEMPT: User "test" attempted login on 2022-03-01 at 22:43:09 and was SUC
 LOGIN ATTEMPT: User "test" attempted login on 2022-03-01 at 22:44:32 and was SUCCESSFUL
 LOGIN ATTEMPT: User "test" attempted login on 2022-03-01 at 22:45:41 and was SUCCESSFUL
 LOGIN ATTEMPT: User "test" attempted login on 2022-03-01 at 22:46:56 and was SUCCESSFUL
+LOGIN ATTEMPT: User "UNRECOGNIZED USER" attempted login on 2022-03-03 at 19:11:39 and was UNSUCCESSFUL
+LOGIN ATTEMPT: User "test" attempted login on 2022-03-03 at 19:11:44 and was SUCCESSFUL
+LOGIN ATTEMPT: User "test" attempted login on 2022-03-03 at 19:21:37 and was SUCCESSFUL
+LOGIN ATTEMPT: User "test" attempted login on 2022-03-03 at 19:43:29 and was SUCCESSFUL
+LOGIN ATTEMPT: User "test" attempted login on 2022-03-03 at 19:45:08 and was SUCCESSFUL
+LOGIN ATTEMPT: User "test" attempted login on 2022-03-03 at 19:46:15 and was SUCCESSFUL
+LOGIN ATTEMPT: User "test" attempted login on 2022-03-03 at 19:47:12 and was SUCCESSFUL
+LOGIN ATTEMPT: User "test" attempted login on 2022-03-03 at 19:48:13 and was SUCCESSFUL
+LOGIN ATTEMPT: User "test" attempted login on 2022-03-03 at 19:48:39 and was SUCCESSFUL
