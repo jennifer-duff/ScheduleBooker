@@ -14,9 +14,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
+
+import static java.time.ZoneId.systemDefault;
 
 public class LoginController implements Initializable {
     @FXML private Label loginLabel;
@@ -41,11 +44,11 @@ public class LoginController implements Initializable {
      * @param resourceBundle    The ResourceBundle to be used in the stage's initialization
      */
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        ZoneId systemZone = systemDefault();
+        countryLabel.setText(systemZone.toString());
+
         Locale locale = Locale.getDefault();
         lang = locale.getDisplayLanguage();
-        String country = locale.getDisplayCountry();
-        countryLabel.setText(country);
-
         if(lang.equalsIgnoreCase("français")){
             loginLabel.setText("Se Connecter");
             usernameLabel.setText("Identifiant");
