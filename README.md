@@ -28,18 +28,8 @@ contacts, customers, reports, and more.
 
 The app consists of three main tabs: "Appointments," "Customers," and "Reports":
 
-	- The "Appointments" tab displays all current appointments, and can be broken down by week or month if desired.
-	  This is also where users can add, update, or delete appointments as needed.
+- The "Appointments" tab displays all current appointments, and can be broken down by week or month if desired. This is also where users can add, update, or delete appointments as needed.
 
-	- The "Customers" tab displays all current customers and their information (name, address, ID, etc.).
-	  This is also where users can add, update, or delete customers as needed. NOTE: deleting a customer will also
-	  delete all of the customer's active appointments, if any exist.
+- The "Customers" tab displays all current customers and their information (name, address, ID, etc.). This is also where users can add, update, or delete customers as needed. NOTE: deleting a customer will also delete all of the customer's active appointments, if any exist.
 
-	- The "Reports" tab displays reports on the number and of appointments by type and by month, and also shows 
-	  schedules for each contact and customer.
-
-
-## ADDITIONAL REPORT
-The additional report included in this program is titled "Customer Schedules," and is found under the "Reports" tab. The
-report displays information on all of the appointments currently scheduled for a given customer. Users select the customer
-whose schedule they wish to view using a drop-down menu (ComboBox) at the top of the page.
+- The "Reports" tab displays reports on the number and of appointments by type and by month, and also shows schedules for each contact and customer.
