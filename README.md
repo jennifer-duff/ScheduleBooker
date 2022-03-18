@@ -1,3 +1,5 @@
+<img src = /src/main/resources/com/jbdev/schedulebooker/assets/scheduleBookerIcon.png/>
+
 # ScheduleBooker
 
 ## DESCRIPTION
