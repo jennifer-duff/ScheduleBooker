@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"m":"com.jbdev.schedulebooker","l":"com.jbdev.schedulebooker"},{"m":"com.jbdev.schedulebooker","l":"Controllers"},{"m":"com.jbdev.schedulebooker","l":"Database"},{"m":"com.jbdev.schedulebooker","l":"Models"},{"m":"com.jbdev.schedulebooker","l":"Utilities"}];updateSearchResults();
