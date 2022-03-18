@@ -1,26 +1,26 @@
--- S C H E D U L E B O O K E R --
+#S C H E D U L E B O O K E R
 
-DESCRIPTION
+##DESCRIPTION
 A robust appointment-scheduling app for professional consultant service
 
 
-AUTHOR
+##AUTHOR
 Jennifer Duff - jduff27@wgu.edu  
 
 
-APPLICATION INFO
+##APPLICATION INFO
 Version No. 1.0  
 Last Updated: 02/25/2022  
 
 
-DEVELOPMENT INFO (programs & versions)
+##DEVELOPMENT INFO (programs & versions)
 IDE			            IntelliJ IDEA Community Edition 2021.1.1 x64
 JDK			            Java SE 17.0.1
 JavaFX			        Java-SDK-11.0.2
 MySQLConnectorDriver	mysql-connector-java:8.0.22  
 
 
-USAGE
+##USAGE
 To run the program, simply open the application and login. The app will pull from the SQL database to display appointments,
 contacts, customers, reports, and more.
 
@@ -37,7 +37,7 @@ The app consists of three main tabs: "Appointments," "Customers," and "Reports":
 	  schedules for each contact and customer.
 
 
-ADDITIONAL REPORT
+##ADDITIONAL REPORT
 The additional report included in this program is titled "Customer Schedules," and is found under the "Reports" tab. The
 report displays information on all of the appointments currently scheduled for a given customer. Users select the customer
 whose schedule they wish to view using a drop-down menu (ComboBox) at the top of the page.
