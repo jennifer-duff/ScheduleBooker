@@ -62,6 +62,6 @@
             </children>
         </GridPane>
         <Button layoutX="465.0" layoutY="447.0" mnemonicParsing="false" onAction="#returnToCustomers" styleClass="appButton" text=" C A N C E L " AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="98.0" />
-        <Button layoutX="557.0" layoutY="447.0" mnemonicParsing="false" onAction="#saveCustomer" styleClass="appButton" text=" S A V E " AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="28.0" />
+        <Button layoutX="557.0" layoutY="447.0" mnemonicParsing="false" onAction="#saveCustomer" styleClass="appButton, confirmActionBtn" text=" S A V E " AnchorPane.bottomAnchor="25.0" AnchorPane.rightAnchor="28.0" />
     </children>
 </AnchorPane>
