@@ -39,6 +39,7 @@ public class Launcher extends Application {
     public void start(Stage stage) throws IOException {
         Tests.WriteToLogTests.shouldRecordUsername("Test Username", true);
         Tests.WriteToLogTests.shouldRecordUsername("", true);
+        Tests.WriteToLogTests.shouldRecordUsername(null, false);
         Tests.WriteToLogTests.shouldRecordUsername("Test Username", false);
         Tests.WriteToLogTests.shouldRecordUsername("", false);
         Tests.WriteToLogTests.shouldRecordDate(true);

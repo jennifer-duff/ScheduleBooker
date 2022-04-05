@@ -72,11 +72,21 @@ public class Tests {
         */
         public static void shouldRecordUsername(String username, Boolean isSuccessful){
             loginController.USERNAME = username;
+            if(loginController.USERNAME == null){
+                loginController.USERNAME = "NULL";
+            }
             loginController.writeToLog(isSuccessful);
             String lastLine = tail(file);
-            assert lastLine != null;
-            String splitLastLine = lastLine.substring(lastLine.indexOf("\"") + 1);
-            String loggedUsername = splitLastLine.substring(0, splitLastLine.indexOf('"'));
+            String loggedUsername = "";
+            try{
+                String splitLastLine = Objects.requireNonNull(lastLine).substring(lastLine.indexOf("\"") + 1);
+                loggedUsername = splitLastLine.substring(0, splitLastLine.indexOf('"'));
+            }
+            catch(Exception error){
+                System.out.println("shouldRecordUsername = FAIL");
+                return;
+            }
+
             if(loginController.USERNAME.equals(loggedUsername)){
                 System.out.println("shouldRecordUsername = PASS");
             }
