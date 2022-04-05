@@ -1,6 +1,6 @@
 package Utilities;
 
-import com.jbdev.schedulebooker.Main;
+import com.jbdev.schedulebooker.Launcher;
 import Controllers.AddModifyAppointmentController;
 import Controllers.AddModifyCustomerController;
 import javafx.event.ActionEvent;
@@ -35,7 +35,7 @@ public class StageChangeUtils {
      */
     public static void changeStage(ActionEvent actionEvent, String view, String stylesheet, String taskbarTitle, String screenTitle, Appointment app, Customer cust) throws IOException {
         Stage stage = (Stage)((Button)actionEvent.getSource()).getScene().getWindow();
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(view));
+        FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource(view));
         Parent scene = fxmlLoader.load();
         if (screenTitle.equals("Add Appointment") || screenTitle.equals("Modify Appointment")){
             AddModifyAppointmentController controller = fxmlLoader.getController();
@@ -52,11 +52,11 @@ public class StageChangeUtils {
                 controller.populateDivisionBox(cust.getCountry());
             }
         }
-        scene.getStylesheets().add(Objects.requireNonNull(Main.class.getResource("/com/jbdev/schedulebooker/stylesheets/app.css")).toExternalForm());
-        scene.getStylesheets().add(Objects.requireNonNull(Main.class.getResource(stylesheet)).toExternalForm());
-        Image icon = new Image(Objects.requireNonNull(Main.class.getResourceAsStream("/com/jbdev/schedulebooker/assets/scheduleBookerIcon.png")));
+        scene.getStylesheets().add(Objects.requireNonNull(Launcher.class.getResource("/com/jbdev/schedulebooker/stylesheets/app.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(Launcher.class.getResource(stylesheet)).toExternalForm());
+        Image icon = new Image(Objects.requireNonNull(Launcher.class.getResourceAsStream("/com/jbdev/schedulebooker/assets/scheduleBookerIcon.png")));
         stage.getIcons().add(icon);
-        stage.setTitle(Main.APP_TITLE + "  |  " + taskbarTitle);
+        stage.setTitle(Launcher.APP_TITLE + "  |  " + taskbarTitle);
         stage.setScene(new Scene(scene));
         stage.setResizable(false);
         stage.centerOnScreen();
@@ -72,8 +72,8 @@ public class StageChangeUtils {
      */
     public static void showDeleteDialog(Stage stage) throws IOException {
         Stage newStage = new Stage();
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("view_dialog.fxml"));
-        Image icon = new Image(Objects.requireNonNull(Main.class.getResourceAsStream("/com/jbdev/schedulebooker/assets/scheduleBookerIcon.png")));
+        FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource("view_dialog.fxml"));
+        Image icon = new Image(Objects.requireNonNull(Launcher.class.getResourceAsStream("/com/jbdev/schedulebooker/assets/scheduleBookerIcon.png")));
         newStage.getIcons().add(icon);
         newStage.setTitle("Delete Confirmation");
         newStage.setResizable(false);
@@ -82,8 +82,8 @@ public class StageChangeUtils {
         newStage.initOwner(stage);
         newStage.setAlwaysOnTop(true);
         Parent scene = fxmlLoader.load();
-        scene.getStylesheets().add(Objects.requireNonNull(Main.class.getResource("/com/jbdev/schedulebooker/stylesheets/app.css")).toExternalForm());
-        scene.getStylesheets().add(Objects.requireNonNull(Main.class.getResource("/com/jbdev/schedulebooker/stylesheets/dialog.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(Launcher.class.getResource("/com/jbdev/schedulebooker/stylesheets/app.css")).toExternalForm());
+        scene.getStylesheets().add(Objects.requireNonNull(Launcher.class.getResource("/com/jbdev/schedulebooker/stylesheets/dialog.css")).toExternalForm());
         newStage.setScene(new Scene(scene));
         newStage.showAndWait();
     }

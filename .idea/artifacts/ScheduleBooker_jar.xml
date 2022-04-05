@@ -1,0 +1,19 @@
+<component name="ArtifactManager">
+  <artifact name="ScheduleBooker:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/ScheduleBooker_jar</output-path>
+    <root id="root">
+      <element id="archive" name="ScheduleBooker.jar">
+        <element id="module-output" name="ScheduleBooker" />
+      </element>
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:11.0.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:win:11.0.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-graphics:win:11.0.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-fxml:win:11.0.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-graphics:11.0.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-base:11.0.2" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-base:win:11.0.2" />
+      <element id="library" level="project" name="mysql.connector.java" />
+      <element id="library" level="project" name="Maven: org.openjfx:javafx-controls:11.0.2" />
+    </root>
+  </artifact>
+</component>

@@ -78,9 +78,9 @@ public class LoginController implements Initializable {
         String string = "LOGIN ATTEMPT: User \"" + USERNAME + "\" attempted login on " + date + " at " + time + " and was " + success + "\n";
 
         try{
-            String filename= "login_activity.txt";
+            String filename = "login_activity.txt";
             FileWriter fw = new FileWriter(filename,true);  //the true will append the new data
-            fw.write(string);                               //appends the string to the file
+            fw.write(string);                                       //appends the string to the file
             fw.close();
         }
         catch(IOException ioe)
@@ -89,15 +89,7 @@ public class LoginController implements Initializable {
         }
     }
 
-
-    /**
-     * Logs into the application, and presents the first screen ("All Appointments")
-     *
-     * @param actionEvent   The ActionEvent associated with the user hitting the "Enter" button
-     * @throws IOException  The Exception that is thrown if the stage change is unsuccessful
-     */
-    @FXML
-    public void enterApp(ActionEvent actionEvent) throws IOException {
+    public Boolean checkCredentials(){
         String username = usernameField.getText();
         String password = passwordField.getText();
         boolean isValidLogin = false;
@@ -113,6 +105,19 @@ public class LoginController implements Initializable {
                 break;
             }
         }
+        return isValidLogin;
+    }
+
+
+    /**
+     * Logs into the application, and presents the first screen ("All Appointments")
+     *
+     * @param actionEvent   The ActionEvent associated with the user hitting the "Enter" button
+     * @throws IOException  The Exception that is thrown if the stage change is unsuccessful
+     */
+    @FXML
+    public void enterApp(ActionEvent actionEvent) throws IOException {
+        Boolean isValidLogin = checkCredentials();
 
         if(isValidLogin){
             writeToLog(true);

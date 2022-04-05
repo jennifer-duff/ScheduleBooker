@@ -85,7 +85,7 @@ public class AppointmentDAO {
         ZoneId utcZone = ZoneId.of("Etc/UTC");
         ZonedDateTime utcZonedTime = systemZonedTime.withZoneSameInstant(utcZone);
 
-        //get utc LocalDateTime from utzZonedTime
+        //get utc LocalDateTime from utcZonedTime
         LocalDateTime utcLocalDateTime = utcZonedTime.toLocalDateTime();
 
         return utcLocalDateTime;

@@ -7,7 +7,6 @@ public class Customer {
     private String name;
     private String streetAddress;
     private int divisionId;
-//    private String divisionName;
     private String zip;
     private String country;
     private String fullAddress;

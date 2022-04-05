@@ -3,6 +3,7 @@ package com.jbdev.schedulebooker;
 import Database.AppointmentDAO;
 import Database.DatabaseConnection;
 import Database.LocationDAO;
+import Utilities.Tests;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -13,7 +14,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.Objects;
 
-public class Main extends Application {
+public class Launcher extends Application {
     public static final String APP_TITLE = "ScheduleBooker";
 
     /**
@@ -36,13 +37,23 @@ public class Main extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
+        Tests.WriteToLogTests.shouldRecordUsername("Test Username", true);
+        Tests.WriteToLogTests.shouldRecordUsername("", true);
+        Tests.WriteToLogTests.shouldRecordUsername("Test Username", false);
+        Tests.WriteToLogTests.shouldRecordUsername("", false);
+        Tests.WriteToLogTests.shouldRecordDate(true);
+        Tests.WriteToLogTests.shouldRecordDate(false);
+        Tests.WriteToLogTests.shouldRecordTime(true);
+        Tests.WriteToLogTests.shouldRecordTime(false);
+
+
         LocationDAO.changeLocationCol();
         AppointmentDAO.changeDescriptionCol();
         AppointmentDAO.changeStartEndToTimestamp();
         AppointmentDAO.updateEntries();
 
         System.setProperty("prism.lcdtext", "false");
-        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("view_login.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(Launcher.class.getResource("view_login.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         Font.loadFont(getClass().getResourceAsStream("/com/jbdev/schedulebooker/fonts/Manrope-ExtraBold.ttf"), 82);
         Font.loadFont(getClass().getResourceAsStream("/com/jbdev/schedulebooker/fonts/Manrope-SemiBold.ttf"), 82);
