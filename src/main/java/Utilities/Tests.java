@@ -119,5 +119,19 @@ public class Tests {
                 System.out.println("shouldRecordTime = FAIL");
             }
         }
+
+        public static void shouldRecordSuccess(Boolean isSuccessful){
+            loginController.writeToLog(isSuccessful);
+            String lastLine = tail(file);
+            if(isSuccessful && lastLine.contains(" SUCCESSFUL")){
+                System.out.println("shouldRecordSuccess(successful) = PASS");
+            }
+            else if (!isSuccessful && lastLine.contains(" UNSUCCESSFUL")){
+                System.out.println("shouldRecordSuccess(unsuccessful) = PASS");
+            }
+            else{
+                System.out.println("shouldRecordSuccess = FAIL");
+            }
+        }
     }
 }

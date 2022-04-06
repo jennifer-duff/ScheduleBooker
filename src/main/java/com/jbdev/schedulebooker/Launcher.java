@@ -37,15 +37,17 @@ public class Launcher extends Application {
      */
     @Override
     public void start(Stage stage) throws IOException {
-        Tests.WriteToLogTests.shouldRecordUsername("Test Username", true);
-        Tests.WriteToLogTests.shouldRecordUsername("", true);
-        Tests.WriteToLogTests.shouldRecordUsername(null, false);
-        Tests.WriteToLogTests.shouldRecordUsername("Test Username", false);
-        Tests.WriteToLogTests.shouldRecordUsername("", false);
-        Tests.WriteToLogTests.shouldRecordDate(true);
-        Tests.WriteToLogTests.shouldRecordDate(false);
-        Tests.WriteToLogTests.shouldRecordTime(true);
-        Tests.WriteToLogTests.shouldRecordTime(false);
+//        Tests.WriteToLogTests.shouldRecordUsername("Test Username", true);
+//        Tests.WriteToLogTests.shouldRecordUsername("", true);
+//        Tests.WriteToLogTests.shouldRecordUsername(null, false);
+//        Tests.WriteToLogTests.shouldRecordUsername("Test Username", false);
+//        Tests.WriteToLogTests.shouldRecordUsername("", false);
+//        Tests.WriteToLogTests.shouldRecordDate(true);
+//        Tests.WriteToLogTests.shouldRecordDate(false);
+//        Tests.WriteToLogTests.shouldRecordTime(true);
+////        Tests.WriteToLogTests.shouldRecordTime(false);
+//        Tests.WriteToLogTests.shouldRecordSuccess(true);
+//        Tests.WriteToLogTests.shouldRecordSuccess(false);
 
 
         LocationDAO.changeLocationCol();
