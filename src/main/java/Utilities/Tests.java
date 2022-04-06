@@ -8,15 +8,11 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.Objects;
-import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class Tests {
     public static final LoginController loginController = new LoginController();
-    public static final File file = new File("login_activity.txt");
+    public static final File file = new File("loginActivity.txt");
 
     /**
      * Utility function to retrieve the latest login attempt record
@@ -67,9 +63,6 @@ public class Tests {
     }
 
     public static class WriteToLogTests{
-        /* Check login_activity.txt - should show most recent login attempt as initiated by
-           by user "Test Username"
-        */
         public static void shouldRecordUsername(String username, Boolean isSuccessful){
             loginController.USERNAME = username;
             if(loginController.USERNAME == null){
@@ -124,10 +117,10 @@ public class Tests {
             loginController.writeToLog(isSuccessful);
             String lastLine = tail(file);
             if(isSuccessful && lastLine.contains(" SUCCESSFUL")){
-                System.out.println("shouldRecordSuccess(successful) = PASS");
+                System.out.println("shouldRecordSuccess = PASS");
             }
             else if (!isSuccessful && lastLine.contains(" UNSUCCESSFUL")){
-                System.out.println("shouldRecordSuccess(unsuccessful) = PASS");
+                System.out.println("shouldRecordSuccess = PASS");
             }
             else{
                 System.out.println("shouldRecordSuccess = FAIL");

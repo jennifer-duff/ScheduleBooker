@@ -59,7 +59,7 @@ public class LoginController implements Initializable {
 
 
     /**
-     * Records the login attempt to the "login_activity.txt" file
+     * Records the login attempt to the "loginActivity.txt" file
      *
      * @param isSuccessful  Used to determine whether the login was successful, so that the method can log the
      *                      attempt appropriately
@@ -78,7 +78,7 @@ public class LoginController implements Initializable {
         String string = "LOGIN ATTEMPT: User \"" + USERNAME + "\" attempted login on " + date + " at " + time + " and was " + success + "\n";
 
         try{
-            String filename = "login_activity.txt";
+            String filename = "loginActivity.txt";
             FileWriter fw = new FileWriter(filename,true);  //the true will append the new data
             fw.write(string);                                       //appends the string to the file
             fw.close();
